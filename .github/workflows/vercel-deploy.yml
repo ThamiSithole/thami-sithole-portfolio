@@ -1,0 +1,31 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel environment information
+        run: vercel pull --yes --environment=production
+      - name: Build project artifacts
+        run: vercel build --prod
+      - name: Deploy project artifacts to Vercel
+        run: vercel deploy --prebuilt --prod
