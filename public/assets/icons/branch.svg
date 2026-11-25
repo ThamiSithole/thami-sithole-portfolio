@@ -1,0 +1,10 @@
+<svg width="202" height="202" viewBox="827 273 202 202" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="#eef1f6" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <g xmlns="http://www.w3.org/2000/svg" id="branch">
+      <path d="M899 337V410M899 410C899 393 912 381 929 381H944C960 381 973 372 978 362" />
+      <circle cx="899" cy="317" r="20" />
+      <circle cx="899" cy="431" r="20" />
+      <circle cx="993" cy="354" r="20" />
+    </g>
+  </g>
+</svg>
