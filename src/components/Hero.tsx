@@ -94,27 +94,68 @@ export default function Hero() {
 
       <div aria-hidden="true" className="hero-scrim absolute inset-0 z-10" />
 
-      <div className="relative z-20 max-w-xl px-6 py-16 sm:px-10 sm:py-24 lg:px-16 lg:py-28">
-        <p className="eyebrow">Portfolio · Selected work</p>
-        <h1
-          id="hero-title"
-          className="mt-6 text-fluid-xl font-extrabold leading-[1.08] tracking-tight text-text"
-        >
-          <span className="hero-line">I build software that</span>
-          <span className="hero-line hero-line-delayed">removes friction.</span>
-        </h1>
-        <p className="mt-6 max-w-lg text-base leading-relaxed text-text/90">
-          I build across frontend, backend and release engineering, with accessible interfaces,
-          testable decisions and deployments a team can trust.
-        </p>
-        <div className="mt-9 flex flex-wrap items-center gap-3">
-          <Link href="/projects" className="hero-primary-cta tap-target">
-            View projects
-          </Link>
-          <Link href="/contact" className="hero-secondary-cta tap-target">
-            Get in touch
-          </Link>
+      <div className="relative z-20 grid min-h-[34rem] gap-12 px-6 py-16 sm:px-10 sm:py-24 lg:min-h-[38rem] lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)] lg:items-center lg:gap-16 lg:px-16 lg:py-28">
+        <div className="max-w-xl">
+          <p className="eyebrow">Portfolio · Selected work</p>
+          <h1
+            id="hero-title"
+            className="mt-6 text-fluid-xl font-extrabold leading-[1.08] tracking-tight text-text"
+          >
+            <span className="hero-line">I build software that</span>
+            <span className="hero-line hero-line-delayed">removes friction.</span>
+          </h1>
+          <p className="mt-6 max-w-lg text-base leading-relaxed text-text/90">
+            I build across frontend, backend and release engineering, with accessible interfaces,
+            testable decisions and deployments a team can trust.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <Link href="/projects" className="hero-primary-cta tap-target">
+              View projects
+            </Link>
+            <Link href="/contact" className="hero-secondary-cta tap-target">
+              Get in touch
+            </Link>
+          </div>
         </div>
+
+        <aside
+          aria-labelledby="profile"
+          className="self-start rounded-[var(--radius-card)] border border-line bg-surface/90 p-6 shadow-lg backdrop-blur-sm lg:w-full lg:justify-self-end"
+        >
+          <div className="flex items-center gap-4">
+            <Image
+              src="/assets/logo-ts.svg"
+              alt=""
+              aria-hidden="true"
+              width={48}
+              height={48}
+              unoptimized
+              className="size-12 shrink-0"
+            />
+            <div>
+              <h2 id="profile" className="text-xl font-bold tracking-tight text-text">
+                Thami Sithole
+              </h2>
+              <p className="mt-1 font-mono text-sm text-accent">
+                Frontend · Backend · DevOps / Release
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-muted">
+            Currently focused on StokvelOS, a capstone that turns trust-based savings groups into
+            auditable, permission-aware software.
+          </p>
+          <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-line pt-5 text-xs sm:text-sm">
+            <div>
+              <dt className="text-muted">Base</dt>
+              <dd className="mt-1 font-semibold text-text">South Africa</dd>
+            </div>
+            <div>
+              <dt className="text-muted">Focus</dt>
+              <dd className="mt-1 font-semibold text-text">Web &amp; mobile-first UX</dd>
+            </div>
+          </dl>
+        </aside>
       </div>
     </section>
   );

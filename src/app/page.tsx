@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import ProjectCard from "@/components/ProjectCard";
@@ -25,44 +24,6 @@ export default function HomePage() {
   return (
     <div className="grid gap-24">
       <Hero />
-
-      <section aria-labelledby="profile" className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
-        <div className="flex items-center gap-5 lg:flex-col lg:items-start">
-          <Image
-            src="/assets/logo-ts.svg"
-            alt=""
-            aria-hidden="true"
-            width={1024}
-            height={1024}
-            unoptimized
-            className="size-20 shrink-0 lg:size-28"
-          />
-          <div>
-            <h2 id="profile" className="text-2xl font-bold tracking-tight text-text">
-              Thami Sithole
-            </h2>
-            <p className="mt-1 font-mono text-sm text-accent">
-              Frontend · Backend · DevOps / Release
-            </p>
-          </div>
-        </div>
-        <div>
-          <p className="text-base leading-relaxed text-muted">
-            Currently focused on StokvelOS, a capstone that turns trust-based savings groups into
-            auditable, permission-aware software.
-          </p>
-          <dl className="mt-8 grid gap-6 border-t border-line pt-6 text-sm sm:grid-cols-2">
-            <div>
-              <dt className="text-muted">Base</dt>
-              <dd className="mt-1 font-semibold text-text">South Africa</dd>
-            </div>
-            <div>
-              <dt className="text-muted">Focus</dt>
-              <dd className="mt-1 font-semibold text-text">Web &amp; mobile-first UX</dd>
-            </div>
-          </dl>
-        </div>
-      </section>
 
       <section aria-labelledby="selected-work">
         <div className="flex flex-wrap items-end justify-between gap-4">

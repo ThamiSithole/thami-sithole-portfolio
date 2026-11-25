@@ -66,7 +66,7 @@ The content model must be able to hold all deferred corrections when they arrive
 Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - **Header:** name/logo, desktop nav links, mobile toggle button with `aria-expanded`, closes on route change and Escape, returns focus to the toggle.
-- **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect.
+- **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop and stacked inside the card below the primary copy on smaller screens.
 - **Projects:** full project grid with category filter and status badges.
 - **About:** background, focus areas, toolkit, GitHub links.
 - **Contact:** GitHub and current work links.
