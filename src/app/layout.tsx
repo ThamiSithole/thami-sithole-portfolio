@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -23,20 +23,60 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const description =
+  "Portfolio of Thami Sithole, a software engineer building accessible, testable web products with Next.js, React and Supabase.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://thami-sithole-portfolio.vercel.app"),
   title: {
-    default: "Thami Sithole — Software Engineer",
-    template: "%s — Thami Sithole",
+    default: "Thami Sithole | Software Engineer",
+    template: "%s | Thami Sithole",
   },
-  description:
-    "Portfolio of Thami Sithole, a software engineer building accessible, testable web products with Next.js, React and Supabase.",
+  description,
   keywords: ["Thami Sithole", "software engineer", "portfolio", "Next.js", "Supabase"],
-  openGraph: {
-    title: "Thami Sithole — Software Engineer",
-    description:
-      "Selected projects, skills and contact details for Thami Sithole, a software engineer focused on practical, testable products.",
-    type: "website",
+  alternates: { canonical: "/" },
+  robots: { index: true, follow: true },
+  manifest: "/assets/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/assets/icon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/assets/icon-32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: { url: "/assets/icon-180.png", sizes: "180x180", type: "image/png" },
   },
+  openGraph: {
+    title: "Thami Sithole | Software Engineer",
+    description,
+    url: "/",
+    siteName: "Thami Sithole",
+    type: "website",
+    images: [
+      {
+        url: "/assets/og-thami-sithole.png",
+        width: 1200,
+        height: 630,
+        alt: "Thami Sithole portfolio social card",
+      },
+      {
+        url: "/assets/cover-thami-sithole.png",
+        width: 1600,
+        height: 900,
+        alt: "Thami Sithole portfolio cover",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Thami Sithole | Software Engineer",
+    description,
+    images: ["/assets/og-thami-sithole.png"],
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#11131a",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
