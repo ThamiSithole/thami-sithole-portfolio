@@ -224,7 +224,7 @@ Design screen "S4" for my responsive web portfolio at **1440 × 900 desktop** an
 - `SiteHeader` with active `"Contact"`.
 - No eyebrow. Heading `"Let's build something useful."`.
 - Intro paragraph of at most 25 words about collaboration, code review and roles.
-- Link card `"GitHub"` with `"github.com/ThamiSithole"` and the generated external-link icon.
+- Link card `"GitHub"` with `"github.com/ThamiRoneo"` and the generated external-link icon.
 - Link card `"Current focus"` with `"StokvelOS capstone: auth, groups and permissions"` and the generated external-link icon.
 - Aside card `"What I bring to a team"` with three dot bullets: small reviewable changes; frontend and backend respecting the same product rules; release discipline with CI and repeatable deployments.
 - Closing note that project pages contain problem, contribution and verification links.

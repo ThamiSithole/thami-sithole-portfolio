@@ -22,7 +22,7 @@ export default function SiteFooter() {
             Contact
           </Link>
           <a
-            href="https://github.com/ThamiSithole"
+            href="https://github.com/ThamiRoneo"
             target="_blank"
             rel="noreferrer"
             className="tap-target inline-flex items-center gap-2 text-muted hover:text-accent"
