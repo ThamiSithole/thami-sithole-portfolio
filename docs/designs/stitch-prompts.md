@@ -13,7 +13,7 @@
 - Use the exact labels in quotation marks. Do not invent features, buttons, screens or copy.
 - List all six states on every prompt: Normal, Empty, Loading, Error, Offline, Success. Mark `N/A` explicitly when the static site has no such state.
 - Sample content comes from PRD §7.5 (project names, South Africa, Rustenburg, stokvels, dates). No lorem ipsum, no invented rand amounts.
-- Do **not** apply optional T10 (shadcn/ui + `lucide-react`) — it is post-launch and out of scope. Icons are the generated custom set only.
+- T10 is activated: shadcn `badge` and `button` use the mapped brand tokens; one local brand SVG marks each Toolkit stack. `lucide-react` is limited to the selected-filter check in functional controls, never in the Toolkit or external-link icon zone.
 
 ### Craft gates (from higgsfield-websites design recipe)
 
@@ -183,7 +183,7 @@ Design screen "S2" for my responsive web portfolio at **1440 × 900 desktop** an
 
 Design screen "S3" for my responsive web portfolio at **1440 × 900 desktop** and **375 × 812 mobile**. Reuse the style guide and shared components exactly. Keep the header and footer identical to my other screens. Include every element in the order listed. Use the exact labels in quotation marks. Fill with the sample content given. Design the Normal state first, then one extra frame for each other state. Do not invent features, buttons, screens or text.
 
-**Spec (PRD §6):** Background, focus areas, toolkit, GitHub links. Primary action: `"Open GitHub"`. Only the `ThamiSithole` account is shown in this pass; dual-account links are deferred cleanup (PRD §5) and are not designed here.
+**Spec (PRD §6):** Background, focus areas, toolkit, GitHub links. Primary action: `"Open GitHub"`. Profile links open `ThamiRoneo`; repository links stay on their existing accounts and are not redesigned here.
 
 **Layout (Normal):**
 
@@ -191,12 +191,12 @@ Design screen "S3" for my responsive web portfolio at **1440 × 900 desktop** an
 - No eyebrow. Page heading `"I am an AI-engineering student building products end to end."`.
 - Three paragraphs of at most 25 words each: Straina CI, deployment and release work plus features; StokvelOS Phase 2 foundations; a product-plus-engineering closing note.
 - Section `"Where I focus"` with three staggered rows, not three equal cards: `"Frontend"`, `"Backend & data"`, `"Release engineering"`. Alternate the alignment of the note column.
-- Section `"Toolkit"` with nine chips: `"TypeScript"`, `"React"`, `"Next.js"`, `"Tailwind CSS"`, `"PostgreSQL"`, `"Supabase"`, `"Vitest"`, `"GitHub Actions"`, `"Vercel"`.
+- Section `"Toolkit"` with nine icon-and-label items, one local brand SVG per stack, decorative and hidden from screen readers: `"TypeScript"`, `"React"`, `"Next.js"`, `"Tailwind CSS"`, `"PostgreSQL"`, `"Supabase"`, `"Vitest"`, `"GitHub Actions"`, `"Vercel"`.
 - CTA card `"Want to see the code?"` with a single framed block CTA `"Open GitHub"`, its own garment. No text arrow glyph.
 - Closing line `"Looking for project detail instead?"` with inline underlined link `"View projects"`.
 - `SiteFooter`.
 
-**Mobile collapse:** focus rows stack note under label; toolkit chips wrap; CTA card spans full width. No horizontal scroll at 320px.
+**Mobile collapse:** focus rows stack note under label; toolkit icon-and-label items wrap; CTA card spans full width. No horizontal scroll at 320px.
 
 **States (PRD §7 / §10):**
 
@@ -277,7 +277,7 @@ Design screen "S5" for my responsive web portfolio at **1440 × 900 desktop** an
 
 ## 7. Modals
 
-No modals are specified in PRD §6 or §7. None are designed in this pass. Do not add a dialog, menu or overlay. Optional Radix-backed primitives belong to deferred slice T10 and are out of scope.
+No modals are specified in PRD §6 or §7. None are designed in this pass. Do not add a dialog, menu or overlay. Activated T10 added only `badge` and `button`; no Radix dialog, menu or overlay was introduced.
 
 ---
 
@@ -303,7 +303,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | PRD area | Prompt coverage |
 |---|---|
 | §5 deferred cleanup / dual GitHub identities | Excluded from S3 and S4 by explicit note |
-| §5 optional T10 shadcn/lucide | Excluded from Style Guide and Modals by explicit note |
+| §5 activated T10 shadcn/lucide | Style Guide notes brand-token mapping; badge and button only, with Lucide confined to filter controls |
 | §6 IA — four routes + 404 | S1–S5 |
 | §6 header behaviour | Style Guide SiteHeader; repeated in every screen prompt |
 | §7.1 breakpoints, typography, radius | Style Guide; desktop + mobile frames in every prompt |
