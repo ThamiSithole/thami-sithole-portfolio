@@ -1,19 +1,53 @@
-import type { Project } from "@/content/projects";
+import Image from "next/image";
+import type { Project, ProjectCategory } from "@/content/projects";
 
 type Props = {
   project: Project;
   featured?: boolean;
 };
 
+const categoryLabels: Record<ProjectCategory, string> = {
+  featured: "Featured",
+  team: "Team",
+  capstone: "Capstone",
+  frontend: "Frontend",
+  backend: "Backend",
+  mobile: "Mobile",
+  ai: "AI",
+};
+
 export default function ProjectCard({ project, featured = false }: Props) {
+  const screenshot = project.screenshots?.[0];
+
   return (
     <article className={`card flex h-full flex-col p-6 ${featured ? "md:p-8" : ""}`}>
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs font-bold uppercase tracking-[0.14em] text-accent">
-          {project.eyebrow}
-        </p>
-        <span className="text-xs font-semibold text-muted">{project.status}</span>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <p className="eyebrow">{project.eyebrow}</p>
+        <span className="status-badge">{project.status}</span>
       </div>
+
+      {project.categories?.length ? (
+        <ul aria-label="Categories" className="mt-4 flex flex-wrap gap-2">
+          {project.categories.map((category) => (
+            <li key={category} className="tag font-mono">
+              {categoryLabels[category]}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+
+      {screenshot ? (
+        <div className="mt-6 overflow-hidden rounded-[var(--radius-card)] border border-line">
+          <Image
+            src={screenshot}
+            alt={`${project.name} interface preview`}
+            width={1200}
+            height={675}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="h-auto w-full object-cover"
+          />
+        </div>
+      ) : null}
 
       <h3 className={`mt-5 font-bold tracking-tight text-text ${featured ? "text-2xl" : "text-xl"}`}>
         {project.name}
@@ -34,7 +68,15 @@ export default function ProjectCard({ project, featured = false }: Props) {
       <ul className="mt-6 grid gap-2 text-sm text-muted">
         {project.highlights.map((highlight) => (
           <li key={highlight} className="flex gap-2">
-            <span aria-hidden="true" className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+            <Image
+              src="/assets/icons/check.svg"
+              alt=""
+              aria-hidden="true"
+              width={16}
+              height={16}
+              unoptimized
+              className="mt-0.5 size-4 shrink-0"
+            />
             <span>{highlight}</span>
           </li>
         ))}
@@ -49,15 +91,24 @@ export default function ProjectCard({ project, featured = false }: Props) {
           ))}
         </ul>
 
-        <div className="mt-6 flex flex-wrap gap-4 text-sm font-semibold">
+        <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold">
           {project.liveHref ? (
             <a
               href={project.liveHref}
               target="_blank"
               rel="noreferrer"
-              className="text-accent underline decoration-accent/40 underline-offset-4 hover:decoration-accent"
+              className="inline-flex items-center gap-2 text-accent hover:text-accent-strong"
             >
-              Live app ↗
+              <Image
+                src="/assets/icons/live.svg"
+                alt=""
+                aria-hidden="true"
+                width={16}
+                height={16}
+                unoptimized
+                className="size-4"
+              />
+              Live app
             </a>
           ) : null}
           {project.githubHref ? (
@@ -65,11 +116,40 @@ export default function ProjectCard({ project, featured = false }: Props) {
               href={project.githubHref}
               target="_blank"
               rel="noreferrer"
-              className="text-text underline decoration-line underline-offset-4 hover:decoration-accent"
+              className="inline-flex items-center gap-2 text-text hover:text-accent"
             >
-              GitHub ↗
+              <Image
+                src="/assets/icons/branch.svg"
+                alt=""
+                aria-hidden="true"
+                width={16}
+                height={16}
+                unoptimized
+                className="size-4"
+              />
+              Open GitHub
             </a>
           ) : null}
+          {project.proofLinks?.map((proof) => (
+            <a
+              key={proof.href}
+              href={proof.href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 text-muted hover:text-accent"
+            >
+              <Image
+                src="/assets/icons/external-link.svg"
+                alt=""
+                aria-hidden="true"
+                width={16}
+                height={16}
+                unoptimized
+                className="size-4"
+              />
+              {proof.label}
+            </a>
+          ))}
         </div>
       </div>
     </article>
