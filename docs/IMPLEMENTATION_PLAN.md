@@ -169,9 +169,9 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T7 — Home featured section and signature motion
 **Files:** `src/app/page.tsx`, hero component (new if needed).  
-**Actions:** show the three `featured` projects from T5 (not a hard-coded slice of 2) in a 2-column asymmetric grid with the first spanning both columns; build the hero with exactly four text elements, the generated grade pair and `"B2 grade-shift"` (cursor spotlight on desktop, scroll-linked grade on mobile); headline build fires on mount; `prefers-reduced-motion` shows the static live grade; CTA buttons wrap at 320px with one label per intent; keep the "How I work" section as a vertical rhythm list, not three equal cards; keep the single eyebrow.  
+**Actions:** show the three `featured` projects from T5 (not a hard-coded slice of 2) in a 2-column asymmetric grid with the first spanning both columns; build the hero with exactly four text elements, the generated grade pair and `"B2 grade-shift"` (cursor spotlight on desktop, scroll-linked grade on mobile); headline build fires on mount; `prefers-reduced-motion` shows the static live grade; CTA buttons wrap at 320px with one label per intent; keep the "How I work" section as a vertical rhythm list, not three equal cards; keep the single eyebrow. On desktop, widen the right profile track to fit the role line naturally on one line and vertically centre the card against the primary copy.
 **Acceptance:** three featured cards first, one signature effect, no opacity-to-zero reveals, no overflow, `"View projects"` reaches `/projects`.  
-**Verify:** screenshots at 320/414/768/1440px with and without reduced motion.
+**Verify:** screenshots at 320/375/414/768/1024/1440px with and without reduced motion; confirm the role line stays on one line at 1024 and 1440px.
 
 ### T8 — About, Contact, 404 and metadata
 **Files:** `src/app/about/page.tsx`, `src/app/contact/page.tsx`, `src/app/not-found.tsx` (new), `src/app/layout.tsx` metadata, `public/assets/site.webmanifest`.  
@@ -192,7 +192,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Acceptance:** no token conflict, no layout regression, CI still green, bundle impact reviewed.  
 **Verify:** full T9 pass again after the slice.  
 **Guard:** this slice is never required for launch and must be recorded in all three docs if activated.
-**Result (2026-11-25):** activated after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB. Later hero polish (2026-11-26): the desktop profile card was widened so the role line stays on one line and vertically centered against the primary copy.
+**Result (2026-11-25):** activated after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
 
 ---
 

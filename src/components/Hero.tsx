@@ -120,7 +120,7 @@ export default function Hero() {
 
         <aside
           aria-labelledby="profile"
-          className="rounded-[var(--radius-card)] border border-line bg-surface/90 p-6 shadow-lg backdrop-blur-sm lg:w-full lg:self-center lg:justify-self-end"
+          className="self-start rounded-[var(--radius-card)] border border-line bg-surface/90 p-6 shadow-lg backdrop-blur-sm lg:w-full lg:self-center lg:justify-self-end"
         >
           <div className="flex items-center gap-4">
             <Image
@@ -136,7 +136,7 @@ export default function Hero() {
               <h2 id="profile" className="text-xl font-bold tracking-tight text-text">
                 Thami Sithole
               </h2>
-              <p className="mt-1 font-mono text-sm text-accent lg:whitespace-nowrap">
+              <p className="mt-1 font-mono text-sm text-accent">
                 Frontend · Backend · DevOps / Release
               </p>
             </div>
