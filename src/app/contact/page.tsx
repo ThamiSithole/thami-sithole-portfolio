@@ -22,14 +22,14 @@ export default function ContactPage() {
 
         <div className="mt-10 grid gap-4">
           <a
-            href="https://github.com/ThamiSithole"
+            href="https://github.com/ThamiRoneo"
             target="_blank"
             rel="noreferrer"
             className="card flex items-center justify-between gap-4 p-6 hover:border-accent/50"
           >
             <span>
               <span className="block text-sm font-bold text-text">Open GitHub</span>
-              <span className="mt-1 block text-sm text-muted">github.com/ThamiSithole</span>
+              <span className="mt-1 block text-sm text-muted">github.com/ThamiRoneo</span>
             </span>
             <Image
               src="/assets/icons/external-link.svg"

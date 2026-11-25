@@ -104,7 +104,7 @@ export default function AboutPage() {
           </p>
         </div>
         <a
-          href="https://github.com/ThamiSithole"
+          href="https://github.com/ThamiRoneo"
           target="_blank"
           rel="noreferrer"
           className="hero-secondary-cta tap-target inline-flex shrink-0 items-center gap-2"
