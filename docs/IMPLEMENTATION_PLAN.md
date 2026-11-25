@@ -183,6 +183,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Files:** none (plus small fixes from T2–T8).  
 **Actions:** `npm run check`; `npm run dev` then browser-test every route at all six widths; test nav, filter, keyboard focus, hero motion and all links; `npm run build && npm run start` smoke test; deploy and confirm production URL HTTP 200. Record LCP/CLS observations if browser tooling exposes them. Run the craft gate checklist from the Stitch prompts: dash ban, CTA labels, eyebrow ration, no equal-card row, radius, one accent, Satoshi/JetBrains Mono, assets, motion, declared mobile collapse. Screenshots here are **verification artefacts**, not final portfolio image assets.  
 **Acceptance:** every PRD §10 criterion passes, including recorded LCP/CLS observations where browser tooling supports them; craft checklist green; no console errors.  
+**Result (2026-11-25):** all functional, craft, accessibility, build and deployment checks passed. CLS measured 0.0000. LCP exceeded 2.5s in this headless environment and remains unverified against the target; see the PRD §10 verification record before treating that criterion as complete.  
 **Verify:** screenshots + `curl -I` on live URL.
 
 ### T10 — Optional post-launch slice: shadcn/ui + lucide-react
