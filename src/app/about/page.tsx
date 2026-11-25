@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -37,8 +38,7 @@ export default function AboutPage() {
   return (
     <div className="grid gap-20">
       <section className="max-w-3xl">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">About</p>
-        <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-text sm:text-5xl">
+        <h1 className="text-fluid-lg font-extrabold tracking-tight text-text">
           I am an AI-engineering student building products end to end.
         </h1>
         <div className="mt-8 space-y-5 text-base leading-relaxed text-muted">
@@ -48,7 +48,7 @@ export default function AboutPage() {
             user and role management, source management and an offline hook.
           </p>
           <p>
-            On StokvelOS I focused on the Phase 2 foundations — authentication, groups, invitations,
+            On StokvelOS I focused on the Phase 2 foundations: authentication, groups, invitations,
             member settings and database-enforced permissions. The goal is always the same: make the
             system understandable to a user and provable to a reviewer.
           </p>
@@ -61,14 +61,17 @@ export default function AboutPage() {
       </section>
 
       <section aria-labelledby="focus">
-        <h2 id="focus" className="text-3xl font-bold tracking-tight text-text">
+        <h2 id="focus" className="text-fluid-md font-bold tracking-tight text-text">
           Where I focus
         </h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 divide-y divide-line border-y border-line">
           {focusAreas.map((area) => (
-            <div key={area.title} className="card p-6">
+            <div
+              key={area.title}
+              className="grid gap-2 py-6 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:gap-8"
+            >
               <h3 className="text-lg font-bold text-text">{area.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{area.body}</p>
+              <p className="text-sm leading-relaxed text-muted">{area.body}</p>
             </div>
           ))}
         </div>
@@ -76,11 +79,12 @@ export default function AboutPage() {
 
       <section aria-labelledby="toolkit" className="grid gap-8 md:grid-cols-[0.8fr_1.2fr]">
         <div>
-          <h2 id="toolkit" className="text-3xl font-bold tracking-tight text-text">
+          <h2 id="toolkit" className="text-fluid-md font-bold tracking-tight text-text">
             Toolkit
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted">
-            The tools I reach for most often, chosen for clarity and deployability rather than novelty.
+            The tools I reach for most often, chosen for clarity and deployability rather than
+            novelty.
           </p>
         </div>
         <ul className="flex flex-wrap gap-3 self-start">
@@ -92,9 +96,9 @@ export default function AboutPage() {
         </ul>
       </section>
 
-      <section className="card flex flex-col gap-5 p-8 sm:flex-row sm:items-center sm:justify-between">
+      <section className="card flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-text">Want to see the code?</h2>
+          <h2 className="text-fluid-sm font-bold text-text">Want to see the code?</h2>
           <p className="mt-2 text-sm text-muted">
             My public repositories and contribution history are on GitHub.
           </p>
@@ -103,14 +107,27 @@ export default function AboutPage() {
           href="https://github.com/ThamiSithole"
           target="_blank"
           rel="noreferrer"
-          className="inline-flex shrink-0 items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-bold text-ink"
+          className="hero-secondary-cta tap-target inline-flex shrink-0 items-center gap-2"
         >
-          Open GitHub ↗
+          Open GitHub
+          <Image
+            src="/assets/icons/external-link.svg"
+            alt=""
+            aria-hidden="true"
+            width={16}
+            height={16}
+            unoptimized
+            className="size-4"
+          />
         </a>
       </section>
 
       <p className="text-sm text-muted">
-        Looking for project detail instead? <Link href="/projects" className="text-accent underline underline-offset-4">Browse projects</Link>.
+        Looking for project detail instead?{" "}
+        <Link href="/projects" className="text-accent underline underline-offset-4">
+          View projects
+        </Link>
+        .
       </p>
     </div>
   );

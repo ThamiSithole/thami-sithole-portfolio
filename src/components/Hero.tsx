@@ -72,7 +72,7 @@ export default function Hero() {
 
       <div
         ref={visualRef}
-        className="hero-visual relative z-10 mt-12 w-full lg:absolute lg:-right-16 lg:top-1/2 lg:mt-0 lg:w-[68%] lg:-translate-y-1/2"
+        className="hero-visual relative z-10 mt-12 w-full lg:absolute lg:right-0 lg:top-1/2 lg:mt-0 lg:w-[68%] lg:-translate-y-1/2 xl:-right-16"
       >
         <div className="relative aspect-[16/9] overflow-hidden rounded-[var(--radius-card)] border border-line">
           <Image
