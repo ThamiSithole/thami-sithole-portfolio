@@ -120,19 +120,19 @@ Design screen "S1" for my responsive web portfolio at **1440 × 900 desktop** an
 
 - `SiteHeader` with active `"Home"`.
 - One eyebrow only, `"Portfolio · Selected work"`.
-- Hero: headline `"I build software that removes friction."` on two desktop lines, and a subtext of at most 25 words about frontend, backend and release engineering. A generated hero visual occupies `public/assets/hero-live.png` in an asymmetric off-centre composition. No left-text/right-image split. No fake dashboard or terminal. Hero contains exactly four text elements: eyebrow, headline, subtext, CTA row. No other copy inside the hero.
+- Hero: headline `"I build software that removes friction."` on two desktop lines, and a subtext of at most 25 words about frontend, backend and release engineering. A generated hero visual occupies `public/assets/hero-live.png` across the full card with a left-aligned focal point. No fake dashboard or terminal. The primary column contains exactly four text elements: eyebrow, headline, subtext, CTA row. The profile card sits in the right column of the same card on desktop and stacks inside the hero below the CTA row on smaller screens.
 - CTA row: `"View projects"` as the primary garment, `"Get in touch"` as the secondary garment. Each is its own component with its own interaction identity. No shared button class.
 - Signature motion: `"B2 grade-shift"` hero pair. A cursor spotlight crossfades `hero-dormant.png` to `hero-live.png` on desktop; on mobile a gentle scroll-linked grade change replaces the cursor. Purpose: the work lights up when the visitor engages. Initial paint shows `hero-live.png` in full. Reduced motion shows the same static image with no crossfade. Headline build fires on mount, not on viewport entry.
-- Profile card, placed below the hero as its own section: generated monogram `"TS"`, `"Thami Sithole"`, `"Frontend · Backend · DevOps / Release"`, short StokvelOS note, two-column facts `"Base"` / `"South Africa"` and `"Focus"` / `"Web & mobile-first UX"`.
+- Profile card, placed at the right edge inside the hero: brand monogram `"TS"`, `"Thami Sithole"`, `"Frontend · Backend · DevOps / Release"`, short StokvelOS note, two-column facts `"Base"` / `"South Africa"` and `"Focus"` / `"Web & mobile-first UX"`.
 - Section `"Selected work"` with heading `"Projects with a point."` and link `"View projects"`. Show the three featured cards in order `"Straina"`, `"StokvelOS"`, `"Riverside Community Hub"` in a 2-column asymmetric grid with the first card spanning both columns on desktop. Same `ProjectCard` component as the projects page, never a copied variant.
 - Section `"How I work"` with heading `"Small, clear slices."` and three principle rows in a vertical rhythm, separated by hairline rules, not a three-card row: `"Build for the real constraint"`, `"Prove it with tests"`, `"Ship in small reviews"`. Each row is a bold label on the left and a one-line note on the right.
 - `SiteFooter`.
 
-**Mobile collapse:** hero visual moves below the CTA row and keeps its full width; profile facts stack; featured grid becomes one column; principle rows stack label above note. No horizontal scroll at 320px.
+**Mobile collapse:** the hero card keeps its full width, the primary copy stays above the profile card, and the profile facts remain in a two-column row. Featured grid becomes one column; principle rows stack label above note. No horizontal scroll at 320px.
 
 **States (PRD §7 / §10):**
 
-- Normal: desktop asymmetric hero plus generated visual; mobile stacks hero, visual, profile, featured cards and principle rows in one column.
+- Normal: desktop full-width hero card with primary copy left and profile card right; mobile stacks primary copy, profile card, featured cards and principle rows inside the one-column page.
 - Empty: N/A — content is authored in `src/content/projects.ts`; no dynamic data source in this pass.
 - Loading: N/A — server-rendered static content, no client fetch.
 - Error: N/A — no runtime data request on this route.
