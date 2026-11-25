@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Project, ProjectCategory } from "@/content/projects";
+import { Badge } from "@/components/ui/badge";
 
 type Props = {
   project: Project;
@@ -85,8 +86,10 @@ export default function ProjectCard({ project, featured = false }: Props) {
       <div className="mt-auto pt-7">
         <ul aria-label="Technologies" className="flex flex-wrap gap-2">
           {project.stack.map((item) => (
-            <li key={item} className="tag">
-              {item}
+            <li key={item}>
+              <Badge variant="stack" className="px-2.5 py-1">
+                {item}
+              </Badge>
             </li>
           ))}
         </ul>

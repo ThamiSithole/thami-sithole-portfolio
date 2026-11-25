@@ -67,7 +67,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - **Header:** name/logo, desktop nav links, mobile toggle button with `aria-expanded`, closes on route change and Escape, returns focus to the toggle.
 - **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop and stacked inside the card below the primary copy on smaller screens.
-- **Projects:** full project grid with category filter and status badges.
+- **Projects:** full project grid with category filter, status badges and shadcn technology badges on each card.
 - **About:** background, focus areas, toolkit, GitHub links.
 - **Contact:** GitHub and current work links.
 - **Footer:** repeat key links, the ThamiRoneo profile CTA and repository links where relevant. No second profile switcher was added.
@@ -95,7 +95,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 ### 7.2 Project cards and filtering
 
 - One `Project` record renders identically on home and `/projects` using the same `ProjectCard` component.
-- Card contents: eyebrow, name, summary, problem, role, stack chips, highlights, status badge, live/repo/PR links.
+- Card contents: eyebrow, name, summary, problem, role, technology badges, highlights, status badge, live/repo/PR links.
 - Desktop project grid is 1/2/3 columns at mobile/tablet/desktop. Home arranges the three featured cards in a 2-column asymmetric grid with the first spanning both columns. No three equal feature cards in a row.
 - Filter categories: **All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI**. Filtering is client-side, keyboard accessible and updates results without a page reload. Chip selection is a transform-only transition with an `:active` scale of 0.98.
 - Featured order: **Straina → StokvelOS → Riverside Community Hub**, expressed with `featured: true` on those three records and their array order — not a hard-coded slice.
