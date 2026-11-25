@@ -180,18 +180,25 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 
 ## 10. Acceptance criteria
 
-- [ ] No horizontal overflow at 320, 375, 414, 768, 1024 and 1440px.
-- [ ] Mobile nav opens/closes via click, Escape and route change; focus remains visible.
-- [ ] All project cards render from `src/content/projects.ts`; links open correct targets.
-- [ ] Category filter works by mouse and keyboard, with a composed empty state and tactile feedback.
-- [ ] Featured three appear first on home and in the full grid; home uses the asymmetric featured layout.
-- [ ] `npm run lint`, `npm run typecheck` and `npm run build` pass on Node 26.
-- [ ] CI green on PR; Vercel production deployment returns HTTP 200.
-- [ ] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
+- [x] No horizontal overflow at 320, 375, 414, 768, 1024 and 1440px.
+- [x] Mobile nav opens/closes via click, Escape and route change; focus remains visible.
+- [x] All project cards render from `src/content/projects.ts`; links open correct targets.
+- [x] Category filter works by mouse and keyboard, with a composed empty state and tactile feedback.
+- [x] Featured three appear first on home and in the full grid; home uses the asymmetric featured layout.
+- [x] `npm run lint`, `npm run typecheck` and `npm run build` pass on Node 26.
+- [x] CI green on PR; Vercel production deployment returns HTTP 200.
+- [x] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
 - [ ] LCP < 2.5s and CLS < 0.1 recorded where browser tooling supports measurement; no unexpected regression.
-- [ ] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale, declared mobile collapse.
-- [ ] No secrets or credentials committed.
-- [ ] `docs/PRD.md`, `docs/IMPLEMENTATION_PLAN.md` and `docs/designs/stitch-prompts.md` cross-reference each other with no conflicting scope.
+- [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale, declared mobile collapse.
+- [x] No secrets or credentials committed.
+- [x] `docs/PRD.md`, `docs/IMPLEMENTATION_PLAN.md` and `docs/designs/stitch-prompts.md` cross-reference each other with no conflicting scope.
+
+### T9 verification record (2026-11-25)
+
+- Browser checks passed on five routes at six widths: nav, keyboard filtering, links, CTA labels, craft tokens and zero horizontal overflow.
+- Contrast measured 4.96:1 at the lowest text/background pair; visible tap targets measured at least 44px. Reduced motion keeps the hero static.
+- Production CLS measured 0.0000 on repeated 320px and 1440px loads.
+- LCP remains **unverified against the 2.5s target** in this headless environment: local loads were 3.1s to 4.2s and production loads were 5.0s to 17.7s, while HTML took about 4.7s and a 380K static asset about 25s to fetch. The hero source assets were compressed from 4.1M/4.9M to 380K/340K at 1920px wide; no application-level LCP regression was observed. Confirm the target with field data or a network-independent lab run before checking this item.
 
 ## 11. Open decisions
 
