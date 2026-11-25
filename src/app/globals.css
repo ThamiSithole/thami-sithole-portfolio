@@ -16,6 +16,26 @@
 
 :root {
   color-scheme: dark;
+  --background: var(--color-ink);
+  --foreground: var(--color-text);
+  --card: var(--color-surface);
+  --card-foreground: var(--color-text);
+  --popover: var(--color-surface);
+  --popover-foreground: var(--color-text);
+  --primary: var(--color-accent);
+  --primary-foreground: var(--color-ink);
+  --secondary: var(--color-surface-2);
+  --secondary-foreground: var(--color-text);
+  --muted: var(--color-surface-2);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-surface-2);
+  --accent-foreground: var(--color-text);
+  --destructive: var(--color-accent);
+  --destructive-foreground: var(--color-ink);
+  --border: var(--color-line);
+  --input: var(--color-line);
+  --ring: var(--color-accent);
+  --radius: var(--radius-card);
   --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.125rem);
   --step-1: clamp(1.125rem, 1.06rem + 0.32vw, 1.375rem);
   --step-2: clamp(1.375rem, 1.24rem + 0.68vw, 1.875rem);

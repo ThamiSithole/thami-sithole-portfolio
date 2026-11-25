@@ -45,7 +45,7 @@ Before writing any code:
 1. **One task at a time.** Only work on the task the human asked for. When its Definition of Done/Verify step is complete, stop and wait for the next instruction.
 2. **Thin slices.** Implement → verify → continue. Never stack untested changes.
 3. **Never weaken a check.** Do not skip lint, typecheck or build, and do not add suppressions or disable rules just to get green. If a check fails, fix the cause.
-4. **Build only what is planned.** Build only what is in this file, `docs/PRD.md` and `docs/designs/stitch-prompts.md`. Never build deferred cleanup or optional T10.
+4. **Build only what is planned.** Build only what is in this file, `docs/PRD.md` and `docs/designs/stitch-prompts.md`. Never build deferred cleanup. T10 stayed out of T0 to T9 and was activated later by explicit request.
 5. **Ask, don't guess.** If anything is missing, unclear or contradictory, stop and ask the human. Never invent labels, links, project data or screenshots.
 6. **Match the designs.** Every screen must match its Stitch prompt: layout, order, labels, text, colours, spacing and generated assets. Use the refreshed tokens in `src/app/globals.css`; never hard-code colours, font sizes or spacing.
 7. **Every state, every screen.** Each screen must handle all six states listed in its prompt (Normal, Empty, Loading, Error, Offline, Success), with `N/A` where the static site has no such state.
@@ -75,11 +75,11 @@ Before writing any code:
 | Scripts | `dev`, `build`, `start`, `lint`, `typecheck`, `check` |
 | CI/CD | GitHub Actions, Node **26**, Vercel deploy workflow with GitHub-only secrets |
 | Asset tool | Higgsfield MCP (connected), generation only; CLI 1.2.3 installed but blocked on trial; not an app dependency or runtime service |
-| Not installed / out of scope | Test runner, shadcn/ui, Radix, icon library, backend, CMS, auth |
+| Not installed | Test runner, backend, CMS, auth. T10 later added shadcn `badge`, `button` and `lucide-react` after launch. |
 
 **React note:** React is already the foundation — Next.js is a React framework. Do not add it again as a dependency. It belongs in the skills list, not in an install step.
 
-**shadcn/ui note:** shadcn/ui is a copy-in component source system (Radix primitives + Tailwind), not a normal npm UI package, and its icons come from `lucide-react`. Current shadcn supports Tailwind v4 + React 19, but it is **not** part of this pass — see optional slice **T10** in section 7. The generated icon set is the default; library icons are only a fallback for dense functional UI and must not be mixed in one visual zone.
+**shadcn/ui note:** shadcn/ui is a copy-in component source system (Radix primitives + Tailwind), not a normal npm UI package, and its icons come from `lucide-react`. It stayed outside T0 to T9; see activated slice **T10** in section 7. Brand SVG icons remain the default, and library icons are confined to dense functional controls in their own visual zone.
 
 ---
 
@@ -186,12 +186,13 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Result (2026-11-25):** all functional, craft, accessibility, build and deployment checks passed. CLS measured 0.0000. LCP exceeded 2.5s in this headless environment and remains unverified against the target; see the PRD §10 verification record before treating that criterion as complete.  
 **Verify:** screenshots + `curl -I` on live URL.
 
-### T10 — Optional post-launch slice: shadcn/ui + lucide-react
+### T10 — Activated post-launch slice: shadcn/ui + lucide-react
 **Files:** `components.json`, `src/components/ui/*`, `src/app/globals.css`, `package.json` (only after T9 passes and the user asks).  
-**Decision:** React needs no addition — it is already present. shadcn/ui is optional because the current cards/buttons/badges are simple and already Tailwind-styled; its real value is Radix-backed dialogs/menus/tabs, which this portfolio does not require. If added: verify the v4 registry style in `components.json`, map shadcn CSS variables to existing `@theme` tokens, add only 2–4 primitives (e.g. `button`, `badge`, `separator`, `dialog`), use `lucide-react` icons with `aria-hidden="true"` when decorative, keep the generated icon set as the default and never mix icon sets in one visual zone, then rerun `npm run check` on Node 26 and re-check all breakpoints.  
+**Decision:** React needs no addition, it is already present. shadcn/ui stayed optional through T9 because the existing cards, buttons and badges were simple and already Tailwind-styled. After explicit approval, activation verified the v4 registry style in `components.json`, mapped shadcn CSS variables to existing `@theme` tokens and copied only `button` and `badge`. Decorative `lucide-react` icons use `aria-hidden="true"`, brand SVGs stay the default and the two icon sets never share a visual zone. Rerun `npm run check` on Node 26 and all breakpoints after activation.
 **Acceptance:** no token conflict, no layout regression, CI still green, bundle impact reviewed.  
 **Verify:** full T9 pass again after the slice.  
 **Guard:** this slice is never required for launch and must be recorded in all three docs if activated.
+**Result (2026-11-25):** activated after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
 
 ---
 

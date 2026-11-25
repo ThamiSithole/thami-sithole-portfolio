@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { Check } from "lucide-react";
 import { useMemo, useState } from "react";
 import type { Project, ProjectCategory } from "@/content/projects";
 import ProjectCard from "@/components/ProjectCard";
+import { Button } from "@/components/ui/button";
 
 type Filter =
   | "All"
@@ -60,19 +62,17 @@ export default function ProjectsExplorer({ projects }: Props) {
         {filters.map((option) => {
           const selected = option === filter;
           return (
-            <button
+            <Button
               key={option}
               type="button"
               aria-pressed={selected}
+              variant={selected ? "filter-active" : "filter"}
+              className="px-4"
               onClick={() => setFilter(option)}
-              className={`tap-target rounded-[var(--radius-card)] px-4 font-mono text-xs font-semibold transition-transform duration-150 active:scale-[0.98] ${
-                selected
-                  ? "bg-accent/15 text-accent"
-                  : "border border-line text-muted hover:border-accent hover:text-text"
-              }`}
             >
               {option}
-            </button>
+              {selected ? <Check aria-hidden="true" className="size-3.5" /> : null}
+            </Button>
           );
         })}
       </div>

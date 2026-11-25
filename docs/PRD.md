@@ -57,7 +57,7 @@ A responsive, fast, static portfolio that works cleanly on any device and builds
 - Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`.
 - Apply eyebrow ration, a single 12px radius scale, declared mobile collapse and bespoke CTA garments.
 
-**Optional post-launch design-system slice (see plan T10):** shadcn/ui + `lucide-react` icons may be added only after launch criteria are met and the user explicitly asks. React is already a dependency through Next.js 15 + React 19 and is **not** a new addition. shadcn/ui is a copy-in component system built on Radix primitives and Tailwind, not a conventional UI package; its icons come from `lucide-react`. Current shadcn supports Tailwind v4 + React 19, but it adds config, dependencies and CSS-variable mapping for widgets this static portfolio does not currently need. If activated, add only 2–4 primitives, verify the v4 registry style in `components.json`, map tokens to the existing `@theme` variables, hide decorative icons from screen readers, and re-run the full verification pass. The generated icon set from v1.3 stays the default; library icons are only a fallback for dense functional UI and must never be mixed in one visual zone.
+**Activated design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
 
 The content model must be able to hold all deferred corrections when they arrive, without a redesign.
 
@@ -70,7 +70,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 - **Projects:** full project grid with category filter and status badges.
 - **About:** background, focus areas, toolkit, GitHub links.
 - **Contact:** GitHub and current work links.
-- **Footer:** repeat key links and both GitHub identities when available (dual-account links remain deferred cleanup).
+- **Footer:** repeat key links, the ThamiRoneo profile CTA and repository links where relevant. No second profile switcher was added.
 - **404:** simple, on-brand not-found page with generated artwork and a link home.
 
 ## 7. Responsive & functional requirements
@@ -176,7 +176,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 6. Restructure home hero and featured grid to the craft rules; polish About, Contact and 404.
 7. Run `npm run check`, verify CI green, deploy to Vercel and confirm production URL returns 200.
 8. Stop. Project content corrections remain in the backlog for the user to action later.
-9. **Optional, post-launch only:** shadcn/ui + `lucide-react` slice (plan T10) after explicit user approval. It is not a launch requirement and must be mirrored back into this PRD if activated.
+9. **Activated after launch:** shadcn/ui + `lucide-react` slice (plan T10) after explicit user approval. It stayed out of T0 to T9 and is mirrored back into this PRD and the plan.
 
 ## 10. Acceptance criteria
 
@@ -200,12 +200,19 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - Production CLS measured 0.0000 on repeated 320px and 1440px loads.
 - LCP remains **unverified against the 2.5s target** in this headless environment: local loads were 3.1s to 4.2s and production loads were 5.0s to 17.7s, while HTML took about 4.7s and a 380K static asset about 25s to fetch. The hero source assets were compressed from 4.1M/4.9M to 380K/340K at 1920px wide; no application-level LCP regression was observed. Confirm the target with field data or a network-independent lab run before checking this item.
 
+### T10 activation verification (2026-11-25)
+
+- Two shadcn primitives (`badge`, `button`) were added with tokens mapped to the existing `@theme` palette; the Toolkit shows nine local brand SVG icons with visible labels and `aria-hidden`.
+- Lucide is limited to the decorative selected-filter `Check` in the project filter zone, hidden from screen readers and never mixed into the Toolkit.
+- `npm run check`, brand-icon checks at six widths, profile-link checks and the full T9 browser suite pass after activation. CLS measured 0.0000; LCP remains environment-dependent as recorded above.
+- Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB; `/about` and shared JS were unchanged.
+
 ## 11. Open decisions
 
 - Whether to add a dedicated `/skills` route or keep skills in `/about` (default: keep in `/about`).
 - Final filter category labels (currently fixed as All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI).
 - Whether this PRD is public or internal.
-- Whether to activate optional T10 (shadcn/ui + `lucide-react`) after launch.
+- **Closed 2026-11-25:** T10 is activated with `badge` and `button`; brand stack SVGs stay in the Toolkit and Lucide stays in the filter controls.
 - **Closed in v1.3:** CTA label unification. Use `"View projects"`, `"Get in touch"` and `"Open GitHub"` site-wide.
 
 ## 12. Cross-document coverage
