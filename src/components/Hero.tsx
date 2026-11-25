@@ -94,7 +94,7 @@ export default function Hero() {
 
       <div aria-hidden="true" className="hero-scrim absolute inset-0 z-10" />
 
-      <div className="relative z-20 grid min-h-[34rem] gap-12 px-6 py-16 sm:px-10 sm:py-24 lg:min-h-[38rem] lg:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)] lg:items-center lg:gap-16 lg:px-16 lg:py-28">
+      <div className="relative z-20 grid min-h-[34rem] gap-12 px-6 py-16 sm:px-10 sm:py-24 lg:min-h-[38rem] lg:grid-cols-[minmax(0,1fr)_minmax(26rem,28rem)] lg:items-center lg:gap-16 lg:px-16 lg:py-28">
         <div className="max-w-xl">
           <p className="eyebrow">Portfolio · Selected work</p>
           <h1
@@ -120,7 +120,7 @@ export default function Hero() {
 
         <aside
           aria-labelledby="profile"
-          className="self-start rounded-[var(--radius-card)] border border-line bg-surface/90 p-6 shadow-lg backdrop-blur-sm lg:w-full lg:justify-self-end"
+          className="rounded-[var(--radius-card)] border border-line bg-surface/90 p-6 shadow-lg backdrop-blur-sm lg:w-full lg:self-center lg:justify-self-end"
         >
           <div className="flex items-center gap-4">
             <Image
@@ -136,7 +136,7 @@ export default function Hero() {
               <h2 id="profile" className="text-xl font-bold tracking-tight text-text">
                 Thami Sithole
               </h2>
-              <p className="mt-1 font-mono text-sm text-accent">
+              <p className="mt-1 font-mono text-sm text-accent lg:whitespace-nowrap">
                 Frontend · Backend · DevOps / Release
               </p>
             </div>
