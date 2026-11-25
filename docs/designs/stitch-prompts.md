@@ -21,7 +21,7 @@
 - **One label per CTA intent page-wide:** `"View projects"` for every browse-projects action, `"Get in touch"` for contact, `"Open GitHub"` for the profile. No synonyms.
 - **Eyebrow ration:** at most one eyebrow per three sections. Prefer none. Section headings carry the hierarchy.
 - **No three equal feature cards in a row.** Home featured work uses a 2-column asymmetric grid; `"How I work"` uses a vertical rhythm list.
-- **One corner-radius scale site-wide:** 12px soft. No mixed radii, no pills except stack chips.
+- **One corner-radius scale site-wide:** 12px soft. No mixed radii; cards, badges and controls stay 12px.
 - **One accent color only.** Neutrals carry everything else. No gradient text, no cyan or violet glow, no second accent.
 - **Mobile collapse is declared explicitly** for every multi-column section. Do not leave it to the framework.
 - **Screenshot-safe motion:** text builds fire on mount, not on viewport entry. Scroll effects animate transform, scale or clip only, never opacity-to-zero. Every animated element has a `prefers-reduced-motion` static fallback.
@@ -86,7 +86,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 
 1. **SiteHeader** — variants: `desktop`, `mobile-closed`, `mobile-open`, `active-link`. Sticky top, `ink/85` with blur, generated monogram mark `"TS"`, name `"Thami Sithole"`, subtitle `"Software engineer"`, nav labels `"Home"`, `"About"`, `"Projects"`, `"Contact"`. Active link uses `accent/15` background and `accent` text. Nav is one line at desktop, height at most 80px. Mobile collapse declared explicitly: below 640px the links hide and the toggle shows.
 2. **SiteFooter** — variants: `desktop-row`, `mobile-stacked`. Name `"Thami Sithole"`, tagline `"Building software that is useful, testable and clear to use."`, links `"About"`, `"Projects"`, `"Contact"`, `"Open GitHub"`. Mobile collapse: below 640px links stack under the name.
-3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, name, summary, `Problem`, `Role`, highlights (dot bullets), stack chips, link row. Screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
+3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, name, summary, `Problem`, `Role`, highlights (dot bullets), technology badges, link row. Screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
 4. **StatusBadge** — variants: `"Live · team capstone"`, `"Phase 2 complete · preparing for Vercel deployment"`, `"Product specification approved · build in progress"`. Muted text, hairline border, no filled background, one accent dot for the active status.
 5. **Tag / stack chip** — variants: `default`, `hover`. Pill border `line`, faint accent tint, 12px semibold JetBrains Mono text.
 6. **FilterChip** — variants: `unselected`, `selected` (`aria-pressed`), `focus-visible`. Labels: `"All"`, `"Featured"`, `"Team"`, `"Capstone"`, `"Frontend"`, `"Backend"`, `"Mobile"`, `"AI"`. Selected uses `accent/15` and `accent`. Each chip has an `:active` scale of 0.98.
