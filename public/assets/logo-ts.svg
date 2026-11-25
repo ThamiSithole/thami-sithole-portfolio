@@ -1,0 +1,6 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TS monogram">
+  <image href="monogram-mark.png" width="1024" height="1024" opacity="0.6"/>
+  <rect x="272" y="272" width="480" height="480" rx="12" fill="#11131a" fill-opacity="0.92"/>
+  <text x="512" y="616" text-anchor="middle" font-family="Satoshi, 'Noto Sans', sans-serif" font-size="360" font-weight="700" fill="#eef1f6">TS</text>
+  <path d="M272 752H752" stroke="#e2655c" stroke-width="10" stroke-linecap="round"/>
+</svg>
