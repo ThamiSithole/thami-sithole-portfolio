@@ -231,15 +231,44 @@ button {
   transition: opacity 220ms ease;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .hero-card:hover {
+    --grade-opacity: 1;
+  }
+}
+
+.hero-scrim {
+  background: linear-gradient(
+    90deg,
+    rgba(17, 19, 26, 0.96) 0%,
+    rgba(17, 19, 26, 0.74) 45%,
+    rgba(17, 19, 26, 0.18) 100%
+  );
+}
+
 @media (max-width: 640px) {
   .hero-grade-overlay {
     --spot-radius: 11rem;
+  }
+
+  .hero-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(17, 19, 26, 0.92) 0%,
+      rgba(17, 19, 26, 0.76) 55%,
+      rgba(17, 19, 26, 0.56) 100%
+    );
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .hero-card,
+  .hero-card:hover {
+    --grade-opacity: 0 !important;
   }
 
   *,
