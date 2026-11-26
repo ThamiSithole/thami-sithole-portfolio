@@ -55,9 +55,9 @@ A responsive, fast, static portfolio that works cleanly on any device and builds
 - Generate a hero grade pair, section plate, profile mark, monogram/favicon kit, OG card, cover and 404 artwork via an allowed Higgsfield path (MCP on this account). These are brand assets, not per-project screenshots.
 - Add one signature `"B2 grade-shift"` hero interaction in non-animated mode, with a `prefers-reduced-motion` static fallback. No scroll-scrub journey.
 - Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`.
-- Apply eyebrow ration, a single 12px radius scale, declared mobile collapse and bespoke CTA garments.
+- Apply eyebrow ration, a 12px radius scale with the fixed nav pill as the sole exception, declared mobile collapse and bespoke CTA garments.
 
-**Activated design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
+**Activated design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
 
 The content model must be able to hold all deferred corrections when they arrive, without a redesign.
 
@@ -189,7 +189,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - [x] CI green on PR; Vercel production deployment returns HTTP 200.
 - [x] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
 - [ ] LCP < 2.5s and CLS < 0.1 recorded where browser tooling supports measurement; no unexpected regression.
-- [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale, declared mobile collapse.
+- [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale with the nav pill exception, declared mobile collapse.
 - [x] No secrets or credentials committed.
 - [x] `docs/PRD.md`, `docs/IMPLEMENTATION_PLAN.md` and `docs/designs/stitch-prompts.md` cross-reference each other with no conflicting scope.
 

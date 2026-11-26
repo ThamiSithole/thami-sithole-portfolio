@@ -67,7 +67,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 - Container: `max-w-6xl` (~1152px) with `px-4 sm:px-6 lg:px-8`.
 - Cards: 24px padding, 32px on featured cards. Grid gap: 24px.
 - Section spacing: 80 to 96px on desktop, reduced proportionally on mobile.
-- One corner radius: 12px on cards, badges, inputs and controls. The fixed SiteHeader nav pill is the one intentional exception to the no-pills rule, with a pinned 999px pill radius, alongside the declared stack chips. No mixed radii elsewhere.
+- One corner radius: 12px on cards, badges, inputs and controls. The fixed SiteHeader nav pill is the one intentional exception to the no-pills rule, alongside the declared stack chips; nav controls stay 12px. No mixed radii elsewhere.
 
 ### Iconography
 
@@ -84,7 +84,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 
 ### Shared components — show each variant side by side with its label
 
-1. **SiteHeader** — variants: `desktop`, `mobile-closed`, `mobile-open`, `active-link`. Fixed at `top-3` with full-width gutters and a horizontally centred glass pill: `ink/70`, blur, one 1px `line/70` outline, pinned 999px pill radius, no filled bar. Generated monogram mark `"TS"`, name `"Thami Sithole"`, subtitle `"Software engineer"`, nav labels `"Home"`, `"About"`, `"Projects"`, `"Contact"`. Active link uses `accent/15` background and `accent` text. Nav is one line at desktop, height at most 80px. Mobile collapse declared explicitly: below 640px the links hide and the toggle shows; `mobile-open` puts a 12px-radius glass dropdown below the pill with the same labels, preserving `aria-expanded`/`aria-controls`, Escape close, route-change close and focus return.
+1. **SiteHeader** — variants: `desktop`, `mobile-closed`, `mobile-open`, `active-link`. Fixed at `top-3` with full-width gutters and a horizontally centred glass pill: `ink/70`, blur, one 1px `line/70` outline, rounded-full pill, no filled bar. Nav links and toggle keep the 12px control radius. Generated monogram mark `"TS"`, name `"Thami Sithole"`, subtitle `"Software engineer"`, nav labels `"Home"`, `"About"`, `"Projects"`, `"Contact"`. Active link uses `accent/15` background and `accent` text. Nav is one line at desktop, height at most 80px. Mobile collapse declared explicitly: below 640px the links hide and the toggle shows; `mobile-open` puts a 12px-radius glass dropdown below the pill with the same labels, preserving `aria-expanded`/`aria-controls`, Escape close, route-change close and focus return.
 2. **SiteFooter** — variants: `desktop-row`, `mobile-stacked`. Name `"Thami Sithole"`, tagline `"Building software that is useful, testable and clear to use."`, links `"About"`, `"Projects"`, `"Contact"`, `"Open GitHub"`. Mobile collapse: below 640px links stack under the name.
 3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, name, summary, `Problem`, `Role`, highlights (dot bullets), technology badges, link row. Screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
 4. **StatusBadge** — variants: `"Live · team capstone"`, `"Phase 2 complete · preparing for Vercel deployment"`, `"Product specification approved · build in progress"`. Muted text, hairline border, no filled background, one accent dot for the active status.

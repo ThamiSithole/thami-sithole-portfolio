@@ -57,7 +57,7 @@ Before writing any code:
 13. **Full check before "done".** Run `npm run check` on Node 26, then report the exact result before claiming a task is complete.
 14. **Stuck rule.** If the same problem is still failing after 3 attempts, stop and report what you tried, the exact error, and what you need from the human.
 15. **Doc parity.** If scope changes, update `PRD.md`, this file and the Stitch prompts in the same session. Do not leave the docs out of sync.
-16. **Craft gates.** No em/en-dashes in visible strings; one label per CTA intent; eyebrow ration; no three equal feature cards; one 12px radius; one accent; declared mobile collapse; real generated assets; one signature motion effect with reduced-motion fallback.
+16. **Craft gates.** No em/en-dashes in visible strings; one label per CTA intent; eyebrow ration; no three equal feature cards; one 12px radius with the nav pill exception; one accent; declared mobile collapse; real generated assets; one signature motion effect with reduced-motion fallback.
 17. **Asset honesty.** A `TODO` slot is acceptable only while generation is blocked. Never ship a CSS gradient blob or fake UI as a final visual.
 
 ---
@@ -138,14 +138,14 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T2 — Refresh tokens, fonts and responsive foundation
 **Files:** `src/app/globals.css`, `src/app/layout.tsx`, font assets.  
-**Actions:** replace cyan/violet tokens with the v1.3 slate/coral palette (`#11131a`, `#1a1e28`, `#242a37`, `#2e3545`, `#eef1f6`, `#a6adbd`, `#e2655c`, `#f07b72`); load Satoshi locally and JetBrains Mono from Google; add fluid heading scale with `clamp()`; one 12px radius scale; standardise gutters (`px-4 sm:px-6 lg:px-8`) and section spacing; body text ≥16px with 1.5–1.7 line height; add `.status-badge` utility; preserve skip link and reduced-motion rules.  
+**Actions:** replace cyan/violet tokens with the v1.3 slate/coral palette (`#11131a`, `#1a1e28`, `#242a37`, `#2e3545`, `#eef1f6`, `#a6adbd`, `#e2655c`, `#f07b72`); load Satoshi locally and JetBrains Mono from Google; add fluid heading scale with `clamp()`; one 12px radius scale (nav pill exception); standardise gutters (`px-4 sm:px-6 lg:px-8`) and section spacing; body text ≥16px with 1.5–1.7 line height; add `.status-badge` utility; preserve skip link and reduced-motion rules.
 **Acceptance:** one accent, no Inter in page UI, no horizontal overflow at 320/375/414/768/1024/1440px; ≥44px touch targets; reduced motion still respected.  
 **Verify:** browser screenshots at all six widths.
 
 ### T3 — Harden header and footer navigation
 **Files:** `src/components/SiteHeader.tsx`, `src/components/SiteFooter.tsx`.  
 **Actions:** close mobile menu on route change and Escape; return focus to the toggle; keep `aria-expanded`/`aria-controls`; visible focus states; footer wraps cleanly at 320px; use the generated monogram and icon set; declared mobile collapse. Do **not** add both GitHub identities here — that is deferred PRD cleanup.  
-**Nav treatment:** fixed centred glass pill with a 1px outline; the mobile dropdown opens below it with unchanged ARIA, Escape, route-change and focus-return behaviour.
+**Nav treatment:** fixed centred glass pill with a 1px outline; nav links and toggle stay 12px, the pill is the sole 999px exception; the mobile dropdown opens below it with unchanged ARIA, Escape, route-change and focus-return behaviour.
 **Acceptance:** mouse, touch and keyboard paths open/close reliably; no focus trap; `aria-current="page"` on active link.  
 **Verify:** keyboard-only pass (Tab, Enter, Escape) in browser.
 
@@ -177,7 +177,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 ### T8 — About, Contact, 404 and metadata
 **Files:** `src/app/about/page.tsx`, `src/app/contact/page.tsx`, `src/app/not-found.tsx` (new), `src/app/layout.tsx` metadata, `public/assets/site.webmanifest`.  
 **Actions:** responsive stacking for focus rows/toolkit/links; keep current 9-chip toolkit (expansion deferred); add on-brand 404 with generated artwork and link home; unify CTA labels to `"View projects"`, `"Get in touch"`, `"Open GitHub"`; wire OG card, cover, favicon set, `theme-color` and full social block; confirm one `<h1>` and correct metadata per route.  
-**Acceptance:** every route clean at all six widths; 404 styled and reachable; no em/en-dashes in visible copy; one radius scale; real absolute image URLs.  
+**Acceptance:** every route clean at all six widths; 404 styled and reachable; no em/en-dashes in visible copy; one radius scale plus nav pill exception; real absolute image URLs.
 **Verify:** visit all routes in browser and inspect `<head>`.
 
 ### T9 — Functional, craft and build verification
@@ -216,7 +216,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 - No horizontal overflow at 320/375/414/768/1024/1440px on any route.
 - Mobile nav and project filter work with mouse, touch and keyboard.
 - All 11 strong projects render from one content file; the featured three appear first.
-- Craft gates pass: one accent, generated assets and icons, one signature motion effect with reduced-motion fallback, no em/en-dashes, one CTA label per intent, one radius scale, declared mobile collapse.
+- Craft gates pass: one accent, generated assets and icons, one signature motion effect with reduced-motion fallback, no em/en-dashes, one CTA label per intent, one radius scale with nav pill exception, declared mobile collapse.
 - No secrets/`.env` in the repo; all three docs remain local untracked review files until approved.
 
 ---
@@ -233,7 +233,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 | §5 in-scope craft refresh | T2, T4, T5, T7, T8, T9 | Palette, fonts, icons, assets, motion, CTA copy |
 | §5 optional design-system decision | T10 | Optional, post-launch, mirrored in PRD §5, prompts Style Guide and Modals |
 | §6 IA — four routes, header behaviour, home, projects, about, contact, footer, 404 | T3, T6, T7, T8 | Footer dual-GitHub links remain deferred |
-| §7.1 Breakpoints, typography, radius, mobile collapse | T2, T3, T7, T9 | Six tested widths; Satoshi + JetBrains Mono; 12px radius |
+| §7.1 Breakpoints, typography, radius, mobile collapse | T2, T3, T7, T9 | Six tested widths; Satoshi + JetBrains Mono; 12px radius, nav pill exception |
 | §7.2 Cards, filter categories, featured order, asymmetric featured grid | T4, T5, T6, T7 | Categories arrays; `featured` boolean; no equal-card row |
 | §7.3 Accessibility, alt text, reduced motion, mount-safe motion | T2, T3, T5, T6, T7, T8, T9 | Skip link preserved in T2; B2 fallback in T7 |
 | §7.4 Content model | T5 | Exact PRD type; no extra required fields |
