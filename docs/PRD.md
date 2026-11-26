@@ -1,11 +1,11 @@
-# PRD — Thami Sithole Portfolio (v1.3 draft)
+# PRD — Thami Sithole Portfolio (v1.4)
 
-**Status:** Draft · **Owner:** Thami Sithole · **Date:** 2026-11-24 · **Supersedes:** v1.2  
-**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.2
+**Status:** Shipped · **Owner:** Thami Sithole · **Date:** 2026-11-26 · **Supersedes:** v1.3
+**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.3
 
 > **Scope reset:** this pass is about a fully responsive, functional, reliably building portfolio. All strong projects are in scope as content. Per-project accuracy fixes are a later backlog item, not a blocker.  
 > **Craft refresh (v1.3):** the higgsfield-websites design recipe now applies to the Stitch prompts. This changes the palette, type pairing, icon set, motion and CTA copy, and adds generated visual assets. These are in scope and mirrored in the plan.  
-> Local review draft — intentionally untracked. Do not stage, commit or push to GitHub until the user approves.  
+> This document and its companion docs are approved, tracked and shipped on `main`. Per-project content corrections stay in the user-led backlog.
 > **Doc parity rule:** any scope change here must be mirrored in the implementation plan, and vice versa.
 
 ## 1. Vision
@@ -86,7 +86,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - Fluid type with `clamp()` for headings; body text ≥16px with 1.5–1.7 line height and max 65 characters per line.
 - Satoshi for display and body; JetBrains Mono for uppercase eyebrows, chips and numeric counts. Inter is not used in page UI.
-- One corner radius: 12px on cards, badges, inputs and controls. Stack chips and the fixed header nav pill are the declared pill exceptions; no other mixed radii.
+- One corner radius: 12px on cards, badges, inputs and controls. The fixed header nav pill is the only 999px exception; no other mixed radii.
 - 8pt spacing scale; consistent card padding and gaps at every breakpoint.
 - Every multi-column section declares its below-640px collapse behaviour explicitly.
 - Headline at most 8 words and two desktop lines; subtext at most 25 words.
@@ -95,7 +95,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 ### 7.2 Project cards and filtering
 
 - One `Project` record renders identically on home and `/projects` using the same `ProjectCard` component.
-- Card contents: eyebrow, name, summary, problem, role, technology badges, highlights, status badge, live/repo/PR links.
+- Card contents: eyebrow, status badge, category labels, name, summary, problem, role, highlights, shadcn technology badges, live/repo/PR links.
 - Desktop project grid is 1/2/3 columns at mobile/tablet/desktop. Home arranges the three featured cards in a 2-column asymmetric grid with the first spanning both columns. No three equal feature cards in a row.
 - Filter categories: **All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI**. Filtering is client-side, keyboard accessible and updates results without a page reload. Chip selection is a transform-only transition with an `:active` scale of 0.98.
 - Featured order: **Straina → StokvelOS → Riverside Community Hub**, expressed with `featured: true` on those three records and their array order — not a hard-coded slice.
@@ -163,7 +163,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - Client components only where interactivity is required (mobile menu, filter, hero grade-shift if needed).
 - `npm ci` → `npm run lint` → `npm run typecheck` → `npm run build` on Node 26.
 - GitHub Actions CI on pull requests and pushes to `main`; Vercel deploy workflow with secrets in GitHub only.
-- Protected `main`, named branches, PR review, squash merge. Branch protection is a GitHub repository setting, not a code change; the implementation plan verifies the required CI status check manually when remote access is available.
+- Protected `main`, named branches, PR review, squash merge. Branch protection is enabled on GitHub with the required `check` status; it is a repository setting, not a code change.
 - No `.env`, credentials or tokens in the repo.
 
 ## 9. Rollout plan
@@ -176,7 +176,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 6. Restructure home hero and featured grid to the craft rules; polish About, Contact and 404.
 7. Run `npm run check`, verify CI green, deploy to Vercel and confirm production URL returns 200.
 8. Stop. Project content corrections remain in the backlog for the user to action later.
-9. **Activated after launch:** shadcn/ui + `lucide-react` slice (plan T10) after explicit user approval. It stayed out of T0 to T9 and is mirrored back into this PRD and the plan.
+9. **Shipped after launch:** shadcn/ui + `lucide-react` slice (plan T10) after explicit user approval. It stayed out of T0 to T9 and is mirrored across this PRD, the plan and the Stitch prompts.
 
 ## 10. Acceptance criteria
 
@@ -188,7 +188,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - [x] `npm run lint`, `npm run typecheck` and `npm run build` pass on Node 26.
 - [x] CI green on PR; Vercel production deployment returns HTTP 200.
 - [x] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
-- [ ] LCP < 2.5s and CLS < 0.1 recorded where browser tooling supports measurement; no unexpected regression.
+- [ ] CLS < 0.1 verified; LCP < 2.5s remains unverified in this headless environment, with no unexpected regression observed.
 - [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale with the nav pill exception, declared mobile collapse.
 - [x] No secrets or credentials committed.
 - [x] `docs/PRD.md`, `docs/IMPLEMENTATION_PLAN.md` and `docs/designs/stitch-prompts.md` cross-reference each other with no conflicting scope.
@@ -218,6 +218,21 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 ## 12. Cross-document coverage
 
 The implementation plan’s section 10 contains the full PRD → task coverage map and the reverse task → PRD check. This PRD defines requirements and scope; the plan defines tasks, files, verification and risks. The Stitch prompts define screen-level design detail. None may add scope without updating the others.
+
+## 13. Shipped record
+
+| PR | Scope | Result |
+|---|---|---|
+| [#12](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/12) | Stretch the hero card across the section | merged 25 Nov 2026 |
+| [#13](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/13) | Point profile links at ThamiRoneo | merged 25 Nov 2026 |
+| [#14](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/14) | Dock the profile card in the hero | merged 25 Nov 2026 |
+| [#15](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/15) | Activate T10 toolkit icons and shadcn primitives | merged 25 Nov 2026 |
+| [#16](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/16) | Use shadcn badges for project technologies | merged 25 Nov 2026 |
+| [#17](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/17) | Widen and centre the hero profile card | merged 26 Nov 2026 |
+| [#18](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/18) | Make the header a fixed glass pill | merged 26 Nov 2026 |
+| [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: v1.4/v1.3/v1.2 parity, shipped status, T10 and radius record | merged 26 Nov 2026 |
+
+Each PR passed the required `check` status and was squash-merged into `main`. Content corrections listed in §5 remain the user-led backlog.
 
 ---
 Related: [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) · [`docs/designs/stitch-prompts.md`](./designs/stitch-prompts.md) · [[Home]]

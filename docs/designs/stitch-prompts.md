@@ -1,10 +1,10 @@
 # Stitch Prompts — Thami Sithole Portfolio
 
-**Version:** v1.1 · **Date:** 2026-11-24  
-**Source:** [`../PRD.md`](../PRD.md) v1.3 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.2  
+**Version:** v1.2 · **Date:** 2026-11-26
+**Source:** [`../PRD.md`](../PRD.md) v1.4 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.3
 **Method:** higgsfield-websites craft rules applied as a refinement lens. The build stack stays Next.js 15 + Vercel as locked in the PRD and plan.
 
-> Local review document — intentionally untracked. Do not stage, commit or push until approved.
+> This document and its companion docs are approved, tracked and shipped on `main`. Per-project content corrections stay in the user-led backlog.
 
 ## Prompt conventions
 
@@ -13,7 +13,7 @@
 - Use the exact labels in quotation marks. Do not invent features, buttons, screens or copy.
 - List all six states on every prompt: Normal, Empty, Loading, Error, Offline, Success. Mark `N/A` explicitly when the static site has no such state.
 - Sample content comes from PRD §7.5 (project names, South Africa, Rustenburg, stokvels, dates). No lorem ipsum, no invented rand amounts.
-- T10 is activated: shadcn `badge` and `button` use the mapped brand tokens; one local brand SVG marks each Toolkit stack. `lucide-react` is limited to the selected-filter check in functional controls, never in the Toolkit or external-link icon zone.
+- T10 is shipped: shadcn `badge` and `button` use the mapped brand tokens; one local brand SVG marks each Toolkit stack. `lucide-react` is limited to the selected-filter check in functional controls, never in the Toolkit or external-link icon zone.
 
 ### Craft gates (from higgsfield-websites design recipe)
 
@@ -21,7 +21,7 @@
 - **One label per CTA intent page-wide:** `"View projects"` for every browse-projects action, `"Get in touch"` for contact, `"Open GitHub"` for the profile. No synonyms.
 - **Eyebrow ration:** at most one eyebrow per three sections. Prefer none. Section headings carry the hierarchy.
 - **No three equal feature cards in a row.** Home featured work uses a 2-column asymmetric grid; `"How I work"` uses a vertical rhythm list.
-- **One corner-radius scale site-wide:** 12px soft on cards, badges and controls. No mixed radii; stack chips and the fixed SiteHeader nav pill are the only declared pill shapes.
+- **One corner-radius scale site-wide:** 12px soft on cards, badges and controls. No mixed radii; the fixed SiteHeader nav pill is the only 999px exception.
 - **One accent color only.** Neutrals carry everything else. No gradient text, no cyan or violet glow, no second accent.
 - **Mobile collapse is declared explicitly** for every multi-column section. Do not leave it to the framework.
 - **Screenshot-safe motion:** text builds fire on mount, not on viewport entry. Scroll effects animate transform, scale or clip only, never opacity-to-zero. Every animated element has a `prefers-reduced-motion` static fallback.
@@ -54,7 +54,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 ### Typography
 
 - Display and body family: **Satoshi**, loaded locally with `next/font/local`. Weights 400, 500, 700.
-- Label, eyebrow and stack-chip family: **JetBrains Mono**, loaded from `next/font/google`. Used only for uppercase eyebrows, chips and the numeric result count.
+- Label, eyebrow, category-tag, technology-badge and numeric-count family: **JetBrains Mono**, loaded from `next/font/google`. Used only for uppercase eyebrows, tags, badges and the result count.
 - Inter is not used anywhere in the page. It remains only in the cover-composition tool, which is not page UI.
 - Fluid headings using `clamp()` per PRD §7.1. Hero `text-4xl sm:text-6xl`, page title `text-4xl sm:text-5xl`, section title `text-3xl`, card title `text-xl` or `text-2xl` when featured.
 - Body: 16px minimum with 1.5 to 1.7 line height, max 65 characters per line. Secondary copy: 14px.
@@ -67,12 +67,12 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 - Container: `max-w-6xl` (~1152px) with `px-4 sm:px-6 lg:px-8`.
 - Cards: 24px padding, 32px on featured cards. Grid gap: 24px.
 - Section spacing: 80 to 96px on desktop, reduced proportionally on mobile.
-- One corner radius: 12px on cards, badges, inputs and controls. The fixed SiteHeader nav pill is the one intentional exception to the no-pills rule, alongside the declared stack chips; nav controls stay 12px. No mixed radii elsewhere.
+- One corner radius: 12px on cards, badges, inputs and controls. The fixed SiteHeader nav pill is the only 999px exception; nav controls stay 12px. No mixed radii elsewhere.
 
 ### Iconography
 
 - Icons come from one generated custom set in `public/assets/icons/`: external-link arrow, three-span menu bars, solid dot bullet, check, branch/commit, live/app mark. One stroke weight, brand palette, shared grid.
-- No hand-rolled SVG illustrations, no icon font, no library icons in this pass.
+- No hand-rolled SVG illustrations, no icon font, and no library icons outside the activated T10 selected-filter check.
 - Decorative icons must be `aria-hidden="true"`. Icons inherit nearby text colour (`accent` for links, `muted` for menu).
 
 ### Motion
@@ -86,9 +86,9 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 
 1. **SiteHeader** — variants: `desktop`, `mobile-closed`, `mobile-open`, `active-link`. Fixed at `top-3` with full-width gutters and a horizontally centred glass pill: `ink/70`, blur, one 1px `line/70` outline, rounded-full pill, no filled bar. Nav links and toggle keep the 12px control radius. Generated monogram mark `"TS"`, name `"Thami Sithole"`, subtitle `"Software engineer"`, nav labels `"Home"`, `"About"`, `"Projects"`, `"Contact"`. Active link uses `accent/15` background and `accent` text. Nav is one line at desktop, height at most 80px. Mobile collapse declared explicitly: below 640px the links hide and the toggle shows; `mobile-open` puts a 12px-radius glass dropdown below the pill with the same labels, preserving `aria-expanded`/`aria-controls`, Escape close, route-change close and focus return.
 2. **SiteFooter** — variants: `desktop-row`, `mobile-stacked`. Name `"Thami Sithole"`, tagline `"Building software that is useful, testable and clear to use."`, links `"About"`, `"Projects"`, `"Contact"`, `"Open GitHub"`. Mobile collapse: below 640px links stack under the name.
-3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, name, summary, `Problem`, `Role`, highlights (dot bullets), technology badges, link row. Screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
+3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, category labels, name, summary, optional screenshot slot, `Problem`, `Role`, highlights (dot bullets), shadcn technology badges, link row. The screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
 4. **StatusBadge** — variants: `"Live · team capstone"`, `"Phase 2 complete · preparing for Vercel deployment"`, `"Product specification approved · build in progress"`. Muted text, hairline border, no filled background, one accent dot for the active status.
-5. **Tag / stack chip** — variants: `default`, `hover`. Pill border `line`, faint accent tint, 12px semibold JetBrains Mono text.
+5. **Technology badge / Toolkit badge (shadcn `Badge`)** — variants: `default`, `stack`. 12px radius, border `line`, faint accent tint for `stack`, 12px semibold JetBrains Mono text. Category labels keep the same 12px tag treatment; status badges stay unchanged.
 6. **FilterChip** — variants: `unselected`, `selected` (`aria-pressed`), `focus-visible`. Labels: `"All"`, `"Featured"`, `"Team"`, `"Capstone"`, `"Frontend"`, `"Backend"`, `"Mobile"`, `"AI"`. Selected uses `accent/15` and `accent`. Each chip has an `:active` scale of 0.98.
 7. **SkipLink** — variants: `hidden`, `focused`. On focus it slides into view at top-left with `accent` background and `ink` text.
 8. **LinkRow** — variants: `live`, `github`, `proof`. Labels `"Live app"`, `"Open GitHub"`, plus proof labels from `proofLinks`. Generated arrow icon, not a text glyph. Each link is its own garment, not one shared button class.
@@ -289,7 +289,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | CTA labels | One label per intent: `"View projects"`, `"Get in touch"`, `"Open GitHub"`. |
 | Eyebrow ration | At most one eyebrow per three sections. |
 | Equal-card ban | No three equal feature cards. Home uses a 2-column asymmetric grid and a vertical rhythm list. |
-| Radius | 12px on cards, badges and controls; stack chips and the fixed SiteHeader nav pill are the only pill exceptions. |
+| Radius | 12px on cards, badges and controls; the fixed SiteHeader nav pill is the only 999px exception. |
 | Accent | One accent `#e2655c`. No cyan, violet, gradient text or glow. |
 | Type | Satoshi display and body, JetBrains Mono labels. No Inter in page UI. |
 | Assets | Every slot uses a generated file or an explicit TODO. No CSS-only placeholder. |
@@ -313,10 +313,26 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | §7.5 project inventory | S2 sample content and card count |
 | §8 tokens refreshed, assets generated | Style Guide palette and generated asset slots |
 | §10 acceptance criteria | Six states on every screen prompt |
+| §13 shipped record | §10 and change log |
 
 **TODO scan:** all asset slots are filled. No PRD data is missing; no PRD update is required for these slots.
 
-**Change log:** v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
+**Change log:** v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
+
+## 10. Shipped record
+
+| PR | Scope | Result |
+|---|---|---|
+| [#12](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/12) | Stretch the hero card across the section | merged 25 Nov 2026 |
+| [#13](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/13) | Point profile links at ThamiRoneo | merged 25 Nov 2026 |
+| [#14](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/14) | Dock the profile card in the hero | merged 25 Nov 2026 |
+| [#15](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/15) | Activate T10 toolkit icons and shadcn primitives | merged 25 Nov 2026 |
+| [#16](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/16) | Use shadcn badges for project technologies | merged 25 Nov 2026 |
+| [#17](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/17) | Widen and centre the hero profile card | merged 26 Nov 2026 |
+| [#18](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/18) | Make the header a fixed glass pill | merged 26 Nov 2026 |
+| [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: PRD v1.4 / plan v1.3 / prompts v1.2 parity | merged 26 Nov 2026 |
+
+Screens S1 to S5 are the shipped design source. Asset slots, T10 icon zones, the 12px radius contract and the single nav-pill exception match the implementation.
 
 ---
 Related: [`../PRD.md`](../PRD.md) · [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) · [[Home]]
