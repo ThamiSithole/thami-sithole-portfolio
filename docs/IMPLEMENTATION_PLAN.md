@@ -89,12 +89,12 @@ Recorded before implementation; the final state is in §9 Definition of done and
 
 - Routes `/`, `/about`, `/projects`, `/contact` existed with shared `SiteHeader`, `SiteFooter`, skip link and `main` wrapper in `layout.tsx`; T8 later added `not-found.tsx`.
 - Design tokens and `prefers-reduced-motion` rules existed in `globals.css`; global `:focus-visible` outline was present. Tokens were refreshed, not preserved, under v1.3.
-- Header had a mobile toggle with `aria-expanded`/`aria-controls`, but no Escape handler, route-change close or focus return; T3 added those behaviours and T18 made the header a fixed glass pill.
+- Header had a mobile toggle with `aria-expanded`/`aria-controls`, but no Escape handler, route-change close or focus return; T3 added those behaviours and PR #18 made the header a fixed glass pill.
 - `/projects` was a static 2-column grid with no filtering, and home showed only the first 2 projects; T6 and T7 replaced both.
 - `Project` type had 10 fields with no category/featured/proof/screenshot support; data had 3 projects, including a known-broken Indlela URL.
 - `.github/workflows/` initially contained only `vercel-deploy.yml` (Node 26); T1 added PR CI for lint/typecheck/build.
-- The repository was later connected to `ThamiSithole/thami-sithole-portfolio`; local `main` is now a tracked Git checkout. PRs use reviewed branches and branch protection.
-- Higgsfield CLI installed at `~/.local/bin/higgsfield`, version 1.2.3. Login and workspace selection are complete, but CLI generation returns `only_mcp_usage_on_trial_is_available`. The Higgsfield MCP is connected and working: the full brand kit was generated through it into `public/assets/` (hero pair 2688 x 1520; other slots at their target sizes).
+- The repository was later connected to `ThamiSithole/thami-sithole-portfolio`; local `main` is now a tracked Git checkout. PRs use reviewed branches; CI status and branch protection are repository settings.
+- Higgsfield CLI was installed at `~/.local/bin/higgsfield`, version 1.2.3. Login and workspace selection were complete, but CLI generation returned `only_mcp_usage_on_trial_is_available`. The Higgsfield MCP was the connected, working generation path: the full brand kit was generated through it into `public/assets/` (hero pair 2688 x 1520; other slots at their target sizes).
 
 ---
 
@@ -135,7 +135,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 ### T1 — CI workflow for pull requests
 **Files:** `.github/workflows/ci.yml` (new).  
 **Actions:** on `pull_request` and push to `main`: checkout, `setup-node@v4` with `node-version: 26` and npm cache, then `npm ci`, `npm run lint`, `npm run typecheck`, `npm run build`. Leave `vercel-deploy.yml` unchanged.  
-**Acceptance:** CI runs on PRs, Node 26, no secrets in CI; `main` requires the CI check in GitHub branch protection (manual remote setting, verified once remote access is available).  
+**Acceptance:** CI runs on PRs, Node 26, no secrets in CI; any protection of `main` is a GitHub repository setting, not a code change.
 **Verify:** open a test PR and confirm all steps green; confirm the required status check in repository settings.
 
 ### T2 — Refresh tokens, fonts and responsive foundation
@@ -160,7 +160,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T5 — Extend content model and upgrade ProjectCard
 **Files:** `src/content/projects.ts`, `src/components/ProjectCard.tsx`.  
-**Actions:** apply the exact `Project` type from PRD §7.4 — `categories?: ProjectCategory[]`, `featured?: boolean`, `proofLinks?`, `screenshots?` — so current entries still compile. Add all 11 strong projects from PRD §7.5 with verified URLs only. Mark the first three `featured: true` in order **Straina → StokvelOS → Riverside Community Hub**. Render status badge, category labels, technology badges using shadcn `Badge`, optional `proofLinks` and optional screenshot slot via `next/image` with `sizes` and meaningful alt text. Keep `h-full` and `mt-auto` link row for aligned grids. Generated icons hidden with `aria-hidden="true"`. Each card is its own component instance, not a shared utility class.
+**Actions:** apply the exact `Project` type from PRD §7.4 — `categories?: ProjectCategory[]`, `featured?: boolean`, `proofLinks?`, `screenshots?` — so current entries still compile. Add all 11 strong projects from PRD §7.5 with verified URLs only. Mark the first three `featured: true` in order **Straina → StokvelOS → Riverside Community Hub**. Render the status badge with its existing treatment, category labels with the tag treatment, and technology badges using shadcn `Badge`; keep `Badge` out of status and category treatments. Render optional `proofLinks` and optional screenshot slot via `next/image` with `sizes` and meaningful alt text. Keep `h-full` and `mt-auto` link row for aligned grids. Generated icons hidden with `aria-hidden="true"`. Each card is its own component instance, not a shared utility class.
 **Acceptance:** all 11 records typecheck; featured order correct; no fabricated links; readable from 320px up; external links use `target="_blank" rel="noreferrer"`.  
 **Verify:** `npm run typecheck` and browser screenshots at mobile and desktop.
 
@@ -195,7 +195,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Acceptance:** no token conflict, no layout regression, CI still green, bundle impact reviewed.  
 **Verify:** full T9 pass again after the slice.  
 **Guard:** this slice was never required for launch. It is shipped and recorded in all three docs; expanding it requires a new scope decision.
-**Result (2026-11-25):** activated after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
+**Result (2026-11-25):** shipped after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
 
 ---
 
@@ -241,7 +241,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 | §7.3 Accessibility, alt text, reduced motion, mount-safe motion | T2, T3, T5, T6, T7, T8, T9 | Skip link preserved in T2; B2 fallback in T7 |
 | §7.4 Content model | T5 | Exact PRD type; no extra required fields |
 | §7.5 Project inventory | T5 | All 11 entries, verified URLs only |
-| §8 Engineering/build/CI/secrets, fonts, generated assets | T0, T1, T2, T4, T9 | Tokens refreshed; Higgsfield MCP is an asset tool only; branch protection verified manually |
+| §8 Engineering/build/CI/secrets, fonts, generated assets | T0, T1, T2, T4, T9 | Tokens refreshed; Higgsfield MCP is an asset tool only; branch protection is a GitHub setting |
 | §9 Rollout steps 1–9 | T2, T3, T5, T4, T6, T7, T9 | Step 4 asset generation is T4; step 9 is T10 |
 | §10 Acceptance criteria | T9 | Checklist owned by T9 |
 | §11 Open decisions — `/skills`, labels, PRD visibility, T10 | Section 9 + PRD §11 | CTA labels closed in v1.3; others left open intentionally |
@@ -257,23 +257,14 @@ If any of the three documents changes, update the others in the same edit sessio
 
 1. New requirement → add to PRD section, then add/mark a task here and in the coverage map, and reflect it in the Stitch prompts.
 2. Task scope removed → remove or mark it in PRD too, and remove the corresponding design detail from the prompts.
-3. Activated slice → keep it marked shipped in all three documents and in the definition of done; expansion needs a new scope decision.
+3. Shipped slice → keep it marked shipped in all three documents and in the definition of done; expansion needs a new scope decision.
 4. Generated asset added, changed or removed → update the prompt slot table and T4.
 
 ## 12. Shipped record
 
-| PR | Scope | Result |
-|---|---|---|
-| [#12](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/12) | Stretch the hero card across the section | merged 25 Nov 2026 |
-| [#13](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/13) | Point profile links at ThamiRoneo | merged 25 Nov 2026 |
-| [#14](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/14) | Dock the profile card in the hero | merged 25 Nov 2026 |
-| [#15](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/15) | Activate T10 toolkit icons and shadcn primitives | merged 25 Nov 2026 |
-| [#16](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/16) | Use shadcn badges for project technologies | merged 25 Nov 2026 |
-| [#17](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/17) | Widen and centre the hero profile card | merged 26 Nov 2026 |
-| [#18](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/18) | Make the header a fixed glass pill | merged 26 Nov 2026 |
-| [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: v1.4/v1.3/v1.2 parity, shipped status, T10 and radius record | merged 26 Nov 2026 |
+The canonical PR table is in [`docs/PRD.md` §13](./PRD.md#13-shipped-record). It is the single source for PR scope and merge results; do not duplicate it here.
 
-Verification anchors: `npm run check` green on each PR, required CI `check` green, squash merges into `main`, six-width browser checks for hero, profile card, pill nav and T10 invariants. LCP remains environment-dependent as recorded in PRD §10.
+Verification anchors: local `npm run check` on the final docs tree, CI `check` green on landed PRs, squash merges into `main`, and six-width browser checks recorded for hero, profile card, pill nav and T10 invariants. LCP remains environment-dependent as recorded in PRD §10.
 
 ---
 Related: [`docs/PRD.md`](./PRD.md) · [`docs/designs/stitch-prompts.md`](./designs/stitch-prompts.md) · [[Home]]

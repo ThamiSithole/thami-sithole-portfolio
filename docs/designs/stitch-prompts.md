@@ -72,7 +72,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 ### Iconography
 
 - Icons come from one generated custom set in `public/assets/icons/`: external-link arrow, three-span menu bars, solid dot bullet, check, branch/commit, live/app mark. One stroke weight, brand palette, shared grid.
-- No hand-rolled SVG illustrations, no icon font, and no library icons outside the activated T10 selected-filter check.
+- No hand-rolled SVG illustrations, no icon font, and no library icons outside the shipped T10 selected-filter check.
 - Decorative icons must be `aria-hidden="true"`. Icons inherit nearby text colour (`accent` for links, `muted` for menu).
 
 ### Motion
@@ -88,7 +88,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 2. **SiteFooter** — variants: `desktop-row`, `mobile-stacked`. Name `"Thami Sithole"`, tagline `"Building software that is useful, testable and clear to use."`, links `"About"`, `"Projects"`, `"Contact"`, `"Open GitHub"`. Mobile collapse: below 640px links stack under the name.
 3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, category labels, name, summary, optional screenshot slot, `Problem`, `Role`, highlights (dot bullets), shadcn technology badges, link row. The screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
 4. **StatusBadge** — variants: `"Live · team capstone"`, `"Phase 2 complete · preparing for Vercel deployment"`, `"Product specification approved · build in progress"`. Muted text, hairline border, no filled background, one accent dot for the active status.
-5. **Technology badge / Toolkit badge (shadcn `Badge`)** — variants: `default`, `stack`. 12px radius, border `line`, faint accent tint for `stack`, 12px semibold JetBrains Mono text. Category labels keep the same 12px tag treatment; status badges stay unchanged.
+5. **Technology badge / Toolkit badge (shadcn `Badge`) and category tag (plain span)** — technology variants: `default`, `stack`; 12px radius, 1px `line` border, 12px semibold JetBrains Mono text, faint accent tint for `stack`. Category tags use the same 12px tag treatment (border, radius, tint and font) but are plain spans, not shadcn `Badge`; the component 4 status badge stays unchanged.
 6. **FilterChip** — variants: `unselected`, `selected` (`aria-pressed`), `focus-visible`. Labels: `"All"`, `"Featured"`, `"Team"`, `"Capstone"`, `"Frontend"`, `"Backend"`, `"Mobile"`, `"AI"`. Selected uses `accent/15` and `accent`. Each chip has an `:active` scale of 0.98.
 7. **SkipLink** — variants: `hidden`, `focused`. On focus it slides into view at top-left with `accent` background and `ink` text.
 8. **LinkRow** — variants: `live`, `github`, `proof`. Labels `"Live app"`, `"Open GitHub"`, plus proof labels from `proofLinks`. Generated arrow icon, not a text glyph. Each link is its own garment, not one shared button class.
@@ -277,7 +277,7 @@ Design screen "S5" for my responsive web portfolio at **1440 × 900 desktop** an
 
 ## 7. Modals
 
-No modals are specified in PRD §6 or §7. None are designed in this pass. Do not add a dialog, menu or overlay. Activated T10 added only `badge` and `button`; no Radix dialog, menu or overlay was introduced.
+No modals are specified in PRD §6 or §7. None are designed in this pass. Do not add a dialog, menu or overlay. Shipped T10 added only `badge` and `button`; no Radix dialog, menu or overlay was introduced.
 
 ---
 
@@ -303,7 +303,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | PRD area | Prompt coverage |
 |---|---|
 | §5 deferred cleanup / dual GitHub identities | Excluded from S3 and S4 by explicit note |
-| §5 activated T10 shadcn/lucide | Style Guide notes brand-token mapping; badge and button only, with Lucide confined to filter controls |
+| §5 shipped T10 shadcn/lucide | Style Guide notes brand-token mapping; badge and button only, with Lucide confined to filter controls |
 | §6 IA — four routes + 404 | S1–S5 |
 | §6 header behaviour | Style Guide SiteHeader; repeated in every screen prompt |
 | §7.1 breakpoints, typography, radius | Style Guide; desktop + mobile frames in every prompt |
@@ -321,16 +321,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 
 ## 10. Shipped record
 
-| PR | Scope | Result |
-|---|---|---|
-| [#12](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/12) | Stretch the hero card across the section | merged 25 Nov 2026 |
-| [#13](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/13) | Point profile links at ThamiRoneo | merged 25 Nov 2026 |
-| [#14](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/14) | Dock the profile card in the hero | merged 25 Nov 2026 |
-| [#15](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/15) | Activate T10 toolkit icons and shadcn primitives | merged 25 Nov 2026 |
-| [#16](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/16) | Use shadcn badges for project technologies | merged 25 Nov 2026 |
-| [#17](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/17) | Widen and centre the hero profile card | merged 26 Nov 2026 |
-| [#18](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/18) | Make the header a fixed glass pill | merged 26 Nov 2026 |
-| [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: PRD v1.4 / plan v1.3 / prompts v1.2 parity | merged 26 Nov 2026 |
+The canonical PR table is in [`docs/PRD.md` §13](../PRD.md#13-shipped-record). It is the single source for PR scope and merge results; do not duplicate it here.
 
 Screens S1 to S5 are the shipped design source. Asset slots, T10 icon zones, the 12px radius contract and the single nav-pill exception match the implementation.
 

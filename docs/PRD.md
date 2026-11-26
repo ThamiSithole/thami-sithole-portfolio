@@ -14,11 +14,13 @@ A responsive, fast, static portfolio that works cleanly on any device and builds
 
 ## 2. Problem (scoped to this pass)
 
-- Layout and navigation are not yet verified across small phones, tablets and wide desktop widths.
-- Project cards need consistent responsive behaviour, accessible interaction and working links.
-- Build, CI and deployment must be green and repeatable on the same Node version Vercel uses.
-- The current content file is a starting point; it needs to represent the full set of strong projects. Accuracy corrections to individual projects will be handled later by the user.
-- The existing cyan and violet palette, Inter display type and CSS-only marks read as generic and conflict with the craft standard adopted in v1.3.
+Recorded as the pre-build problem statement; shipped scope is in §10 and §13.
+
+- Layout and navigation were not yet verified across small phones, tablets and wide desktop widths.
+- Project cards needed consistent responsive behaviour, accessible interaction and working links.
+- Build, CI and deployment had to be green and repeatable on the same Node version Vercel uses.
+- The content file was a starting point; it needed to represent the full set of strong projects. Accuracy corrections to individual projects remain a user-led backlog item.
+- The existing cyan and violet palette, Inter display type and CSS-only marks read as generic and conflicted with the craft standard adopted in v1.3.
 
 ## 3. Audience
 
@@ -57,7 +59,7 @@ A responsive, fast, static portfolio that works cleanly on any device and builds
 - Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`.
 - Apply eyebrow ration, a 12px radius scale with the fixed nav pill as the sole exception, declared mobile collapse and bespoke CTA garments.
 
-**Activated design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
+**Shipped design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
 
 The content model must be able to hold all deferred corrections when they arrive, without a redesign.
 
@@ -85,7 +87,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 | 1440px+ (wide) | Centered container, no stretched text or cards |
 
 - Fluid type with `clamp()` for headings; body text ≥16px with 1.5–1.7 line height and max 65 characters per line.
-- Satoshi for display and body; JetBrains Mono for uppercase eyebrows, chips and numeric counts. Inter is not used in page UI.
+- Satoshi for display and body; JetBrains Mono for uppercase eyebrows, category labels, technology badges and numeric counts. Inter is not used in page UI.
 - One corner radius: 12px on cards, badges, inputs and controls. The fixed header nav pill is the only 999px exception; no other mixed radii.
 - 8pt spacing scale; consistent card padding and gaps at every breakpoint.
 - Every multi-column section declares its below-640px collapse behaviour explicitly.
@@ -156,14 +158,14 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 ## 8. Engineering & build requirements
 
 - Next.js App Router, TypeScript (strict), Tailwind CSS. The v1.3 palette **refreshes** the existing token values; earlier token names/values are not preserved. Utilities are extended, not replaced.
-- Installed stack: Next.js 15.5.29, React 19.3.0, Tailwind 4.3.3, ESLint 8 + `eslint-config-next` 15.5.29. React is **not** a new dependency.
+- Installed stack: Next.js 15.5.29, React 19.3.0, Tailwind 4.3.3, ESLint 8 + `eslint-config-next` 15.5.29. T10 ships shadcn `badge`/`button` and `lucide-react` with tokens mapped to these values. React is **not** a new dependency.
 - Fonts: Satoshi loaded via `next/font/local`, JetBrains Mono via `next/font/google`. No Inter in page UI.
 - Generated brand assets live in `public/assets/` and are referenced same-origin with `next/image` and explicit `sizes`. Higgsfield is an asset-generation tool only, not an app dependency or runtime service.
 - Content stays in `src/content/projects.ts`; no backend or CMS.
 - Client components only where interactivity is required (mobile menu, filter, hero grade-shift if needed).
 - `npm ci` → `npm run lint` → `npm run typecheck` → `npm run build` on Node 26.
 - GitHub Actions CI on pull requests and pushes to `main`; Vercel deploy workflow with secrets in GitHub only.
-- Protected `main`, named branches, PR review, squash merge. Branch protection is enabled on GitHub with the required `check` status; it is a repository setting, not a code change.
+- Protected `main`, named branches, PR review, squash merge. Branch protection is a GitHub repository setting, not a code change; verify the required CI status in repository settings.
 - No `.env`, credentials or tokens in the repo.
 
 ## 9. Rollout plan
@@ -188,6 +190,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - [x] `npm run lint`, `npm run typecheck` and `npm run build` pass on Node 26.
 - [x] CI green on PR; Vercel production deployment returns HTTP 200.
 - [x] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
+- [x] T10 shadcn `badge`/`button`, nine brand Toolkit SVGs and the Lucide filter check are shipped with separated icon zones.
 - [ ] CLS < 0.1 verified; LCP < 2.5s remains unverified in this headless environment, with no unexpected regression observed.
 - [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale with the nav pill exception, declared mobile collapse.
 - [x] No secrets or credentials committed.
@@ -212,12 +215,12 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - Whether to add a dedicated `/skills` route or keep skills in `/about` (default: keep in `/about`).
 - Final filter category labels (currently fixed as All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI).
 - Whether this PRD is public or internal.
-- **Closed 2026-11-25:** T10 is activated with `badge` and `button`; brand stack SVGs stay in the Toolkit and Lucide stays in the filter controls.
+- **Closed 2026-11-25:** T10 is shipped with `badge` and `button`; brand stack SVGs stay in the Toolkit and Lucide stays in the filter controls.
 - **Closed in v1.3:** CTA label unification. Use `"View projects"`, `"Get in touch"` and `"Open GitHub"` site-wide.
 
 ## 12. Cross-document coverage
 
-The implementation plan’s section 10 contains the full PRD → task coverage map and the reverse task → PRD check. This PRD defines requirements and scope; the plan defines tasks, files, verification and risks. The Stitch prompts define screen-level design detail. None may add scope without updating the others.
+The implementation plan’s section 10 contains the full PRD → task coverage map and the reverse task → PRD check. T10 is recorded as shipped in all three documents. This PRD defines requirements and scope; the plan defines tasks, files, verification and risks. The Stitch prompts define screen-level design detail. None may add scope without updating the others.
 
 ## 13. Shipped record
 
