@@ -38,26 +38,36 @@ const toolkit = [
 export default function AboutPage() {
   return (
     <div className="grid gap-20">
-      <section className="max-w-3xl">
-        <h1 className="text-fluid-lg font-extrabold tracking-tight text-text">
-          I am an AI-engineering student building products end to end.
-        </h1>
-        <div className="mt-8 space-y-5 text-base leading-relaxed text-muted">
-          <p>
-            My work spans coursework, individual projects and team builds. On Straina I handled CI,
-            deployment and release work alongside frontend and backend features: hotspot alerts,
-            user and role management, source management and an offline hook.
-          </p>
-          <p>
-            On StokvelOS I focused on the Phase 2 foundations: authentication, groups, invitations,
-            member settings and database-enforced permissions. The goal is always the same: make the
-            system understandable to a user and provable to a reviewer.
-          </p>
-          <p>
-            I am most useful where product thinking and engineering meet: turning a real constraint
-            into a clear interface, then backing it with tests and a deployment other people can
-            trust.
-          </p>
+      <section className="grid max-w-3xl gap-8 sm:grid-cols-[auto_minmax(0,1fr)] sm:items-start">
+        <Image
+          src="/assets/anime-thami.png"
+          alt="Portrait of Thami Sithole"
+          width={128}
+          height={128}
+          sizes="(min-width: 640px) 128px, 96px"
+          className="size-24 rounded-[var(--radius-card)] object-cover sm:size-32"
+        />
+        <div>
+          <h1 className="text-fluid-lg font-extrabold tracking-tight text-text">
+            I am an AI-engineering student building products end to end.
+          </h1>
+          <div className="mt-8 space-y-5 text-base leading-relaxed text-muted">
+            <p>
+              My work spans coursework, individual projects and team builds. On Straina I handled CI,
+              deployment and release work alongside frontend and backend features: hotspot alerts,
+              user and role management, source management and an offline hook.
+            </p>
+            <p>
+              On StokvelOS I focused on the Phase 2 foundations: authentication, groups, invitations,
+              member settings and database-enforced permissions. The goal is always the same: make
+              the system understandable to a user and provable to a reviewer.
+            </p>
+            <p>
+              I am most useful where product thinking and engineering meet: turning a real constraint
+              into a clear interface, then backing it with tests and a deployment other people can
+              trust.
+            </p>
+          </div>
         </div>
       </section>
 

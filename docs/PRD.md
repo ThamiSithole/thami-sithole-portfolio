@@ -54,7 +54,7 @@ Recorded as the pre-build problem statement; shipped scope is in §10 and §13.
 - Replace the near-black plus cyan/violet two-accent scheme with one slate base and one coral accent.
 - Replace Inter display with Satoshi for display/body and JetBrains Mono for labels, loaded locally where possible.
 - Replace CSS arrow/menu marks with one generated icon set in the brand palette.
-- Generate a hero grade pair, section plate, profile mark, monogram/favicon kit, OG card, cover and 404 artwork via an allowed Higgsfield path (MCP on this account). These are brand assets, not per-project screenshots.
+- Generate a hero grade pair, section plate, profile portrait, profile-card monogram, monogram/favicon kit, OG card, cover and 404 artwork via an allowed Higgsfield path (MCP on this account). These are brand assets, not per-project screenshots.
 - Add one signature `"B2 grade-shift"` hero interaction in non-animated mode, with a `prefers-reduced-motion` static fallback. No scroll-scrub journey.
 - Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`.
 - Apply eyebrow ration, a 12px radius scale with the fixed nav pill as the sole exception, declared mobile collapse and bespoke CTA garments.
@@ -68,9 +68,9 @@ The content model must be able to hold all deferred corrections when they arrive
 Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - **Header:** fixed, horizontally centred glass pill with a 1px outline; name/logo, desktop nav links and mobile toggle sit inside it. The mobile dropdown opens in a glass panel below the pill; toggle keeps `aria-expanded`/`aria-controls`, closes on route change and Escape, and returns focus to the toggle.
-- **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens.
+- **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens. The card shows the profile portrait and a small decorative monogram.
 - **Projects:** full project grid with category filter, status badges and shadcn technology badges on each card.
-- **About:** background, focus areas, toolkit, GitHub links.
+- **About:** background, focus areas, toolkit, GitHub links, and the same profile portrait in the intro.
 - **Contact:** GitHub and current work links.
 - **Footer:** repeat key links, the ThamiRoneo profile CTA and repository links where relevant. No second profile switcher was added.
 - **404:** simple, on-brand not-found page with generated artwork and a link home.
@@ -173,7 +173,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 1. Audit responsive layout at 320/375/414/768/1024/1440px and fix overflow, spacing and typography.
 2. Refresh design tokens, fonts and radius; harden header/nav (mobile toggle, Escape, route-change close, focus states) and footer links.
 3. Extend `Project` type with optional fields and add the full inventory above; mark the first three `featured: true`.
-4. Generate the brand asset kit (hero grades, section plate, profile mark, icons, monogram/favicon, OG/cover, 404 art) and slot into the designs.
+4. Generate the brand asset kit (hero grades, section plate, profile portrait, profile-card monogram, icons, monogram/favicon, OG/cover, 404 art) and slot into the designs.
 5. Add category filtering with keyboard support, composed empty state and tactile feedback.
 6. Restructure home hero and featured grid to the craft rules; polish About, Contact and 404.
 7. Run `npm run check`, verify CI green, deploy to Vercel and confirm production URL returns 200.
