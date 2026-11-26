@@ -55,9 +55,9 @@ A responsive, fast, static portfolio that works cleanly on any device and builds
 - Generate a hero grade pair, section plate, profile mark, monogram/favicon kit, OG card, cover and 404 artwork via an allowed Higgsfield path (MCP on this account). These are brand assets, not per-project screenshots.
 - Add one signature `"B2 grade-shift"` hero interaction in non-animated mode, with a `prefers-reduced-motion` static fallback. No scroll-scrub journey.
 - Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`.
-- Apply eyebrow ration, a single 12px radius scale, declared mobile collapse and bespoke CTA garments.
+- Apply eyebrow ration, a 12px radius scale with the fixed nav pill as the sole exception, declared mobile collapse and bespoke CTA garments.
 
-**Activated design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
+**Activated design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
 
 The content model must be able to hold all deferred corrections when they arrive, without a redesign.
 
@@ -65,7 +65,7 @@ The content model must be able to hold all deferred corrections when they arrive
 
 Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
-- **Header:** name/logo, desktop nav links, mobile toggle button with `aria-expanded`, closes on route change and Escape, returns focus to the toggle.
+- **Header:** fixed, horizontally centred glass pill with a 1px outline; name/logo, desktop nav links and mobile toggle sit inside it. The mobile dropdown opens in a glass panel below the pill; toggle keeps `aria-expanded`/`aria-controls`, closes on route change and Escape, and returns focus to the toggle.
 - **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens.
 - **Projects:** full project grid with category filter, status badges and shadcn technology badges on each card.
 - **About:** background, focus areas, toolkit, GitHub links.
@@ -86,7 +86,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - Fluid type with `clamp()` for headings; body text ≥16px with 1.5–1.7 line height and max 65 characters per line.
 - Satoshi for display and body; JetBrains Mono for uppercase eyebrows, chips and numeric counts. Inter is not used in page UI.
-- One corner radius: 12px on cards, inputs and panels. Stack chips are the only pill shape.
+- One corner radius: 12px on cards, badges, inputs and controls. Stack chips and the fixed header nav pill are the declared pill exceptions; no other mixed radii.
 - 8pt spacing scale; consistent card padding and gaps at every breakpoint.
 - Every multi-column section declares its below-640px collapse behaviour explicitly.
 - Headline at most 8 words and two desktop lines; subtext at most 25 words.
@@ -189,7 +189,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - [x] CI green on PR; Vercel production deployment returns HTTP 200.
 - [x] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
 - [ ] LCP < 2.5s and CLS < 0.1 recorded where browser tooling supports measurement; no unexpected regression.
-- [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale, declared mobile collapse.
+- [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale with the nav pill exception, declared mobile collapse.
 - [x] No secrets or credentials committed.
 - [x] `docs/PRD.md`, `docs/IMPLEMENTATION_PLAN.md` and `docs/designs/stitch-prompts.md` cross-reference each other with no conflicting scope.
 

@@ -45,8 +45,8 @@ export default function SiteHeader() {
   }, [open, closeMenu]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-line/80 bg-ink/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
+    <header className="fixed inset-x-0 top-3 z-50 px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full border border-line/70 bg-ink/70 px-3 py-2 shadow-lg backdrop-blur-xl">
         <Link
           href="/"
           className="flex items-center gap-3 rounded-[var(--radius-card)]"
@@ -114,33 +114,32 @@ export default function SiteHeader() {
             className="size-5"
           />
         </button>
+        <nav
+          id="mobile-navigation"
+          aria-label="Mobile navigation"
+          className={`${open ? "block" : "hidden"} absolute left-0 right-0 top-full mt-2 rounded-[var(--radius-card)] border border-line/70 bg-ink/80 p-3 shadow-lg backdrop-blur-xl sm:hidden`}
+        >
+          <ul className="grid gap-1">
+            {links.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    aria-current={active ? "page" : undefined}
+                    onClick={() => closeMenu(false)}
+                    className={`tap-target flex items-center rounded-[var(--radius-card)] px-3 text-sm font-semibold ${
+                      active ? "bg-accent/15 text-accent" : "text-muted hover:bg-surface-2 hover:text-text"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
       </div>
-
-      <nav
-        id="mobile-navigation"
-        aria-label="Mobile navigation"
-        className={`${open ? "block" : "hidden"} border-t border-line bg-ink px-4 py-3 sm:hidden lg:px-8`}
-      >
-        <ul className="grid gap-1">
-          {links.map((link) => {
-            const active = pathname === link.href;
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  onClick={() => closeMenu(false)}
-                  className={`tap-target flex items-center rounded-[var(--radius-card)] px-3 text-sm font-semibold ${
-                    active ? "bg-accent/15 text-accent" : "text-muted hover:bg-surface-2 hover:text-text"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
     </header>
   );
 }
