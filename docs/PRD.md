@@ -108,7 +108,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 - Visible focus rings; no keyboard traps; skip-to-content link preserved from the existing layout.
 - Alt text for screenshots and generated art; decorative generated icons hidden from screen readers with `aria-hidden="true"`.
 - Respect `prefers-reduced-motion`; no layout shift from images or font loading.
-- One signature motion effect only. Text builds fire on mount, not on viewport entry; scroll effects animate transform/scale/clip only, never opacity-to-zero. Reduced motion shows the composed static state.
+- One signature motion effect only. Text builds fire on mount over 900ms with a 180ms second-line delay, not on viewport entry; scroll effects animate transform/scale/clip only, never opacity-to-zero. Reduced motion shows the composed static state.
 
 ### 7.4 Content model
 
