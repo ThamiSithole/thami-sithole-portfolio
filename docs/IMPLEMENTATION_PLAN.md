@@ -1,10 +1,10 @@
 # Implementation Plan — Thami Sithole Portfolio (responsive + build + craft)
 
-**Status:** Companion to `docs/PRD.md` v1.3 · **Version:** v1.2 · **Date:** 2026-11-24  
+**Status:** Companion to `docs/PRD.md` v1.4 · **Version:** v1.3 · **Date:** 2026-11-26
 **Source of truth for requirements:** [`docs/PRD.md`](./PRD.md)  
 **Target folder:** `/home/kayron1/Work/thami-sithole-portfolio`
 
-> Local review document — intentionally untracked. Do not stage, commit or push until the user approves.  
+> This document and its companion docs are approved, tracked and shipped on `main`. Per-project content corrections stay in the user-led backlog.
 > **Doc parity rule:** any scope change in this file must be mirrored in `PRD.md` and `docs/designs/stitch-prompts.md`, and vice versa. Section 10 maps every PRD section to a task so there are no uncovered requirements.
 
 ---
@@ -14,14 +14,14 @@
 | Field | Value |
 | --- | --- |
 | App name | Thami Sithole Portfolio |
-| Built from PRD version | v1.3 |
-| Screen designs | `docs/designs/stitch-prompts.md` v1.1 (S1–S5). No Stitch project URL yet. |
-| Plan version | v1.2 (added v1.3 craft scope; status amended 25 Nov 2026 for CLI auth, trial restriction and MCP-generated brand kit) |
+| Built from PRD version | v1.4 |
+| Screen designs | `docs/designs/stitch-prompts.md` v1.2 (S1–S5). No Stitch project URL yet. |
+| Plan version | v1.3 (final close-out: shipped status, T10 record, radius parity and PR history) |
 | Repository | https://github.com/ThamiSithole/thami-sithole-portfolio |
-| Local path | `/home/kayron1/Work/thami-sithole-portfolio` (no local `.git` directory) |
+| Local path | `/home/kayron1/Work/thami-sithole-portfolio` (tracked Git checkout on `main`) |
 | Asset tooling | Higgsfield CLI 1.2.3 at `~/.local/bin/higgsfield` (authenticated, workspace selected, CLI generation blocked on trial); Higgsfield MCP connected and used for the full brand kit. |
-| Status | Local review draft — untracked; full brand kit generated via MCP and in PR review; code tasks not started |
-| Last updated | 25 Nov 2026 |
+| Status | Shipped: T0 to T10 complete, full brand kit generated via MCP, all planned PRs merged. Content corrections remain a user-led backlog. |
+| Last updated | 26 Nov 2026 |
 
 ---
 
@@ -30,13 +30,13 @@
 Before writing any code:
 
 1. Read this whole file from top to bottom.
-2. Read `docs/PRD.md` v1.3.
-3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.1 (S1–S5), especially the Style Guide and craft gates.
+2. Read `docs/PRD.md` v1.4.
+3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.2 (S1–S5), especially the Style Guide and craft gates.
 4. Check Section 10. If a PRD requirement has no task, or this file contradicts the PRD or prompts, stop and ask the human. Do not guess.
-5. Check the stack and local constraints in Sections 3–4 (Node 26, npm, browser tooling, no local Git history at start, CLI auth).
+5. Check the stack and local constraints in Sections 3–4 (Node 26, npm, browser tooling, tracked Git history, CLI auth).
 6. Start at **T0 only**. When that task's **Verify** step passes, stop and wait for the human to say "continue". Do not batch tasks unless explicitly allowed.
 7. Before **T4**, confirm either Higgsfield CLI auth with a selected workspace or the connected Higgsfield MCP. If CLI returns `only_mcp_usage_on_trial_is_available`, use the MCP path; ask the human only if no allowed generation path exists. Do not substitute CSS-only placeholders or spoof an MCP client header to bypass the account restriction.
-8. Never start **T10** unless the human asks after launch.
+8. **T10** was started only after the human asked after launch and is now shipped. Do not expand it without a new scope decision.
 
 ---
 
@@ -53,7 +53,7 @@ Before writing any code:
 9. **One content source.** Every card renders from `src/content/projects.ts`. Do not duplicate project data in components.
 10. **Client components only where needed.** Only the mobile menu, project filter and the hero grade-shift interaction may use `"use client"`.
 11. **Secret hygiene.** Never put keys, tokens or credentials in app code, logs, tests, docs or Git. No `.env` in the repo.
-12. **No surprise libraries.** Do not add, remove or upgrade any library or tool not listed in Section 3 without asking. shadcn/ui and `lucide-react` are T10-only and post-launch.
+12. **No surprise libraries.** Do not add, remove or upgrade any library or tool not listed in Section 3 without asking. shadcn/ui and `lucide-react` are shipped under T10; do not expand them without a new scope decision.
 13. **Full check before "done".** Run `npm run check` on Node 26, then report the exact result before claiming a task is complete.
 14. **Stuck rule.** If the same problem is still failing after 3 attempts, stop and report what you tried, the exact error, and what you need from the human.
 15. **Doc parity.** If scope changes, update `PRD.md`, this file and the Stitch prompts in the same session. Do not leave the docs out of sync.
@@ -75,24 +75,26 @@ Before writing any code:
 | Scripts | `dev`, `build`, `start`, `lint`, `typecheck`, `check` |
 | CI/CD | GitHub Actions, Node **26**, Vercel deploy workflow with GitHub-only secrets |
 | Asset tool | Higgsfield MCP (connected), generation only; CLI 1.2.3 installed but blocked on trial; not an app dependency or runtime service |
-| Not installed | Test runner, backend, CMS, auth. T10 later added shadcn `badge`, `button` and `lucide-react` after launch. |
+| Not installed | Test runner, backend, CMS, auth. T10 added shadcn `badge`, `button` and `lucide-react` after launch and is shipped. |
 
 **React note:** React is already the foundation — Next.js is a React framework. Do not add it again as a dependency. It belongs in the skills list, not in an install step.
 
-**shadcn/ui note:** shadcn/ui is a copy-in component source system (Radix primitives + Tailwind), not a normal npm UI package, and its icons come from `lucide-react`. It stayed outside T0 to T9; see activated slice **T10** in section 7. Brand SVG icons remain the default, and library icons are confined to dense functional controls in their own visual zone.
+**shadcn/ui note:** shadcn/ui is a copy-in component source system (Radix primitives + Tailwind), not a normal npm UI package, and its icons come from `lucide-react`. It stayed outside T0 to T9 and is now shipped under **T10** in section 7. Brand SVG icons remain the default, and library icons are confined to dense functional controls in their own visual zone.
 
 ---
 
-## 4. Current-state findings (read-only audit)
+## 4. Baseline findings (pre-T0, 2026-11-24)
 
-- Routes `/`, `/about`, `/projects`, `/contact` exist. Shared `SiteHeader`, `SiteFooter`, skip link and `main` wrapper live in `layout.tsx`. No `not-found.tsx`.
-- Design tokens and `prefers-reduced-motion` rules already exist in `globals.css`; global `:focus-visible` outline is present. Tokens will be refreshed, not preserved, under v1.3.
-- Header has a mobile toggle with `aria-expanded`/`aria-controls`, but no Escape handler, no route-change close except link clicks, and no focus return.
-- `/projects` is a static 2-column grid, no filtering. Home shows only the first 2 projects.
-- `Project` type has 10 fields; no category/featured/proof/screenshot support. Data has 3 projects, including a known-broken Indlela URL.
-- `.github/workflows/` contains only `vercel-deploy.yml` (Node 26). There is no PR CI workflow for lint/typecheck/build.
-- Local folder has no `.git` directory — do not assume local commits are possible; use the GitHub remote when available.
-- Higgsfield CLI installed at `~/.local/bin/higgsfield`, version 1.2.3. Login and workspace selection are complete, but CLI generation returns `only_mcp_usage_on_trial_is_available`. The Higgsfield MCP is connected and working: the full brand kit was generated through it into `public/assets/` (hero pair 2688 x 1520; other slots at their target sizes).
+Recorded before implementation; the final state is in §9 Definition of done and §12 Shipped record.
+
+- Routes `/`, `/about`, `/projects`, `/contact` existed with shared `SiteHeader`, `SiteFooter`, skip link and `main` wrapper in `layout.tsx`; T8 later added `not-found.tsx`.
+- Design tokens and `prefers-reduced-motion` rules existed in `globals.css`; global `:focus-visible` outline was present. Tokens were refreshed, not preserved, under v1.3.
+- Header had a mobile toggle with `aria-expanded`/`aria-controls`, but no Escape handler, route-change close or focus return; T3 added those behaviours and PR #18 made the header a fixed glass pill.
+- `/projects` was a static 2-column grid with no filtering, and home showed only the first 2 projects; T6 and T7 replaced both.
+- `Project` type had 10 fields with no category/featured/proof/screenshot support; data had 3 projects, including a known-broken Indlela URL.
+- `.github/workflows/` initially contained only `vercel-deploy.yml` (Node 26); T1 added PR CI for lint/typecheck/build.
+- The repository was later connected to `ThamiSithole/thami-sithole-portfolio`; local `main` is now a tracked Git checkout. PRs use reviewed branches; CI status and branch protection are repository settings.
+- Higgsfield CLI was installed at `~/.local/bin/higgsfield`, version 1.2.3. Login and workspace selection were complete, but CLI generation returned `only_mcp_usage_on_trial_is_available`. The Higgsfield MCP was the connected, working generation path: the full brand kit was generated through it into `public/assets/` (hero pair 2688 x 1520; other slots at their target sizes).
 
 ---
 
@@ -115,10 +117,10 @@ T0 → T1
      ↓
 T2 → T3 → T4 → T5 → T6 → T7 → T8 → T9
                                        ↓
-                                    T10 (optional, post-launch only)
+                                    T10 (shipped, post-launch)
 ```
 
-T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connected MCP path. T5 depends on generated assets from T4. T9 must be last before launch. T10 is never a launch blocker.
+T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connected MCP path. T5 depends on generated assets from T4. T9 must be last before launch. T10 is now shipped but was never a launch blocker.
 
 ---
 
@@ -133,7 +135,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 ### T1 — CI workflow for pull requests
 **Files:** `.github/workflows/ci.yml` (new).  
 **Actions:** on `pull_request` and push to `main`: checkout, `setup-node@v4` with `node-version: 26` and npm cache, then `npm ci`, `npm run lint`, `npm run typecheck`, `npm run build`. Leave `vercel-deploy.yml` unchanged.  
-**Acceptance:** CI runs on PRs, Node 26, no secrets in CI; `main` requires the CI check in GitHub branch protection (manual remote setting, verified once remote access is available).  
+**Acceptance:** CI runs on PRs, Node 26, no secrets in CI; any protection of `main` is a GitHub repository setting, not a code change.
 **Verify:** open a test PR and confirm all steps green; confirm the required status check in repository settings.
 
 ### T2 — Refresh tokens, fonts and responsive foundation
@@ -158,7 +160,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T5 — Extend content model and upgrade ProjectCard
 **Files:** `src/content/projects.ts`, `src/components/ProjectCard.tsx`.  
-**Actions:** apply the exact `Project` type from PRD §7.4 — `categories?: ProjectCategory[]`, `featured?: boolean`, `proofLinks?`, `screenshots?` — so current entries still compile. Add all 11 strong projects from PRD §7.5 with verified URLs only. Mark the first three `featured: true` in order **Straina → StokvelOS → Riverside Community Hub**. Render status badge, category labels, technology badges using shadcn `Badge`, optional `proofLinks` and optional screenshot slot via `next/image` with `sizes` and meaningful alt text. Keep `h-full` and `mt-auto` link row for aligned grids. Generated icons hidden with `aria-hidden="true"`. Each card is its own component instance, not a shared utility class.
+**Actions:** apply the exact `Project` type from PRD §7.4 — `categories?: ProjectCategory[]`, `featured?: boolean`, `proofLinks?`, `screenshots?` — so current entries still compile. Add all 11 strong projects from PRD §7.5 with verified URLs only. Mark the first three `featured: true` in order **Straina → StokvelOS → Riverside Community Hub**. Render the status badge with its existing treatment, category labels with the tag treatment, and technology badges using shadcn `Badge`; keep `Badge` out of status and category treatments. Render optional `proofLinks` and optional screenshot slot via `next/image` with `sizes` and meaningful alt text. Keep `h-full` and `mt-auto` link row for aligned grids. Generated icons hidden with `aria-hidden="true"`. Each card is its own component instance, not a shared utility class.
 **Acceptance:** all 11 records typecheck; featured order correct; no fabricated links; readable from 320px up; external links use `target="_blank" rel="noreferrer"`.  
 **Verify:** `npm run typecheck` and browser screenshots at mobile and desktop.
 
@@ -187,20 +189,20 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Result (2026-11-25):** all functional, craft, accessibility, build and deployment checks passed. CLS measured 0.0000. LCP exceeded 2.5s in this headless environment and remains unverified against the target; see the PRD §10 verification record before treating that criterion as complete.  
 **Verify:** screenshots + `curl -I` on live URL.
 
-### T10 — Activated post-launch slice: shadcn/ui + lucide-react
-**Files:** `components.json`, `src/components/ui/*`, `src/app/globals.css`, `package.json` (only after T9 passes and the user asks).  
+### T10 — Shipped post-launch slice: shadcn/ui + lucide-react
+**Files:** `components.json`, `src/components/ui/*`, `src/app/globals.css`, `package.json`.
 **Decision:** React needs no addition, it is already present. shadcn/ui stayed optional through T9 because the existing cards, buttons and badges were simple and already Tailwind-styled. After explicit approval, activation verified the v4 registry style in `components.json`, mapped shadcn CSS variables to existing `@theme` tokens and copied only `button` and `badge`. Decorative `lucide-react` icons use `aria-hidden="true"`, brand SVGs stay the default and the two icon sets never share a visual zone. Rerun `npm run check` on Node 26 and all breakpoints after activation.
 **Acceptance:** no token conflict, no layout regression, CI still green, bundle impact reviewed.  
 **Verify:** full T9 pass again after the slice.  
-**Guard:** this slice is never required for launch and must be recorded in all three docs if activated.
-**Result (2026-11-25):** activated after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
+**Guard:** this slice was never required for launch. It is shipped and recorded in all three docs; expanding it requires a new scope decision.
+**Result (2026-11-25):** shipped after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
 
 ---
 
 ## 8. Risks and mitigations
 
 - **Broken/stale links** — accuracy is deferred; use verified URLs only, never invent them.
-- **No local Git repo** — keep work as file edits; use the GitHub remote for PRs.
+- **Repository history** — tracked on GitHub with a local `main`; PRs use reviewed branches, required CI and branch protection.
 - **Higgsfield CLI trial restriction** — CLI is authenticated with a workspace selected, but trial jobs are MCP-only; use the connected MCP path, which already produced the full brand kit. Ask the human only if neither path is available. No CSS-only substitutes and no header spoofing.
 - **Tailwind v4** — verify utilities against v4, not v3 habits.
 - **Hydration/focus** — header, filter and hero grade-shift are the only client islands; test all with keyboard.
@@ -216,8 +218,9 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 - No horizontal overflow at 320/375/414/768/1024/1440px on any route.
 - Mobile nav and project filter work with mouse, touch and keyboard.
 - All 11 strong projects render from one content file; the featured three appear first.
-- Craft gates pass: one accent, generated assets and icons, one signature motion effect with reduced-motion fallback, no em/en-dashes, one CTA label per intent, one radius scale with nav pill exception, declared mobile collapse.
-- No secrets/`.env` in the repo; all three docs remain local untracked review files until approved.
+- Craft gates pass: one accent, generated assets and icons, one signature motion effect with reduced-motion fallback, no em/en-dashes, one CTA label per intent, one 12px radius scale with the fixed nav pill as sole exception, declared mobile collapse.
+- T10 shadcn `badge`/`button`, mapped tokens, brand Toolkit SVGs and the Lucide filter check are shipped with separated icon zones.
+- No secrets/`.env` in the repo; all three docs are approved and tracked on `main`.
 
 ---
 
@@ -231,17 +234,18 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 | §4 Goals — responsive, navigation, filtering, check green, 11 projects, a11y, craft | T2, T3, T4, T6, T7, T9 | Every goal has a task and a verification |
 | §5 Non-goals / deferred cleanup | T4/T8 (explicitly excluded) | Deferred items listed in PRD are not silently implemented |
 | §5 in-scope craft refresh | T2, T4, T5, T7, T8, T9 | Palette, fonts, icons, assets, motion, CTA copy |
-| §5 optional design-system decision | T10 | Optional, post-launch, mirrored in PRD §5, prompts Style Guide and Modals |
+| §5 design-system decision | T10 | Shipped post-launch, mirrored in PRD §5, prompts Style Guide and Modals |
 | §6 IA — four routes, header behaviour, home, projects, about, contact, footer, 404 | T3, T6, T7, T8 | Footer dual-GitHub links remain deferred |
 | §7.1 Breakpoints, typography, radius, mobile collapse | T2, T3, T7, T9 | Six tested widths; Satoshi + JetBrains Mono; 12px radius, nav pill exception |
 | §7.2 Cards, filter categories, featured order, asymmetric featured grid | T4, T5, T6, T7 | Categories arrays; `featured` boolean; no equal-card row |
 | §7.3 Accessibility, alt text, reduced motion, mount-safe motion | T2, T3, T5, T6, T7, T8, T9 | Skip link preserved in T2; B2 fallback in T7 |
 | §7.4 Content model | T5 | Exact PRD type; no extra required fields |
 | §7.5 Project inventory | T5 | All 11 entries, verified URLs only |
-| §8 Engineering/build/CI/secrets, fonts, generated assets | T0, T1, T2, T4, T9 | Tokens refreshed; Higgsfield MCP is an asset tool only; branch protection verified manually |
+| §8 Engineering/build/CI/secrets, fonts, generated assets | T0, T1, T2, T4, T9 | Tokens refreshed; Higgsfield MCP is an asset tool only; branch protection is a GitHub setting |
 | §9 Rollout steps 1–9 | T2, T3, T5, T4, T6, T7, T9 | Step 4 asset generation is T4; step 9 is T10 |
 | §10 Acceptance criteria | T9 | Checklist owned by T9 |
 | §11 Open decisions — `/skills`, labels, PRD visibility, T10 | Section 9 + PRD §11 | CTA labels closed in v1.3; others left open intentionally |
+| §13 shipped record | §12 | PR history and verification anchors |
 
 **Gap check:** every PRD requirement maps to at least one task with an acceptance criterion. Every task maps back to a PRD section. T10 exists in all three documents with identical scope.
 
@@ -253,8 +257,14 @@ If any of the three documents changes, update the others in the same edit sessio
 
 1. New requirement → add to PRD section, then add/mark a task here and in the coverage map, and reflect it in the Stitch prompts.
 2. Task scope removed → remove or mark it in PRD too, and remove the corresponding design detail from the prompts.
-3. Optional slice activated → remove the "optional/post-launch" guard in all three documents and add it to the definition of done.
+3. Shipped slice → keep it marked shipped in all three documents and in the definition of done; expansion needs a new scope decision.
 4. Generated asset added, changed or removed → update the prompt slot table and T4.
+
+## 12. Shipped record
+
+The canonical PR table is in [`docs/PRD.md` §13](./PRD.md#13-shipped-record). It is the single source for PR scope and merge results; do not duplicate it here.
+
+Verification anchors: local `npm run check` on the final docs tree, CI `check` green on landed PRs, squash merges into `main`, and six-width browser checks recorded for hero, profile card, pill nav and T10 invariants. LCP remains environment-dependent as recorded in PRD §10.
 
 ---
 Related: [`docs/PRD.md`](./PRD.md) · [`docs/designs/stitch-prompts.md`](./designs/stitch-prompts.md) · [[Home]]
