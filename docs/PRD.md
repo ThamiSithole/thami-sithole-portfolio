@@ -65,7 +65,7 @@ The content model must be able to hold all deferred corrections when they arrive
 
 Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
-- **Header:** name/logo, desktop nav links, mobile toggle button with `aria-expanded`, closes on route change and Escape, returns focus to the toggle.
+- **Header:** fixed, horizontally centred glass pill with a 1px outline; name/logo, desktop nav links and mobile toggle sit inside it. The mobile dropdown opens in a glass panel below the pill; toggle keeps `aria-expanded`/`aria-controls`, closes on route change and Escape, and returns focus to the toggle.
 - **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens.
 - **Projects:** full project grid with category filter, status badges and shadcn technology badges on each card.
 - **About:** background, focus areas, toolkit, GitHub links.
@@ -86,7 +86,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - Fluid type with `clamp()` for headings; body text ≥16px with 1.5–1.7 line height and max 65 characters per line.
 - Satoshi for display and body; JetBrains Mono for uppercase eyebrows, chips and numeric counts. Inter is not used in page UI.
-- One corner radius: 12px on cards, inputs and panels. Stack chips are the only pill shape.
+- One corner radius: 12px on cards, badges, inputs and controls. Stack chips and the fixed header nav pill are the declared pill exceptions; no other mixed radii.
 - 8pt spacing scale; consistent card padding and gaps at every breakpoint.
 - Every multi-column section declares its below-640px collapse behaviour explicitly.
 - Headline at most 8 words and two desktop lines; subtext at most 25 words.

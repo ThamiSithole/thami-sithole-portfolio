@@ -145,6 +145,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 ### T3 — Harden header and footer navigation
 **Files:** `src/components/SiteHeader.tsx`, `src/components/SiteFooter.tsx`.  
 **Actions:** close mobile menu on route change and Escape; return focus to the toggle; keep `aria-expanded`/`aria-controls`; visible focus states; footer wraps cleanly at 320px; use the generated monogram and icon set; declared mobile collapse. Do **not** add both GitHub identities here — that is deferred PRD cleanup.  
+**Nav treatment:** fixed centred glass pill with a 1px outline; the mobile dropdown opens below it with unchanged ARIA, Escape, route-change and focus-return behaviour.
 **Acceptance:** mouse, touch and keyboard paths open/close reliably; no focus trap; `aria-current="page"` on active link.  
 **Verify:** keyboard-only pass (Tab, Enter, Escape) in browser.
 
