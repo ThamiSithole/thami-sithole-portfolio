@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Project, ProjectCategory } from "@/content/projects";
+import StackIcon from "@/components/StackIcon";
 import { Badge } from "@/components/ui/badge";
 
 type Props = {
@@ -88,6 +89,7 @@ export default function ProjectCard({ project, featured = false }: Props) {
           {project.stack.map((item) => (
             <li key={item}>
               <Badge variant="stack" className="px-2.5 py-1">
+                <StackIcon label={item} />
                 {item}
               </Badge>
             </li>
