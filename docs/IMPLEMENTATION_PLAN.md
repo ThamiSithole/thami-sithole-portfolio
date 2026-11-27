@@ -75,7 +75,7 @@ Before writing any code:
 | Scripts | `dev`, `build`, `start`, `lint`, `typecheck`, `check` |
 | CI/CD | GitHub Actions, Node **26**, Vercel deploy workflow with GitHub-only secrets |
 | Asset tool | Higgsfield MCP (connected), generation only; CLI 1.2.3 installed but blocked on trial; not an app dependency or runtime service |
-| Icon source | `simple-icons` **16.38.1** (dev only, CC0-1.0) generates local brand SVGs; `lucide-react` **1.80.0** supplies conceptual badge glyphs |
+| Icon source | `simple-icons` **15.0.0** (dev only, CC0-1.0) generates local brand SVGs; `lucide-react` **1.80.0** supplies conceptual badge glyphs |
 | Not installed | Test runner, backend, CMS, auth. T10 added shadcn `badge`, `button` and `lucide-react` after launch and is shipped. |
 
 **React note:** React is already the foundation — Next.js is a React framework. Do not add it again as a dependency. It belongs in the skills list, not in an install step.
@@ -192,18 +192,18 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T10 — Shipped post-launch slice: shadcn/ui + lucide-react
 **Files:** `components.json`, `src/components/ui/*`, `src/app/globals.css`, `package.json`.
-**Decision:** React needs no addition, it is already present. shadcn/ui stayed optional through T9 because the existing cards, buttons and badges were simple and already Tailwind-styled. After explicit approval, activation verified the v4 registry style in `components.json`, mapped shadcn CSS variables to existing `@theme` tokens and copied only `button` and `badge`. Decorative `lucide-react` icons use `aria-hidden="true"`, brand SVGs stay the default and the two icon sets never share a visual zone. Rerun `npm run check` on Node 26 and all breakpoints after activation.
+**Decision:** React needs no addition, it is already present. shadcn/ui stayed optional through T9 because the existing cards, buttons and badges were simple and already Tailwind-styled. After explicit approval, activation verified the v4 registry style in `components.json`, mapped shadcn CSS variables to existing `@theme` tokens and copied only `button` and `badge`. Decorative `lucide-react` icons use `aria-hidden="true"`, brand SVGs stay the default and the two icon sets never share a visual zone at T10. T11 later amended the badge zone for conceptual technology labels. Rerun `npm run check` on Node 26 and all breakpoints after activation.
 **Acceptance:** no token conflict, no layout regression, CI still green, bundle impact reviewed.  
 **Verify:** full T9 pass again after the slice.  
 **Guard:** this slice was never required for launch. It is shipped and recorded in all three docs; expanding it requires a new scope decision.
-**Result (2026-11-25):** shipped after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
+**Result (2026-11-25):** shipped after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; at T10, `lucide-react` appeared only as the selected-filter `Check` in the functional project-filter zone and was never mixed into the Toolkit or external-link icons. T11 amended that scope for conceptual technology badges. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
 
 ### T11 — Post-launch slice: technology badge icons
 **Files:** `package.json`, `package-lock.json`, `public/assets/icons/stacks/*`, `src/lib/stack-icons.ts`, `src/components/StackIcon.tsx`, `src/app/about/page.tsx`, `src/components/ProjectCard.tsx`, `docs/*`.
 **Decision:** after explicit user approval, `simple-icons` was added as a dev-only source for missing brand SVGs and the existing `lucide-react` dependency supplies glyphs for seven conceptual labels. The nine existing Toolkit icons stay brand SVGs, the About visual zone stays library-free, and both icon kinds remain decorative with visible text labels.
 **Acceptance:** every technology label has an icon or no icon safely falls back to text; no new accent colour, radius, runtime dependency or layout overflow; ARIA and keyboard behaviour unchanged.
 **Verify:** `npm run check`, responsive pass at 320/375/414/768/1024/1440px, filter/skeleton regression pass, and two-axis review.
-**Result (2026-11-28):** shipped as PR #23. `simple-icons` 16.38.1 is dev-only; 11 brand SVGs were generated into `public/assets/icons/stacks/` in the existing `#EEF1F6` palette. `src/lib/stack-icons.ts` is the shared registry and `src/components/StackIcon.tsx` renders either kind with `aria-hidden`. Project cards and the About toolkit consume the same registry.
+**Result (2026-11-28):** shipped as PR #23. `simple-icons` 15.0.0 is dev-only; 11 brand SVGs were generated into `public/assets/icons/stacks/` in the existing `#EEF1F6` palette. `src/lib/stack-icons.ts` is the shared registry and `src/components/StackIcon.tsx` renders either kind with `aria-hidden`. Project cards and the About toolkit consume the same registry. `npm run check` passed on Node 26.13.1: ESLint clean, `tsc --noEmit` clean and `next build` generated 7 static pages. First Load JS: `/projects` 125 kB, `/about` 113 kB, shared 103 kB.
 
 ---
 
@@ -227,7 +227,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 - Mobile nav and project filter work with mouse, touch and keyboard.
 - All 11 strong projects render from one content file; the featured three appear first.
 - Craft gates pass: one accent, generated assets and icons, one signature motion effect with reduced-motion fallback, no em/en-dashes, one CTA label per intent, one 12px radius scale with the fixed nav pill as sole exception, declared mobile collapse.
-- T10 shadcn `badge`/`button`, mapped tokens, brand Toolkit SVGs and the Lucide filter check are shipped with separated icon zones.
+- T10 shadcn `badge`/`button`, mapped tokens, brand Toolkit SVGs and the Lucide filter check are shipped; T11 adds Lucide only for conceptual project technology badges.
 - No secrets/`.env` in the repo; all three docs are approved and tracked on `main`.
 
 ---

@@ -13,7 +13,7 @@
 - Use the exact labels in quotation marks. Do not invent features, buttons, screens or copy.
 - List all six states on every prompt: Normal, Empty, Loading, Error, Offline, Success. Mark `N/A` explicitly when the static site has no such state.
 - Sample content comes from PRD §7.5 (project names, South Africa, Rustenburg, stokvels, dates). No lorem ipsum, no invented rand amounts.
-- T10 is shipped: shadcn `badge` and `button` use the mapped brand tokens; one local brand SVG marks each Toolkit stack. `lucide-react` is limited to the selected-filter check in functional controls, never in the Toolkit or external-link icon zone.
+- T10 is shipped: shadcn `badge` and `button` use the mapped brand tokens; one local brand SVG marks each Toolkit stack. At T10, `lucide-react` was limited to the selected-filter check in functional controls, never in the Toolkit or external-link icon zone. T11 adds decorative Lucide glyphs only for conceptual project technology badges.
 
 ### Craft gates (from higgsfield-websites design recipe)
 
@@ -72,8 +72,8 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 ### Iconography
 
 - Icons come from one generated custom set in `public/assets/icons/`: external-link arrow, three-span menu bars, solid dot bullet, check, branch/commit, live/app mark. One stroke weight, brand palette, shared grid.
-- No hand-rolled SVG illustrations, no icon font, and no library icons outside the shipped T10 selected-filter check.
-- Decorative icons must be `aria-hidden="true"`. Icons inherit nearby text colour (`accent` for links, `muted` for menu).
+- No hand-rolled SVG illustrations, no icon font, and no library icons outside the shipped T10 selected-filter check and the T11 conceptual technology badge glyphs.
+- Decorative icons must be `aria-hidden="true"`. Icons inherit nearby text colour (`accent` for links, `muted` for menu); generated stack SVGs are pinned to the same `#EEF1F6` text token.
 
 ### Motion
 
@@ -107,7 +107,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 | OG card and cover | `public/assets/og-thami-sithole.png`, `public/assets/cover-thami-sithole.png` | Metadata, feed card |
 | 404 artwork | `public/assets/404-art.png` | S5 |
 
-All asset slots are generated and slotted in from Higgsfield MCP. The hero pair is 2688 x 1520; the remaining grades and derived favicon/OG/cover files use the sizes listed above. No slot uses a CSS approximation. `profile-mark.png` remains in the kit but is not referenced by the shipped UI. Stack SVGs in `public/assets/icons/stacks/` are dev-generated from `simple-icons` in the existing `#EEF1F6` palette; conceptual badge labels without a brand mark use decorative lucide glyphs from the shared icon registry.
+Generated brand asset slots are generated and slotted in from Higgsfield MCP. The hero pair is 2688 x 1520; the remaining grades and derived favicon/OG/cover files use the sizes listed above. No slot uses a CSS approximation. `profile-mark.png` remains in the kit but is not referenced by the shipped UI. Stack SVGs in `public/assets/icons/stacks/` are a separate dev-generated set from `simple-icons` in the existing `#EEF1F6` palette; conceptual badge labels without a brand mark use decorative lucide glyphs from the shared icon registry.
 
 ---
 
@@ -305,7 +305,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | PRD area | Prompt coverage |
 |---|---|
 | §5 deferred cleanup / dual GitHub identities | Excluded from S3 and S4 by explicit note |
-| §5 shipped T10 shadcn/lucide | Style Guide notes brand-token mapping; badge and button only, with Lucide confined to filter controls |
+| §5 shipped T10 shadcn/lucide and T11 badge icons | Style Guide notes brand-token mapping; badge and button only, Lucide in filter controls plus conceptual technology badges |
 | §6 IA — four routes + 404 | S1–S5 |
 | §6 header behaviour | Style Guide SiteHeader; repeated in every screen prompt |
 | §7.1 breakpoints, typography, radius | Style Guide; desktop + mobile frames in every prompt |
