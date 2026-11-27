@@ -1,7 +1,7 @@
-# PRD — Thami Sithole Portfolio (v1.4)
+# PRD — Thami Sithole Portfolio (v1.5)
 
-**Status:** Shipped · **Owner:** Thami Sithole · **Date:** 2026-11-26 · **Supersedes:** v1.3
-**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.3
+**Status:** Shipped · **Owner:** Thami Sithole · **Date:** 2026-11-28 · **Supersedes:** v1.4
+**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.4
 
 > **Scope reset:** this pass is about a fully responsive, functional, reliably building portfolio. All strong projects are in scope as content. Per-project accuracy fixes are a later backlog item, not a blocker.  
 > **Craft refresh (v1.3):** the higgsfield-websites design recipe now applies to the Stitch prompts. This changes the palette, type pairing, icon set, motion and CTA copy, and adds generated visual assets. These are in scope and mirrored in the plan.  
@@ -61,6 +61,8 @@ Recorded as the pre-build problem statement; shipped scope is in §10 and §13.
 
 **Shipped design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
 
+**Technology badge icons (2026-11-28):** project technology badges and the About toolkit share one label-to-icon registry. Brand-backed labels use local SVGs generated from `simple-icons` (dev dependency only, CC0-1.0) in the existing brand palette. Conceptual labels without a brand mark use decorative `lucide-react` glyphs hidden from screen readers. The visible text label remains authoritative, both icon kinds stay `aria-hidden`, and the external-link icon zone is unchanged.
+
 The content model must be able to hold all deferred corrections when they arrive, without a redesign.
 
 ## 6. Information architecture & navigation
@@ -69,7 +71,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - **Header:** fixed, horizontally centred glass pill with a 1px outline; name/logo, desktop nav links and mobile toggle sit inside it. The mobile dropdown opens in a glass panel below the pill; toggle keeps `aria-expanded`/`aria-controls`, closes on route change and Escape, and returns focus to the toggle.
 - **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens. The card shows the profile portrait and a small decorative monogram.
-- **Projects:** full project grid with category filter, status badges and shadcn technology badges on each card.
+- **Projects:** full project grid with category filter, status badges and shadcn technology badges with local brand or decorative lucide icons on each card.
 - **About:** background, focus areas, toolkit, GitHub links, and the same profile portrait in the intro.
 - **Contact:** GitHub and current work links.
 - **Footer:** repeat key links, the ThamiRoneo profile CTA and repository links where relevant. No second profile switcher was added.
@@ -234,6 +236,10 @@ The implementation plan’s section 10 contains the full PRD → task coverage m
 | [#17](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/17) | Widen and centre the hero profile card | merged 26 Nov 2026 |
 | [#18](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/18) | Make the header a fixed glass pill | merged 26 Nov 2026 |
 | [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: v1.4/v1.3/v1.2 parity, shipped status, T10 and radius record | merged 26 Nov 2026 |
+| [#20](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/20) | Slow the hero heading build | merged 26 Nov 2026 |
+| [#21](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/21) | Add profile portrait and hero monogram | merged 27 Nov 2026 |
+| [#22](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/22) | Add a project filter skeleton | merged 27 Nov 2026 |
+| [#23](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/23) | Add icons to project technology badges | merged 28 Nov 2026 |
 
 Each PR passed the required `check` status and was squash-merged into `main`. Content corrections listed in §5 remain the user-led backlog.
 

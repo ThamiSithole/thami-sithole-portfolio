@@ -1,7 +1,7 @@
 # Stitch Prompts — Thami Sithole Portfolio
 
-**Version:** v1.2 · **Date:** 2026-11-26
-**Source:** [`../PRD.md`](../PRD.md) v1.4 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.3
+**Version:** v1.3 · **Date:** 2026-11-28
+**Source:** [`../PRD.md`](../PRD.md) v1.5 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.4
 **Method:** higgsfield-websites craft rules applied as a refinement lens. The build stack stays Next.js 15 + Vercel as locked in the PRD and plan.
 
 > This document and its companion docs are approved, tracked and shipped on `main`. Per-project content corrections stay in the user-led backlog.
@@ -86,9 +86,9 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 
 1. **SiteHeader** — variants: `desktop`, `mobile-closed`, `mobile-open`, `active-link`. Fixed at `top-3` with full-width gutters and a horizontally centred glass pill: `ink/70`, blur, one 1px `line/70` outline, rounded-full pill, no filled bar. Nav links and toggle keep the 12px control radius. Generated monogram mark `"TS"`, name `"Thami Sithole"`, subtitle `"Software engineer"`, nav labels `"Home"`, `"About"`, `"Projects"`, `"Contact"`. Active link uses `accent/15` background and `accent` text. Nav is one line at desktop, height at most 80px. Mobile collapse declared explicitly: below 640px the links hide and the toggle shows; `mobile-open` puts a 12px-radius glass dropdown below the pill with the same labels, preserving `aria-expanded`/`aria-controls`, Escape close, route-change close and focus return.
 2. **SiteFooter** — variants: `desktop-row`, `mobile-stacked`. Name `"Thami Sithole"`, tagline `"Building software that is useful, testable and clear to use."`, links `"About"`, `"Projects"`, `"Contact"`, `"Open GitHub"`. Mobile collapse: below 640px links stack under the name.
-3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, category labels, name, summary, optional screenshot slot, `Problem`, `Role`, highlights (dot bullets), shadcn technology badges, link row. The screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
+3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, category labels, name, summary, optional screenshot slot, `Problem`, `Role`, highlights (dot bullets), shadcn icon-and-label technology badges, link row. The screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
 4. **StatusBadge** — variants: `"Live · team capstone"`, `"Phase 2 complete · preparing for Vercel deployment"`, `"Product specification approved · build in progress"`. Muted text, hairline border, no filled background, one accent dot for the active status.
-5. **Technology badge / Toolkit badge (shadcn `Badge`) and category tag (plain span)** — technology variants: `default`, `stack`; 12px radius, 1px `line` border, 12px semibold JetBrains Mono text, faint accent tint for `stack`. Category tags use the same 12px tag treatment (border, radius, tint and font) but are plain spans, not shadcn `Badge`; the component 4 status badge stays unchanged.
+5. **Technology badge / Toolkit badge (shadcn `Badge`) and category tag (plain span)** — technology variants: `default`, `stack`; 12px radius, 1px `line` border, 12px semibold JetBrains Mono text, faint accent tint for `stack`. Each technology and toolkit badge pairs the visible label with a decorative icon: a local brand SVG for brand-backed labels, or a same-palette lucide glyph for conceptual labels without a brand mark. Both icon kinds are hidden from screen readers. Category tags use the same 12px tag treatment (border, radius, tint and font) but are plain spans, not shadcn `Badge`; the component 4 status badge stays unchanged.
 6. **FilterChip** — variants: `unselected`, `selected` (`aria-pressed`), `focus-visible`. Labels: `"All"`, `"Featured"`, `"Team"`, `"Capstone"`, `"Frontend"`, `"Backend"`, `"Mobile"`, `"AI"`. Selected uses `accent/15` and `accent`. Each chip has an `:active` scale of 0.98.
 7. **SkipLink** — variants: `hidden`, `focused`. On focus it slides into view at top-left with `accent` background and `ink` text.
 8. **LinkRow** — variants: `live`, `github`, `proof`. Labels `"Live app"`, `"Open GitHub"`, plus proof labels from `proofLinks`. Generated arrow icon, not a text glyph. Each link is its own garment, not one shared button class.
@@ -107,7 +107,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 | OG card and cover | `public/assets/og-thami-sithole.png`, `public/assets/cover-thami-sithole.png` | Metadata, feed card |
 | 404 artwork | `public/assets/404-art.png` | S5 |
 
-All asset slots are generated and slotted in from Higgsfield MCP. The hero pair is 2688 x 1520; the remaining grades and derived favicon/OG/cover files use the sizes listed above. No slot uses a CSS approximation. `profile-mark.png` remains in the kit but is not referenced by the shipped UI.
+All asset slots are generated and slotted in from Higgsfield MCP. The hero pair is 2688 x 1520; the remaining grades and derived favicon/OG/cover files use the sizes listed above. No slot uses a CSS approximation. `profile-mark.png` remains in the kit but is not referenced by the shipped UI. Stack SVGs in `public/assets/icons/stacks/` are dev-generated from `simple-icons` in the existing `#EEF1F6` palette; conceptual badge labels without a brand mark use decorative lucide glyphs from the shared icon registry.
 
 ---
 
@@ -319,13 +319,13 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 
 **TODO scan:** all asset slots are filled. No PRD data is missing; no PRD update is required for these slots.
 
-**Change log:** v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
+**Change log:** v1.3 — 28 Nov 2026: icon-and-label technology badges, shared stack icon registry, PRD v1.5 / plan v1.4 parity. v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
 
 ## 10. Shipped record
 
 The canonical PR table is in [`docs/PRD.md` §13](../PRD.md#13-shipped-record). It is the single source for PR scope and merge results; do not duplicate it here.
 
-Screens S1 to S5 are the shipped design source. Asset slots, T10 icon zones, the 12px radius contract and the single nav-pill exception match the implementation.
+Screens S1 to S5 are the shipped design source. Asset slots, T10 and T11 icon zones, the 12px radius contract and the single nav-pill exception match the implementation.
 
 ---
 Related: [`../PRD.md`](../PRD.md) · [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) · [[Home]]

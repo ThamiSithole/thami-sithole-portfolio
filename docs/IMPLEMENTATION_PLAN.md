@@ -1,6 +1,6 @@
 # Implementation Plan — Thami Sithole Portfolio (responsive + build + craft)
 
-**Status:** Companion to `docs/PRD.md` v1.4 · **Version:** v1.3 · **Date:** 2026-11-26
+**Status:** Companion to `docs/PRD.md` v1.5 · **Version:** v1.4 · **Date:** 2026-11-28
 **Source of truth for requirements:** [`docs/PRD.md`](./PRD.md)  
 **Target folder:** `/home/kayron1/Work/thami-sithole-portfolio`
 
@@ -14,14 +14,14 @@
 | Field | Value |
 | --- | --- |
 | App name | Thami Sithole Portfolio |
-| Built from PRD version | v1.4 |
-| Screen designs | `docs/designs/stitch-prompts.md` v1.2 (S1–S5). No Stitch project URL yet. |
-| Plan version | v1.3 (final close-out: shipped status, T10 record, radius parity and PR history) |
+| Built from PRD version | v1.5 |
+| Screen designs | `docs/designs/stitch-prompts.md` v1.3 (S1–S5). No Stitch project URL yet. |
+| Plan version | v1.4 (T11 technology badge icons, PRD v1.5 parity) |
 | Repository | https://github.com/ThamiSithole/thami-sithole-portfolio |
 | Local path | `/home/kayron1/Work/thami-sithole-portfolio` (tracked Git checkout on `main`) |
 | Asset tooling | Higgsfield CLI 1.2.3 at `~/.local/bin/higgsfield` (authenticated, workspace selected, CLI generation blocked on trial); Higgsfield MCP connected and used for the full brand kit. |
 | Status | Shipped: T0 to T10 complete, full brand kit generated via MCP, all planned PRs merged. Content corrections remain a user-led backlog. |
-| Last updated | 26 Nov 2026 |
+| Last updated | 28 Nov 2026 |
 
 ---
 
@@ -30,8 +30,8 @@
 Before writing any code:
 
 1. Read this whole file from top to bottom.
-2. Read `docs/PRD.md` v1.4.
-3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.2 (S1–S5), especially the Style Guide and craft gates.
+2. Read `docs/PRD.md` v1.5.
+3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.3 (S1–S5), especially the Style Guide and craft gates.
 4. Check Section 10. If a PRD requirement has no task, or this file contradicts the PRD or prompts, stop and ask the human. Do not guess.
 5. Check the stack and local constraints in Sections 3–4 (Node 26, npm, browser tooling, tracked Git history, CLI auth).
 6. Start at **T0 only**. When that task's **Verify** step passes, stop and wait for the human to say "continue". Do not batch tasks unless explicitly allowed.
@@ -53,7 +53,7 @@ Before writing any code:
 9. **One content source.** Every card renders from `src/content/projects.ts`. Do not duplicate project data in components.
 10. **Client components only where needed.** Only the mobile menu, project filter and the hero grade-shift interaction may use `"use client"`.
 11. **Secret hygiene.** Never put keys, tokens or credentials in app code, logs, tests, docs or Git. No `.env` in the repo.
-12. **No surprise libraries.** Do not add, remove or upgrade any library or tool not listed in Section 3 without asking. shadcn/ui and `lucide-react` are shipped under T10; do not expand them without a new scope decision.
+12. **No surprise libraries.** Do not add, remove or upgrade any library or tool not listed in Section 3 without asking. shadcn/ui and `lucide-react` are shipped under T10; `simple-icons` is an approved dev-only source for local brand SVGs under T11. Do not expand any icon zone without a new scope decision.
 13. **Full check before "done".** Run `npm run check` on Node 26, then report the exact result before claiming a task is complete.
 14. **Stuck rule.** If the same problem is still failing after 3 attempts, stop and report what you tried, the exact error, and what you need from the human.
 15. **Doc parity.** If scope changes, update `PRD.md`, this file and the Stitch prompts in the same session. Do not leave the docs out of sync.
@@ -75,11 +75,12 @@ Before writing any code:
 | Scripts | `dev`, `build`, `start`, `lint`, `typecheck`, `check` |
 | CI/CD | GitHub Actions, Node **26**, Vercel deploy workflow with GitHub-only secrets |
 | Asset tool | Higgsfield MCP (connected), generation only; CLI 1.2.3 installed but blocked on trial; not an app dependency or runtime service |
+| Icon source | `simple-icons` **16.38.1** (dev only, CC0-1.0) generates local brand SVGs; `lucide-react` **1.80.0** supplies conceptual badge glyphs |
 | Not installed | Test runner, backend, CMS, auth. T10 added shadcn `badge`, `button` and `lucide-react` after launch and is shipped. |
 
 **React note:** React is already the foundation — Next.js is a React framework. Do not add it again as a dependency. It belongs in the skills list, not in an install step.
 
-**shadcn/ui note:** shadcn/ui is a copy-in component source system (Radix primitives + Tailwind), not a normal npm UI package, and its icons come from `lucide-react`. It stayed outside T0 to T9 and is now shipped under **T10** in section 7. Brand SVG icons remain the default, and library icons are confined to dense functional controls in their own visual zone.
+**shadcn/ui note:** shadcn/ui is a copy-in component source system (Radix primitives + Tailwind), not a normal npm UI package, and its icons come from `lucide-react`. It stayed outside T0 to T9 and is now shipped under **T10** in section 7. Brand SVG icons remain the default; `lucide-react` is confined to the functional filter zone and conceptual technology badge glyphs, never to the Toolkit or external-link icon zone.
 
 ---
 
@@ -196,6 +197,13 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Verify:** full T9 pass again after the slice.  
 **Guard:** this slice was never required for launch. It is shipped and recorded in all three docs; expanding it requires a new scope decision.
 **Result (2026-11-25):** shipped after explicit user approval. `components.json` uses the Tailwind v4 registry style with an empty config path. Only `badge` and `button` were copied into `src/components/ui/*`; shadcn variables map to the existing `@theme` tokens. The Toolkit uses nine local brand SVGs with visible labels and `aria-hidden`; `lucide-react` appears only as the selected-filter `Check` in the functional project-filter zone and is never mixed into the Toolkit or external-link icons. Full verification was rerun after activation. Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB because the filter uses the shadcn button and Lucide; `/about` stayed at 178 B and 112 kB; shared JS stayed at 103 kB.
+
+### T11 — Post-launch slice: technology badge icons
+**Files:** `package.json`, `package-lock.json`, `public/assets/icons/stacks/*`, `src/lib/stack-icons.ts`, `src/components/StackIcon.tsx`, `src/app/about/page.tsx`, `src/components/ProjectCard.tsx`, `docs/*`.
+**Decision:** after explicit user approval, `simple-icons` was added as a dev-only source for missing brand SVGs and the existing `lucide-react` dependency supplies glyphs for seven conceptual labels. The nine existing Toolkit icons stay brand SVGs, the About visual zone stays library-free, and both icon kinds remain decorative with visible text labels.
+**Acceptance:** every technology label has an icon or no icon safely falls back to text; no new accent colour, radius, runtime dependency or layout overflow; ARIA and keyboard behaviour unchanged.
+**Verify:** `npm run check`, responsive pass at 320/375/414/768/1024/1440px, filter/skeleton regression pass, and two-axis review.
+**Result (2026-11-28):** shipped as PR #23. `simple-icons` 16.38.1 is dev-only; 11 brand SVGs were generated into `public/assets/icons/stacks/` in the existing `#EEF1F6` palette. `src/lib/stack-icons.ts` is the shared registry and `src/components/StackIcon.tsx` renders either kind with `aria-hidden`. Project cards and the About toolkit consume the same registry.
 
 ---
 
