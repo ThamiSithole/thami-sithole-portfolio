@@ -99,7 +99,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 - One `Project` record renders identically on home and `/projects` using the same `ProjectCard` component.
 - Card contents: eyebrow, status badge, category labels, name, summary, problem, role, highlights, shadcn technology badges, live/repo/PR links.
 - Desktop project grid is 1/2/3 columns at mobile/tablet/desktop. Home arranges the three featured cards in a 2-column asymmetric grid with the first spanning both columns. No three equal feature cards in a row.
-- Filter categories: **All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI**. Filtering is client-side, keyboard accessible and updates results without a page reload. Chip selection is a transform-only transition with an `:active` scale of 0.98.
+- Filter categories: **All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI**. Filtering is client-side, keyboard accessible and updates results without a page reload. Chip selection is a transform-only transition with an `:active` scale of 0.98. A chip change to a filter with results shows a ~180ms card-shaped skeleton that reserves the real card row height in the same grid, with a token-based shimmer; the grid is `aria-busy`, an `sr-only` status announces `"Loading projects"`, and the count and empty state stay tied to the committed filter. Reduced motion keeps the static skeleton shape without the shimmer.
 - Featured order: **Straina → StokvelOS → Riverside Community Hub**, expressed with `featured: true` on those three records and their array order — not a hard-coded slice.
 
 ### 7.3 Accessibility

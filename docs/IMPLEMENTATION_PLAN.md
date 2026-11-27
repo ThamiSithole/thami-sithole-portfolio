@@ -166,7 +166,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T6 — Projects page with filtering
 **Files:** `src/components/ProjectsExplorer.tsx` (new, `"use client"`), `src/app/projects/page.tsx`.  
-**Actions:** move the grid into the explorer; filter chips: All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI; `useState` + `useMemo`; `aria-pressed` on chips; result count in `aria-live="polite"`; composed empty state; 1/2/3-column grid; `:active` scale and transform-only filter transition; apply the low-opacity section plate. URL query sync only if it stays simple.  
+**Actions:** move the grid into the explorer; filter chips: All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI; `useState` + `useMemo`; `aria-pressed` on chips; result count in `aria-live="polite"`; composed empty state; 1/2/3-column grid; `:active` scale and transform-only filter transition; apply the low-opacity section plate. On chip change to a filter with results, show a ~180ms card-shaped skeleton that reserves the real card row height in the same grid via a pending/committed filter split with a cleared-on-unmount timer; commit zero-match filters immediately; set `aria-busy` on the grid and an `sr-only` `"Loading projects"` status, keep count and empty state on the committed filter, and drop the shimmer under reduced motion. URL query sync only if it stays simple.
 **Acceptance:** filtering works by mouse and keyboard, count updates, no page reload, featured order preserved in "All".  
 **Verify:** keyboard pass + `npm run check`.
 
@@ -184,7 +184,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T9 — Functional, craft and build verification
 **Files:** none (plus small fixes from T2–T8).  
-**Actions:** `npm run check`; `npm run dev` then browser-test every route at all six widths; test nav, filter, keyboard focus, hero motion and all links; `npm run build && npm run start` smoke test; deploy and confirm production URL HTTP 200. Record LCP/CLS observations if browser tooling exposes them. Run the craft gate checklist from the Stitch prompts: dash ban, CTA labels, eyebrow ration, no equal-card row, radius, one accent, Satoshi/JetBrains Mono, assets, motion, declared mobile collapse. Screenshots here are **verification artefacts**, not final portfolio image assets.  
+**Actions:** `npm run check`; `npm run dev` then browser-test every route at all six widths; test nav, filter (including rapid chip changes, `aria-busy`, status announcement and reduced motion), keyboard focus, hero motion and all links; `npm run build && npm run start` smoke test; deploy and confirm production URL HTTP 200. Record LCP/CLS observations if browser tooling exposes them. Run the craft gate checklist from the Stitch prompts: dash ban, CTA labels, eyebrow ration, no equal-card row, radius, one accent, Satoshi/JetBrains Mono, assets, motion, declared mobile collapse. Screenshots here are **verification artefacts**, not final portfolio image assets.
 **Acceptance:** every PRD §10 criterion passes, including recorded LCP/CLS observations where browser tooling supports them; craft checklist green; no console errors.  
 **Result (2026-11-25):** all functional, craft, accessibility, build and deployment checks passed. CLS measured 0.0000. LCP exceeded 2.5s in this headless environment and remains unverified against the target; see the PRD §10 verification record before treating that criterion as complete.  
 **Verify:** screenshots + `curl -I` on live URL.

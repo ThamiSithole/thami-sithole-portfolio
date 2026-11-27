@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { Project, ProjectCategory } from "@/content/projects";
 import ProjectCard from "@/components/ProjectCard";
 import { Button } from "@/components/ui/button";
@@ -28,23 +28,110 @@ const categoryByFilter: Partial<Record<Filter, ProjectCategory>> = {
   AI: "ai",
 };
 
+const FILTER_PENDING_MS = 180;
+
 type Props = {
   projects: Project[];
 };
 
-export default function ProjectsExplorer({ projects }: Props) {
-  const [filter, setFilter] = useState<Filter>("All");
+function SkeletonCard() {
+  return (
+    <div
+      aria-hidden="true"
+      className="card skeleton-card pointer-events-none flex h-full min-h-[36rem] flex-col p-6"
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="h-3 w-24 rounded-full bg-surface-2" />
+        <div className="h-6 w-20 rounded-[var(--radius-card)] bg-surface-2" />
+      </div>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <div className="h-6 w-16 rounded-[var(--radius-card)] bg-surface-2" />
+        <div className="h-6 w-16 rounded-[var(--radius-card)] bg-surface-2" />
+      </div>
+      <div className="mt-5 h-6 w-2/3 rounded-full bg-surface-2" />
+      <div className="mt-3 h-3 w-full rounded-full bg-surface-2" />
+      <div className="mt-2 h-3 w-5/6 rounded-full bg-surface-2" />
+      <div className="mt-6 grid gap-4">
+        <div className="h-3 w-20 rounded-full bg-surface-2" />
+        <div className="h-3 w-full rounded-full bg-surface-2" />
+        <div className="h-3 w-20 rounded-full bg-surface-2" />
+        <div className="h-3 w-5/6 rounded-full bg-surface-2" />
+      </div>
+      <div className="mt-6 grid gap-2">
+        <div className="h-3 w-3/4 rounded-full bg-surface-2" />
+        <div className="h-3 w-2/3 rounded-full bg-surface-2" />
+        <div className="h-3 w-4/5 rounded-full bg-surface-2" />
+      </div>
+      <div className="mt-auto pt-7">
+        <div className="flex flex-wrap gap-2">
+          <div className="h-6 w-16 rounded-[var(--radius-card)] bg-surface-2" />
+          <div className="h-6 w-16 rounded-[var(--radius-card)] bg-surface-2" />
+          <div className="h-6 w-14 rounded-[var(--radius-card)] bg-surface-2" />
+        </div>
+        <div className="mt-6 flex gap-6">
+          <div className="h-3 w-16 rounded-full bg-surface-2" />
+          <div className="h-3 w-16 rounded-full bg-surface-2" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
-  const visible = useMemo(() => {
-    if (filter === "All") {
-      return projects;
+export default function ProjectsExplorer({ projects }: Props) {
+  const [selected, setSelected] = useState<Filter>("All");
+  const [committed, setCommitted] = useState<Filter>("All");
+  const [pending, setPending] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, []);
+
+  const projectsFor = useCallback(
+    (value: Filter) => {
+      if (value === "All") {
+        return projects;
+      }
+      if (value === "Featured") {
+        return projects.filter((project) => project.featured);
+      }
+      const category = categoryByFilter[value];
+      return projects.filter((project) => category && project.categories?.includes(category));
+    },
+    [projects],
+  );
+
+  const visible = useMemo(() => projectsFor(committed), [projectsFor, committed]);
+  const skeletonCount = pending ? projectsFor(selected).length : 0;
+
+  const chooseFilter = (option: Filter) => {
+    if (option === selected) {
+      return;
     }
-    if (filter === "Featured") {
-      return projects.filter((project) => project.featured);
+
+    setSelected(option);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
-    const category = categoryByFilter[filter];
-    return projects.filter((project) => category && project.categories?.includes(category));
-  }, [filter, projects]);
+
+    if (option === committed || projectsFor(option).length === 0) {
+      setCommitted(option);
+      setPending(false);
+      return;
+    }
+
+    setPending(true);
+    timerRef.current = setTimeout(() => {
+      setCommitted(option);
+      setPending(false);
+      timerRef.current = null;
+    }, FILTER_PENDING_MS);
+  };
 
   return (
     <div className="relative">
@@ -60,18 +147,18 @@ export default function ProjectsExplorer({ projects }: Props) {
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
         {filters.map((option) => {
-          const selected = option === filter;
+          const active = option === selected;
           return (
             <Button
               key={option}
               type="button"
-              aria-pressed={selected}
-              variant={selected ? "filter-active" : "filter"}
+              aria-pressed={active}
+              variant={active ? "filter-active" : "filter"}
               className="px-4"
-              onClick={() => setFilter(option)}
+              onClick={() => chooseFilter(option)}
             >
               {option}
-              {selected ? <Check aria-hidden="true" className="size-3.5" /> : null}
+              {active ? <Check aria-hidden="true" className="size-3.5" /> : null}
             </Button>
           );
         })}
@@ -80,12 +167,15 @@ export default function ProjectsExplorer({ projects }: Props) {
       <p className="mt-6 font-mono text-sm text-muted" aria-live="polite">
         {visible.length} {visible.length === 1 ? "project" : "projects"}
       </p>
+      <span className="sr-only" role="status">
+        {pending ? "Loading projects" : ""}
+      </span>
 
-      {visible.length ? (
-        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {visible.map((project) => (
-            <ProjectCard key={project.name} project={project} />
-          ))}
+      {pending || visible.length ? (
+        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3" aria-busy={pending}>
+          {pending
+            ? Array.from({ length: skeletonCount }, (_, index) => <SkeletonCard key={index} />)
+            : visible.map((project) => <ProjectCard key={project.name} project={project} />)}
         </div>
       ) : (
         <div className="card mt-6 flex flex-col items-start gap-3 p-8">
@@ -93,7 +183,7 @@ export default function ProjectsExplorer({ projects }: Props) {
           <p className="text-sm text-muted">Choose another category to see more work.</p>
           <button
             type="button"
-            onClick={() => setFilter("All")}
+            onClick={() => chooseFilter("All")}
             className="tap-target rounded-[var(--radius-card)] border border-line px-4 text-sm font-semibold text-accent transition-transform duration-150 active:scale-[0.98]"
           >
             Show all projects

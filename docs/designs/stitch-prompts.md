@@ -169,7 +169,7 @@ Design screen "S2" for my responsive web portfolio at **1440 × 900 desktop** an
 
 - Normal: 11 cards, `"All"` selected, count `"11 projects"`.
 - Empty: `"No projects match this filter."` with the filter row still visible and composed spacing, not a bare line of text.
-- Loading: N/A — filtering is local component state, no fetch. If a skeleton is ever needed, shape it like the final card grid, never a generic spinner.
+- Loading: selecting a chip with results shows a brief ~180ms skeleton in the same 1/2/3-column grid, shaped like a project card, reserving the real card row height, with a token-based shimmer, never a generic spinner. A filter with no matches goes straight to the empty state. The grid is `aria-busy` and an `sr-only` status says `"Loading projects"`. Reduced motion keeps the static skeleton shape without the shimmer. The result count stays tied to the committed filter.
 - Error: N/A — no runtime data request.
 - Offline: N/A — static content.
 - Success: selecting a chip updates the grid without reload; count changes, selected chip uses `accent/15` and `accent`, focus ring stays visible.
