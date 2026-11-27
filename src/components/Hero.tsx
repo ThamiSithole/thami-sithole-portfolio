@@ -124,18 +124,28 @@ export default function Hero() {
         >
           <div className="flex items-center gap-4">
             <Image
-              src="/assets/logo-ts.svg"
-              alt=""
-              aria-hidden="true"
+              src="/assets/anime-thami.png"
+              alt="Portrait of Thami Sithole"
               width={48}
               height={48}
-              unoptimized
-              className="size-12 shrink-0"
+              sizes="48px"
+              className="size-12 shrink-0 rounded-[var(--radius-card)] object-cover"
             />
             <div>
-              <h2 id="profile" className="text-xl font-bold tracking-tight text-text">
-                Thami Sithole
-              </h2>
+              <div className="flex items-center gap-2">
+                <h2 id="profile" className="text-xl font-bold tracking-tight text-text">
+                  Thami Sithole
+                </h2>
+                <Image
+                  src="/assets/monogram-mark.png"
+                  alt=""
+                  aria-hidden="true"
+                  width={20}
+                  height={20}
+                  sizes="20px"
+                  className="size-5 shrink-0"
+                />
+              </div>
               <p className="mt-1 font-mono text-sm text-accent">
                 Frontend · Backend · DevOps / Release
               </p>

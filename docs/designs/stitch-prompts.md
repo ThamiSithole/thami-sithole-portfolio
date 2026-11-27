@@ -100,13 +100,14 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 | Hero, dormant grade | `public/assets/hero-dormant.png` | S1 hero, B2 crossfade source |
 | Hero, live grade | `public/assets/hero-live.png` | S1 hero, B2 crossfade target and reduced-motion fallback |
 | Section plate | `public/assets/section-plate-projects.png` | S2 background texture |
-| Profile mark | `public/assets/profile-mark.png` | S1 profile card |
+| Profile portrait | `public/assets/anime-thami.png` | S1 profile card, S3 About intro |
+| Profile-card monogram | `public/assets/monogram-mark.png` | S1 decorative mark |
 | Icon set | `public/assets/icons/` | All screens |
 | Monogram and favicon set | `public/assets/logo-ts.*`, `public/assets/icon-*.png`, `public/assets/site.webmanifest` | Header, browser kit |
 | OG card and cover | `public/assets/og-thami-sithole.png`, `public/assets/cover-thami-sithole.png` | Metadata, feed card |
 | 404 artwork | `public/assets/404-art.png` | S5 |
 
-All asset slots are generated and slotted in from Higgsfield MCP. The hero pair is 2688 x 1520; the remaining grades and derived favicon/OG/cover files use the sizes listed above. No slot uses a CSS approximation.
+All asset slots are generated and slotted in from Higgsfield MCP. The hero pair is 2688 x 1520; the remaining grades and derived favicon/OG/cover files use the sizes listed above. No slot uses a CSS approximation. `profile-mark.png` remains in the kit but is not referenced by the shipped UI.
 
 ---
 
@@ -123,7 +124,7 @@ Design screen "S1" for my responsive web portfolio at **1440 × 900 desktop** an
 - Hero: headline `"I build software that removes friction."` on two desktop lines, and a subtext of at most 25 words about frontend, backend and release engineering. A generated hero visual occupies `public/assets/hero-live.png` across the full card with a left-aligned focal point. No fake dashboard or terminal. The primary column contains exactly four text elements: eyebrow, headline, subtext, CTA row. The profile card sits in the right column of the same card on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacks inside the hero below the CTA row on smaller screens.
 - CTA row: `"View projects"` as the primary garment, `"Get in touch"` as the secondary garment. Each is its own component with its own interaction identity. No shared button class.
 - Signature motion: `"B2 grade-shift"` hero pair. A cursor spotlight crossfades `hero-dormant.png` to `hero-live.png` on desktop; on mobile a gentle scroll-linked grade change replaces the cursor. Purpose: the work lights up when the visitor engages. Initial paint shows `hero-live.png` in full. Reduced motion shows the same static image with no crossfade. Headline build fires on mount over 900ms with a 180ms second-line delay, not on viewport entry.
-- Profile card, placed at the right edge inside the hero: brand monogram `"TS"`, `"Thami Sithole"`, `"Frontend · Backend · DevOps / Release"`, short StokvelOS note, two-column facts `"Base"` / `"South Africa"` and `"Focus"` / `"Web & mobile-first UX"`.
+- Profile card, placed at the right edge inside the hero: `anime-thami.png` portrait, small decorative `monogram-mark.png` hidden from screen readers, `"Thami Sithole"`, `"Frontend · Backend · DevOps / Release"`, short StokvelOS note, two-column facts `"Base"` / `"South Africa"` and `"Focus"` / `"Web & mobile-first UX"`.
 - Section `"Selected work"` with heading `"Projects with a point."` and link `"View projects"`. Show the three featured cards in order `"Straina"`, `"StokvelOS"`, `"Riverside Community Hub"` in a 2-column asymmetric grid with the first card spanning both columns on desktop. Same `ProjectCard` component as the projects page, never a copied variant.
 - Section `"How I work"` with heading `"Small, clear slices."` and three principle rows in a vertical rhythm, separated by hairline rules, not a three-card row: `"Build for the real constraint"`, `"Prove it with tests"`, `"Ship in small reviews"`. Each row is a bold label on the left and a one-line note on the right.
 - `SiteFooter`.
@@ -188,6 +189,7 @@ Design screen "S3" for my responsive web portfolio at **1440 × 900 desktop** an
 **Layout (Normal):**
 
 - `SiteHeader` with active `"About"`.
+- `anime-thami.png` profile portrait: 96px square below 640px, 128px beside the heading on larger screens, using the 12px card radius.
 - No eyebrow. Page heading `"I am an AI-engineering student building products end to end."`.
 - Three paragraphs of at most 25 words each: Straina CI, deployment and release work plus features; StokvelOS Phase 2 foundations; a product-plus-engineering closing note.
 - Section `"Where I focus"` with three staggered rows, not three equal cards: `"Frontend"`, `"Backend & data"`, `"Release engineering"`. Alternate the alignment of the note column.
@@ -196,7 +198,7 @@ Design screen "S3" for my responsive web portfolio at **1440 × 900 desktop** an
 - Closing line `"Looking for project detail instead?"` with inline underlined link `"View projects"`.
 - `SiteFooter`.
 
-**Mobile collapse:** focus rows stack note under label; toolkit icon-and-label items wrap; CTA card spans full width. No horizontal scroll at 320px.
+**Mobile collapse:** profile portrait stacks above the heading; focus rows stack note under label; toolkit icon-and-label items wrap; CTA card spans full width. No horizontal scroll at 320px.
 
 **States (PRD §7 / §10):**
 

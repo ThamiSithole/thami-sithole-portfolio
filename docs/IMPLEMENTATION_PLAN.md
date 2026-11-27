@@ -153,7 +153,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T4 — Generate brand asset kit
 **Files:** `public/assets/**` (new), `docs/designs/stitch-prompts.md` slot table updated with real filenames.  
-**Actions:** confirm an allowed Higgsfield path; generate hero dormant/live grades, section plate, profile mark, one icon set, monogram and favicon set, OG card, cover and 404 artwork via MCP; download into `public/assets/`; keep rejects out of `public/`; reference every file from a route or component.  
+**Actions:** confirm an allowed Higgsfield path; generate hero dormant/live grades, section plate, profile portrait, profile-card monogram, one icon set, monogram and favicon set, OG card, cover and 404 artwork via MCP; download into `public/assets/`; keep rejects out of `public/`; reference every file from a route or component.
 **Acceptance:** all slots filled and no final deploy; one coherent grade; no watermark or model-rendered text; hero art ≥1500px wide.  
 **Verify:** batch coherence check, then `ls public/assets` against the prompt slot table.  
 **Guard:** if `higgsfield auth login` is required and MCP is unavailable, or no allowed generation path exists, stop and ask the human. A `only_mcp_usage_on_trial_is_available` CLI error means use MCP, not a stop. Never substitute CSS-only visuals and never spoof an MCP client header to bypass the trial restriction.
@@ -172,13 +172,13 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T7 — Home featured section and signature motion
 **Files:** `src/app/page.tsx`, hero component (new if needed).  
-**Actions:** show the three `featured` projects from T5 (not a hard-coded slice of 2) in a 2-column asymmetric grid with the first spanning both columns; build the hero with exactly four text elements, the generated grade pair and `"B2 grade-shift"` (cursor spotlight on desktop, scroll-linked grade on mobile); headline build fires on mount over 900ms with a 180ms second-line delay; `prefers-reduced-motion` shows the static live grade; CTA buttons wrap at 320px with one label per intent; keep the "How I work" section as a vertical rhythm list, not three equal cards; keep the single eyebrow. On desktop, widen the right profile track to fit the role line naturally on one line and vertically centre the card against the primary copy.
+**Actions:** show the three `featured` projects from T5 (not a hard-coded slice of 2) in a 2-column asymmetric grid with the first spanning both columns; build the hero with exactly four text elements, the generated grade pair and `"B2 grade-shift"` (cursor spotlight on desktop, scroll-linked grade on mobile); headline build fires on mount over 900ms with a 180ms second-line delay; show the profile portrait and small decorative monogram in the profile card; `prefers-reduced-motion` shows the static live grade; CTA buttons wrap at 320px with one label per intent; keep the "How I work" section as a vertical rhythm list, not three equal cards; keep the single eyebrow. On desktop, widen the right profile track to fit the role line naturally on one line and vertically centre the card against the primary copy.
 **Acceptance:** three featured cards first, one signature effect, no opacity-to-zero reveals, no overflow, `"View projects"` reaches `/projects`.  
 **Verify:** screenshots at 320/375/414/768/1024/1440px with and without reduced motion; confirm the role line stays on one line at 1024 and 1440px.
 
 ### T8 — About, Contact, 404 and metadata
 **Files:** `src/app/about/page.tsx`, `src/app/contact/page.tsx`, `src/app/not-found.tsx` (new), `src/app/layout.tsx` metadata, `public/assets/site.webmanifest`.  
-**Actions:** responsive stacking for focus rows/toolkit/links; keep current 9-chip toolkit (expansion deferred); add on-brand 404 with generated artwork and link home; unify CTA labels to `"View projects"`, `"Get in touch"`, `"Open GitHub"`; wire OG card, cover, favicon set, `theme-color` and full social block; confirm one `<h1>` and correct metadata per route.  
+**Actions:** responsive stacking for the About portrait, focus rows/toolkit/links; keep current 9-chip toolkit (expansion deferred); add on-brand 404 with generated artwork and link home; unify CTA labels to `"View projects"`, `"Get in touch"`, `"Open GitHub"`; wire OG card, cover, favicon set, `theme-color` and full social block; confirm one `<h1>` and correct metadata per route.
 **Acceptance:** every route clean at all six widths; 404 styled and reachable; no em/en-dashes in visible copy; one radius scale plus nav pill exception; real absolute image URLs.
 **Verify:** visit all routes in browser and inspect `<head>`.
 
