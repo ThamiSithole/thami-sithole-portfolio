@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import StackIcon from "@/components/StackIcon";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
@@ -24,15 +25,15 @@ const focusAreas = [
 ];
 
 const toolkit = [
-  { label: "TypeScript", icon: "typescript" },
-  { label: "React", icon: "react" },
-  { label: "Next.js", icon: "nextjs" },
-  { label: "Tailwind CSS", icon: "tailwindcss" },
-  { label: "PostgreSQL", icon: "postgresql" },
-  { label: "Supabase", icon: "supabase" },
-  { label: "Vitest", icon: "vitest" },
-  { label: "GitHub Actions", icon: "githubactions" },
-  { label: "Vercel", icon: "vercel" },
+  "TypeScript",
+  "React",
+  "Next.js",
+  "Tailwind CSS",
+  "PostgreSQL",
+  "Supabase",
+  "Vitest",
+  "GitHub Actions",
+  "Vercel",
 ];
 
 export default function AboutPage() {
@@ -100,18 +101,10 @@ export default function AboutPage() {
         </div>
         <ul className="flex flex-wrap gap-3 self-start">
           {toolkit.map((tool) => (
-            <li key={tool.label}>
+            <li key={tool}>
               <Badge variant="stack" className="px-4 py-2 text-sm">
-                <Image
-                  src={`/assets/icons/stacks/${tool.icon}.svg`}
-                  alt=""
-                  aria-hidden="true"
-                  width={18}
-                  height={18}
-                  unoptimized
-                  className="size-[18px] shrink-0"
-                />
-                {tool.label}
+                <StackIcon label={tool} size={18} />
+                {tool}
               </Badge>
             </li>
           ))}

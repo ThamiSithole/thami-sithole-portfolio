@@ -1,7 +1,7 @@
-# PRD — Thami Sithole Portfolio (v1.4)
+# PRD — Thami Sithole Portfolio (v1.5)
 
-**Status:** Shipped · **Owner:** Thami Sithole · **Date:** 2026-11-26 · **Supersedes:** v1.3
-**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.3
+**Status:** Shipped · **Owner:** Thami Sithole · **Date:** 2026-11-28 · **Supersedes:** v1.4
+**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.4
 
 > **Scope reset:** this pass is about a fully responsive, functional, reliably building portfolio. All strong projects are in scope as content. Per-project accuracy fixes are a later backlog item, not a blocker.  
 > **Craft refresh (v1.3):** the higgsfield-websites design recipe now applies to the Stitch prompts. This changes the palette, type pairing, icon set, motion and CTA copy, and adds generated visual assets. These are in scope and mirrored in the plan.  
@@ -59,7 +59,9 @@ Recorded as the pre-build problem statement; shipped scope is in §10 and §13.
 - Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`.
 - Apply eyebrow ration, a 12px radius scale with the fixed nav pill as the sole exception, declared mobile collapse and bespoke CTA garments.
 
-**Shipped design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. `lucide-react` is limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixes into the Toolkit or external-link icon zone. React was already present through Next.js 15 + React 19 and was not added again.
+**Shipped design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. At T10, `lucide-react` was limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixed into the Toolkit or external-link icon zone. T11 later added the conceptual badge exception recorded below. React was already present through Next.js 15 + React 19 and was not added again.
+
+**Technology badge icons (2026-11-28):** project technology badges and the About toolkit share one label-to-icon registry. Brand-backed labels use local SVGs generated from `simple-icons` (dev dependency only, CC0-1.0) in the existing brand palette. Conceptual labels without a brand mark use decorative `lucide-react` glyphs hidden from screen readers. The visible text label remains authoritative, both icon kinds stay `aria-hidden`, and the external-link icon zone is unchanged.
 
 The content model must be able to hold all deferred corrections when they arrive, without a redesign.
 
@@ -69,7 +71,7 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - **Header:** fixed, horizontally centred glass pill with a 1px outline; name/logo, desktop nav links and mobile toggle sit inside it. The mobile dropdown opens in a glass panel below the pill; toggle keeps `aria-expanded`/`aria-controls`, closes on route change and Escape, and returns focus to the toggle.
 - **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens. The card shows the profile portrait and a small decorative monogram.
-- **Projects:** full project grid with category filter, status badges and shadcn technology badges on each card.
+- **Projects:** full project grid with category filter, status badges and shadcn technology badges with local brand or decorative lucide icons on each card.
 - **About:** background, focus areas, toolkit, GitHub links, and the same profile portrait in the intro.
 - **Contact:** GitHub and current work links.
 - **Footer:** repeat key links, the ThamiRoneo profile CTA and repository links where relevant. No second profile switcher was added.
@@ -190,7 +192,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - [x] `npm run lint`, `npm run typecheck` and `npm run build` pass on Node 26.
 - [x] CI green on PR; Vercel production deployment returns HTTP 200.
 - [x] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
-- [x] T10 shadcn `badge`/`button`, nine brand Toolkit SVGs and the Lucide filter check are shipped with separated icon zones.
+- [x] T10 shadcn `badge`/`button`, nine brand Toolkit SVGs and the Lucide filter check are shipped; T11 adds decorative Lucide glyphs only for conceptual project technology badges.
 - [ ] CLS < 0.1 verified; LCP < 2.5s remains unverified in this headless environment, with no unexpected regression observed.
 - [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale with the nav pill exception, declared mobile collapse.
 - [x] No secrets or credentials committed.
@@ -206,8 +208,15 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 ### T10 activation verification (2026-11-25)
 
 - Two shadcn primitives (`badge`, `button`) were added with tokens mapped to the existing `@theme` palette; the Toolkit shows nine local brand SVG icons with visible labels and `aria-hidden`.
-- Lucide is limited to the decorative selected-filter `Check` in the project filter zone, hidden from screen readers and never mixed into the Toolkit.
+- Lucide remains in the functional filter zone as the decorative selected-filter `Check`. T11 adds decorative Lucide glyphs for conceptual project technology badges, still hidden from screen readers and never mixed into the Toolkit or external-link zone.
 - `npm run check`, brand-icon checks at six widths, profile-link checks and the full T9 browser suite pass after activation. CLS measured 0.0000; LCP remains environment-dependent as recorded above.
+
+### T11 verification record (2026-11-28)
+
+- `npm run check` passed on Node 26.13.1: ESLint clean, `tsc --noEmit` clean and `next build` generated 7 static pages.
+- Browser metrics at 320/375/414/768/1024/1440px on `/projects`: 52 technology badges, all 52 with a decorative icon, zero elements extending past the viewport. Home showed 17 badges, all iconed, at 375px and 1440px.
+- About toolkit kept nine items with 18px icons at 375px and 1440px; project badges use 14px icons to match their smaller `text-xs` badge scale. Both consume the same registry.
+- Filter, skeleton and reduced-motion behaviour are untouched; no new accent colour or radius was introduced.
 - Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB; `/about` and shared JS were unchanged.
 
 ## 11. Open decisions
@@ -215,7 +224,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - Whether to add a dedicated `/skills` route or keep skills in `/about` (default: keep in `/about`).
 - Final filter category labels (currently fixed as All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI).
 - Whether this PRD is public or internal.
-- **Closed 2026-11-25:** T10 is shipped with `badge` and `button`; brand stack SVGs stay in the Toolkit and Lucide stays in the filter controls.
+- **Closed 2026-11-25, amended 2026-11-28:** T10 is shipped with `badge` and `button`; brand stack SVGs stay in the Toolkit, Lucide stays in the filter controls, and T11 adds Lucide only for conceptual project technology badges.
 - **Closed in v1.3:** CTA label unification. Use `"View projects"`, `"Get in touch"` and `"Open GitHub"` site-wide.
 
 ## 12. Cross-document coverage
@@ -234,6 +243,7 @@ The implementation plan’s section 10 contains the full PRD → task coverage m
 | [#17](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/17) | Widen and centre the hero profile card | merged 26 Nov 2026 |
 | [#18](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/18) | Make the header a fixed glass pill | merged 26 Nov 2026 |
 | [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: v1.4/v1.3/v1.2 parity, shipped status, T10 and radius record | merged 26 Nov 2026 |
+| [#23](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/23) | Add icons to project technology badges | merged 28 Nov 2026 |
 
 Each PR passed the required `check` status and was squash-merged into `main`. Content corrections listed in §5 remain the user-led backlog.
 
