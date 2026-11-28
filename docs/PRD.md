@@ -193,7 +193,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - [x] CI green on PR; Vercel production deployment returns HTTP 200.
 - [x] Contrast ≥4.5:1 for text, touch targets ≥44px, reduced-motion respected.
 - [x] T10 shadcn `badge`/`button`, nine brand Toolkit SVGs and the Lucide filter check are shipped; T11 adds decorative Lucide glyphs only for conceptual project technology badges.
-- [ ] CLS < 0.1 verified; LCP < 2.5s remains unconfirmed. The hero image is the correct, preloaded LCP element and no application-level defect was found, but this 2-core host cannot produce a representative throttled measurement. Field LCP is a Speed Insights Plus metric that needs a Pro plan; the free Hobby tier reports only the Real Experience Score. See the LCP lab verification record.
+- [ ] CLS < 0.1 verified; LCP < 2.5s remains unconfirmed. The hero image is the correct, preloaded LCP element and no LCP-element defect was found, but the verification host (2 cores at load ~12) cannot produce a representative throttled measurement. Field LCP is a Speed Insights Plus metric that needs a Pro plan; the free Hobby tier reports only the Real Experience Score. See the LCP lab verification record.
 - [x] One accent, generated icons and visuals, one signature motion effect, no em/en-dashes in visible copy, one label per CTA intent, one radius scale with the nav pill exception, declared mobile collapse.
 - [x] No secrets or credentials committed.
 - [x] `docs/PRD.md`, `docs/IMPLEMENTATION_PLAN.md` and `docs/designs/stitch-prompts.md` cross-reference each other with no conflicting scope.
@@ -225,7 +225,9 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - Optimised transfer measured at about 8 KB for the 1200 px WebP variant, with response end between 0.4 s and 1.5 s on localhost. The 380 KB figure recorded earlier was the source PNG, not the served image.
 - Lab runs against the local production build at 390 x 844 with cache disabled: 1.26 s and 2.21 s unthrottled, 3.19 s and 4.26 s on Slow 4G, and 6.34 s, 6.46 s and 7.21 s on Slow 4G plus 4x CPU.
 - The host has 2 cores at a load average near 12 during the runs, so CPU-throttled values are host-bound. Document complete times reached 29 s at 4x CPU, which a static page does not produce on an idle machine. The numbers therefore bound the environment, not the application.
-- No application-level LCP defect was found. The `< 2.5 s` target stays unconfirmed: field LCP is a Speed Insights Plus metric that requires a Pro plan, so the free Hobby tier reports only the Real Experience Score.
+- The earlier 3.1 s to 4.2 s local figure came from a run that still fetched over the real network. This record replaces it with a localhost run that removes network variance, so the two are not directly comparable.
+- No LCP-element defect was found. The dormant overlay is a second full-viewport above-fold image that still downloads and competes for bandwidth on Slow 4G; it is not an LCP candidate, but deferring it until first interaction is the clearest remaining optimisation if field data ever shows a problem.
+- The `< 2.5 s` target stays unconfirmed: field LCP is a Speed Insights Plus metric that requires a Pro plan, so the free Hobby tier reports only the Real Experience Score.
 
 ## 11. Open decisions
 
