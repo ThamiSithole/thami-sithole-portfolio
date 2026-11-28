@@ -252,6 +252,7 @@ The implementation plan’s section 10 contains the full PRD → task coverage m
 | [#18](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/18) | Make the header a fixed glass pill | merged 26 Nov 2026 |
 | [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: v1.4/v1.3/v1.2 parity, shipped status, T10 and radius record | merged 26 Nov 2026 |
 | [#23](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/23) | Add icons to project technology badges | merged 28 Nov 2026 |
+| [#24](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/24) | Record LCP lab verification and the Speed Insights Plus gate | merged 28 Nov 2026 |
 
 Each PR passed the required `check` status and was squash-merged into `main`. Content corrections listed in §5 remain the user-led backlog.
 
