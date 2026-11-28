@@ -1,6 +1,6 @@
 # Implementation Plan — Thami Sithole Portfolio (responsive + build + craft)
 
-**Status:** Companion to `docs/PRD.md` v1.6 · **Version:** v1.5 · **Date:** 2026-11-28
+**Status:** Companion to `docs/PRD.md` v1.7 · **Version:** v1.6 · **Date:** 2026-11-28
 **Source of truth for requirements:** [`docs/PRD.md`](./PRD.md)  
 **Target folder:** `/home/kayron1/Work/thami-sithole-portfolio`
 
@@ -14,13 +14,13 @@
 | Field | Value |
 | --- | --- |
 | App name | Thami Sithole Portfolio |
-| Built from PRD version | v1.6 |
-| Screen designs | `docs/designs/stitch-prompts.md` v1.4 (S1–S5). No Stitch project URL yet. |
-| Plan version | v1.5 (T12 Home positioning slice, PRD v1.6 parity) |
+| Built from PRD version | v1.7 |
+| Screen designs | `docs/designs/stitch-prompts.md` v1.5 (S1–S5). No Stitch project URL yet. |
+| Plan version | v1.6 (T13 Projects evidence slice, PRD v1.7 parity) |
 | Repository | https://github.com/ThamiSithole/thami-sithole-portfolio |
 | Local path | `/home/kayron1/Work/thami-sithole-portfolio` (tracked Git checkout on `main`) |
 | Asset tooling | Higgsfield CLI 1.2.3 at `~/.local/bin/higgsfield` (authenticated, workspace selected, CLI generation blocked on trial); Higgsfield MCP connected and used for the full brand kit. |
-| Status | Shipped: T0 to T11 complete, full brand kit generated via MCP, all planned PRs merged. T12 is in progress on `feat/home-personalization`. Content corrections remain a user-led backlog. |
+| Status | Shipped: T0 to T12 complete, full brand kit generated via MCP, PRs #12 to #25 merged. T13 is in progress on `feat/projects-evidence`. Remaining content corrections stay in the user-led backlog. |
 | Last updated | 28 Nov 2026 |
 
 ---
@@ -30,8 +30,8 @@
 Before writing any code:
 
 1. Read this whole file from top to bottom.
-2. Read `docs/PRD.md` v1.6.
-3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.4 (S1–S5), especially the Style Guide and craft gates.
+2. Read `docs/PRD.md` v1.7.
+3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.5 (S1–S5), especially the Style Guide and craft gates.
 4. Check Section 10. If a PRD requirement has no task, or this file contradicts the PRD or prompts, stop and ask the human. Do not guess.
 5. Check the stack and local constraints in Sections 3–4 (Node 26, npm, browser tooling, tracked Git history, CLI auth).
 6. Start at **T0 only**. When that task's **Verify** step passes, stop and wait for the human to say "continue". Do not batch tasks unless explicitly allowed.
@@ -161,7 +161,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T5 — Extend content model and upgrade ProjectCard
 **Files:** `src/content/projects.ts`, `src/components/ProjectCard.tsx`.  
-**Actions:** apply the exact `Project` type from PRD §7.4 — `categories?: ProjectCategory[]`, `featured?: boolean`, `proofLinks?`, `screenshots?` — so current entries still compile. Add all 11 strong projects from PRD §7.5 with verified URLs only. Mark the first three `featured: true` in order **Straina → StokvelOS → Riverside Community Hub**. Render the status badge with its existing treatment, category labels with the tag treatment, and technology badges using shadcn `Badge`; keep `Badge` out of status and category treatments. Render optional `proofLinks` and optional screenshot slot via `next/image` with `sizes` and meaningful alt text. Keep `h-full` and `mt-auto` link row for aligned grids. Generated icons hidden with `aria-hidden="true"`. Each card is its own component instance, not a shared utility class.
+**Actions:** apply the exact `Project` type from PRD §7.4 — `categories?: ProjectCategory[]`, `featured?: boolean`, `proofLinks?`, `screenshots?` — so current entries still compile. Add all 11 strong projects from PRD §7.5 with verified URLs only. Mark the first three `featured: true` in order **Straina → StokvelOS → Riverside Community Hub**. Render the status badge with its existing treatment, category labels with the tag treatment, and technology badges using shadcn `Badge`; keep `Badge` out of status and category treatments. Render optional `proofLinks` and optional screenshot slot via `next/image` with `sizes` and meaningful alt text from the optional `screenshotAlt` field, falling back to a project-named alt; published screenshots use 1200x887 crops so intrinsic dimensions match the file. Keep `h-full` and `mt-auto` link row for aligned grids. Generated icons hidden with `aria-hidden="true"`. Each card is its own component instance, not a shared utility class.
 **Acceptance:** all 11 records typecheck; featured order correct; no fabricated links; readable from 320px up; external links use `target="_blank" rel="noreferrer"`.  
 **Verify:** `npm run typecheck` and browser screenshots at mobile and desktop.
 
@@ -211,7 +211,13 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Decision:** after explicit user confirmation, the Home hero leads with `"AI-augmented software engineer"` and one plain line about building AI-integrated software; the old Home framing is retired here, while About copy stays untouched until its own PR. The hero CTA row gains `"Open LinkedIn"` as its own external-link intent beside `"View projects"` and `"Get in touch"`. The three existing principle rows are rewritten in the same voice. Palette, Satoshi/JetBrains Mono, four routes, nav and the toolkit badge treatment are unchanged.
 **Acceptance:** no new dependency, no new page or section, no em/en-dashes in visible copy, external link reuses the shipped external-link icon with `rel="noreferrer"` and a screen-reader-only new-tab cue, one label per CTA intent, and no horizontal overflow at 320px.
 **Verify:** `npm run check`, six-width browser pass on `/`, keyboard focus on all three CTAs, and two-axis review.
-**Result (2026-11-28):** implemented on `feat/home-personalization`; verification in progress.
+**Result (2026-11-28):** shipped as PR #25. All three hero CTAs were keyboard focusable at six widths with no horizontal overflow, and CI `check` passed before squash merge.
+
+### T13 — Projects evidence slice
+**Files:** `src/content/projects.ts`, `src/components/ProjectsExplorer.tsx`, `src/app/projects/page.tsx`, `public/assets/screenshots/*`, `docs/PRD.md`, `docs/designs/stitch-prompts.md`, this plan.
+**Decision:** after explicit user confirmation, `/projects` gains one Evidence section for real, captioned screens. Only StokvelOS screens are supplied now; Straina and EdTech Assistant slots stay deferred until real files arrive. The StokvelOS organiser home fills the existing card screenshot slot and the contributions ledger appears in the Evidence figure with a caption that states what it proves.
+**Acceptance:** no new dependency or route, no invented screenshot or claim, no private or real user data in any published image, no em/en-dashes in visible copy, explorer count and empty copy rewritten in the agreed voice, and no horizontal overflow at 320px. Straina's role and highlights list only verifiable feature work and PR #66; the CI, deploy and release ownership claim is removed. The shared card preview is allowed to appear on Home's featured StokvelOS card; no Home source file changes.
+**Verify:** `npm run check`, six-width browser pass on `/projects`, keyboard filter pass, screenshot text review with OCR, and two-axis review.
 
 ---
 
@@ -235,7 +241,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 - Mobile nav and project filter work with mouse, touch and keyboard.
 - All 11 strong projects render from one content file; the featured three appear first.
 - Craft gates pass: one accent, generated assets and icons, one signature motion effect with reduced-motion fallback, no em/en-dashes, one CTA label per intent, one 12px radius scale with the fixed nav pill as sole exception, declared mobile collapse.
-- T10 shadcn `badge`/`button`, mapped tokens, brand Toolkit SVGs and the Lucide filter check are shipped; T11 adds Lucide only for conceptual project technology badges; T12 adds the AI-augmented role line and the `"Open LinkedIn"` CTA on Home only.
+- T10 shadcn `badge`/`button`, mapped tokens, brand Toolkit SVGs and the Lucide filter check are shipped; T11 adds Lucide only for conceptual project technology badges; T12 adds the AI-augmented role line and the `"Open LinkedIn"` CTA on Home only; T13 adds captioned StokvelOS screen evidence and corrects the Straina role on Projects only.
 - No secrets/`.env` in the repo; all three docs are approved and tracked on `main`.
 
 ---
@@ -249,12 +255,14 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 | §3 Audience — mobile/laptop scanning | T2, T6, T7, T9 | Breakpoint screenshots at both sizes |
 | §4 Goals — responsive, navigation, filtering, check green, 11 projects, a11y, craft | T2, T3, T4, T6, T7, T9 | Every goal has a task and a verification |
 | §5 Non-goals / deferred cleanup | T4/T8 (explicitly excluded) | Deferred items listed in PRD are not silently implemented |
+| §5 Straina attribution correction | T13 | Closed on `/projects` after git-history review; the same claim on `/about` and in S3 stays in the About PR backlog |
 | §5 in-scope craft refresh | T2, T4, T5, T7, T8, T9, T12 | Palette, fonts, icons, assets, motion, CTA copy |
 | §5 design-system decision | T10 | Shipped post-launch, mirrored in PRD §5, prompts Style Guide and Modals |
 | §6 IA — four routes, header behaviour, home, projects, about, contact, footer, 404 | T3, T6, T7, T8 | Footer dual-GitHub links remain deferred |
 | §6 Home positioning — AI-augmented role line, LinkedIn CTA, personal principles | T12 | Home only; About framing stays unchanged until its own PR |
 | §7.1 Breakpoints, typography, radius, mobile collapse | T2, T3, T7, T9 | Six tested widths; Satoshi + JetBrains Mono; 12px radius, nav pill exception |
 | §7.2 Cards, filter categories, featured order, asymmetric featured grid | T4, T5, T6, T7 | Categories arrays; `featured` boolean; no equal-card row |
+| §7.2 Evidence section, caption rules and rewritten explorer copy | T13 | Real StokvelOS screens only; no empty placeholders for deferred projects |
 | §7.3 Accessibility, alt text, reduced motion, mount-safe motion | T2, T3, T5, T6, T7, T8, T9 | Skip link preserved in T2; B2 fallback in T7 |
 | §7.4 Content model | T5 | Exact PRD type; no extra required fields |
 | §7.5 Project inventory | T5 | All 11 entries, verified URLs only |
@@ -264,7 +272,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 | §11 Open decisions — `/skills`, labels, PRD visibility, T10 | Section 9 + PRD §11 | CTA labels closed in v1.3 and amended in v1.6; others left open intentionally |
 | §13 shipped record | §12 | PR history and verification anchors |
 
-**Gap check:** every PRD requirement maps to at least one task with an acceptance criterion. Every task maps back to a PRD section. T10 and T11 are shipped with identical scope in all three documents; T12 is tracked here and in the Stitch S1 prompt.
+**Gap check:** every PRD requirement maps to at least one task with an acceptance criterion. Every task maps back to a PRD section. T10, T11 and T12 are shipped with identical scope in all three documents; T13 is tracked here, in PRD §7.2 and in the Stitch S2 prompt.
 
 ---
 

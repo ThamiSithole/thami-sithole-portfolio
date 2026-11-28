@@ -1,7 +1,7 @@
 # Stitch Prompts — Thami Sithole Portfolio
 
-**Version:** v1.4 · **Date:** 2026-11-28
-**Source:** [`../PRD.md`](../PRD.md) v1.6 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.5
+**Version:** v1.5 · **Date:** 2026-11-28
+**Source:** [`../PRD.md`](../PRD.md) v1.7 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.6
 **Method:** higgsfield-websites craft rules applied as a refinement lens. The build stack stays Next.js 15 + Vercel as locked in the PRD and plan.
 
 > This document and its companion docs are approved, tracked and shipped on `main`. Per-project content corrections stay in the user-led backlog.
@@ -86,7 +86,7 @@ Background treatment: slate base with a very subtle warm paper grain plate from 
 
 1. **SiteHeader** — variants: `desktop`, `mobile-closed`, `mobile-open`, `active-link`. Fixed at `top-3` with full-width gutters and a horizontally centred glass pill: `ink/70`, blur, one 1px `line/70` outline, rounded-full pill, no filled bar. Nav links and toggle keep the 12px control radius. Generated monogram mark `"TS"`, name `"Thami Sithole"`, subtitle `"Software engineer"`, nav labels `"Home"`, `"About"`, `"Projects"`, `"Contact"`. Active link uses `accent/15` background and `accent` text. Nav is one line at desktop, height at most 80px. Mobile collapse declared explicitly: below 640px the links hide and the toggle shows; `mobile-open` puts a 12px-radius glass dropdown below the pill with the same labels, preserving `aria-expanded`/`aria-controls`, Escape close, route-change close and focus return.
 2. **SiteFooter** — variants: `desktop-row`, `mobile-stacked`. Name `"Thami Sithole"`, tagline `"Building software that is useful, testable and clear to use."`, links `"About"`, `"Projects"`, `"Contact"`, `"Open GitHub"`. Mobile collapse: below 640px links stack under the name.
-3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, category labels, name, summary, optional screenshot slot, `Problem`, `Role`, highlights (dot bullets), shadcn icon-and-label technology badges, link row. The screenshot slot is optional and reserved, not a final asset. Each card is its own component instance, not a shared card utility class.
+3. **ProjectCard** — variants: `featured`, `compact`, `with-proof-links`, `with-screenshot-slot`. Fields in order: eyebrow, status badge, category labels, name, summary, optional screenshot slot, `Problem`, `Role`, highlights (dot bullets), shadcn icon-and-label technology badges, link row. The screenshot slot is optional; StokvelOS fills it with the real organiser home screen from `public/assets/screenshots/stokvelos-home.webp` and supplies a project-specific `screenshotAlt`. Published screenshots use 1200x887 crops. Straina and EdTech Assistant stay empty until real files arrive. Each card is its own component instance, not a shared card utility class.
 4. **StatusBadge** — variants: `"Live · team capstone"`, `"Phase 2 complete · preparing for Vercel deployment"`, `"Product specification approved · build in progress"`. Muted text, hairline border, no filled background, one accent dot for the active status.
 5. **Technology badge / Toolkit badge (shadcn `Badge`) and category tag (plain span)** — technology variants: `default`, `stack`; 12px radius, 1px `line` border, 12px semibold JetBrains Mono text, faint accent tint for `stack`. Each technology and toolkit badge pairs the visible label with a decorative icon: a local brand SVG for brand-backed labels, or a same-palette lucide glyph for conceptual labels without a brand mark. Both icon kinds are hidden from screen readers. Category tags use the same 12px tag treatment (border, radius, tint and font) but are plain spans, not shadcn `Badge`; the component 4 status badge stays unchanged.
 6. **FilterChip** — variants: `unselected`, `selected` (`aria-pressed`), `focus-visible`. Labels: `"All"`, `"Featured"`, `"Team"`, `"Capstone"`, `"Frontend"`, `"Backend"`, `"Mobile"`, `"AI"`. Selected uses `accent/15` and `accent`. Each chip has an `:active` scale of 0.98.
@@ -159,16 +159,17 @@ Design screen "S2" for my responsive web portfolio at **1440 × 900 desktop** an
 - Page heading `"Work that solves a named problem."`.
 - Intro paragraph of at most 25 words explaining problem, role, tools and delivery, with the capstone first.
 - Filter row with chips `"All"`, `"Featured"`, `"Team"`, `"Capstone"`, `"Frontend"`, `"Backend"`, `"Mobile"`, `"AI"`. `"All"` selected on load.
-- Result count in a live region, e.g. `"11 projects"`, in JetBrains Mono.
+- Result count in a live region, e.g. `"11 projects in this view"` or `"1 project in this view"`, in JetBrains Mono.
 - Background uses the subtle paper-grain plate `public/assets/section-plate-projects.png` at low opacity.
 - Grid of `ProjectCard`s: 1 column mobile, 2 columns tablet, 3 columns desktop, 24px gap. Featured order `"Straina"`, `"StokvelOS"`, `"Riverside Community Hub"`. The 3-column grid is a project grid, not an equal feature-card row, and is required by the PRD.
 - Each chip and card has an `:active` scale of 0.98. Filter change is a transform-only transition, never opacity-to-zero.
+- Below the grid, an `"Evidence"` section with a short intro and one captioned figure. Heading is `"Evidence"`, intro reads `"Screens from work I can show publicly. Each caption says what the screen proves."` The figure uses the real StokvelOS contributions ledger with a caption naming the project and the ledger behaviour it proves. No empty placeholder cards for projects without a supplied screen.
 - `SiteFooter`.
 
 **States (PRD §7 / §10):**
 
-- Normal: 11 cards, `"All"` selected, count `"11 projects"`.
-- Empty: `"No projects match this filter."` with the filter row still visible and composed spacing, not a bare line of text.
+- Normal: 11 cards, `"All"` selected, count `"11 projects in this view"`, Evidence section below the grid.
+- Empty: `"No work under this filter."` and `"The full set is still one click away."` with a `"Show all projects"` action, the filter row still visible and composed spacing, not a bare line of text.
 - Loading: selecting a chip with results shows a brief ~180ms skeleton in the same 1/2/3-column grid, shaped like a project card, reserving the real card row height, with a token-based shimmer, never a generic spinner. A filter with no matches goes straight to the empty state. The grid is `aria-busy` and an `sr-only` status says `"Loading projects"`. Reduced motion keeps the static skeleton shape without the shimmer. The result count stays tied to the committed filter.
 - Error: N/A — no runtime data request.
 - Offline: N/A — static content.
@@ -191,7 +192,7 @@ Design screen "S3" for my responsive web portfolio at **1440 × 900 desktop** an
 - `SiteHeader` with active `"About"`.
 - `anime-thami.png` profile portrait: 96px square below 640px, 128px beside the heading on larger screens, using the 12px card radius.
 - No eyebrow. Page heading `"I am an AI-engineering student building products end to end."`.
-- Three paragraphs of at most 25 words each: Straina CI, deployment and release work plus features; StokvelOS Phase 2 foundations; a product-plus-engineering closing note.
+- Three paragraphs of at most 25 words each: Straina CI, deployment and release work plus features; StokvelOS Phase 2 foundations; a product-plus-engineering closing note. **Deferred:** the Straina CI, deployment and release wording is stale and is corrected in the About PR, not in T13; T13 corrects only the `/projects` role and highlights.
 - Section `"Where I focus"` with three staggered rows, not three equal cards: `"Frontend"`, `"Backend & data"`, `"Release engineering"`. Alternate the alignment of the note column.
 - Section `"Toolkit"` with nine icon-and-label items, one local brand SVG per stack, decorative and hidden from screen readers: `"TypeScript"`, `"React"`, `"Next.js"`, `"Tailwind CSS"`, `"PostgreSQL"`, `"Supabase"`, `"Vitest"`, `"GitHub Actions"`, `"Vercel"`.
 - CTA card `"Want to see the code?"` with a single framed block CTA `"Open GitHub"`, its own garment. No text arrow glyph.
@@ -310,6 +311,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | §6 header behaviour | Style Guide SiteHeader; repeated in every screen prompt |
 | §7.1 breakpoints, typography, radius | Style Guide; desktop + mobile frames in every prompt |
 | §7.2 cards, badges, filters, featured order | Style Guide components; S2, S1 |
+| §7.2 Evidence section and rewritten explorer copy | S2 Evidence figure and empty-state strings |
 | §7.3 accessibility, alt text, reduced motion | Style Guide SkipLink, focus ring, aria-hidden icons, motion fallback |
 | §7.4 content model | S2 card fields and proof links; S1 featured flag order |
 | §7.5 project inventory | S2 sample content and card count |
@@ -317,9 +319,9 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | §10 acceptance criteria | Six states on every screen prompt |
 | §13 shipped record | §10 and change log |
 
-**TODO scan:** all asset slots are filled. No PRD data is missing; no PRD update is required for these slots.
+**TODO scan:** the StokvelOS screenshot slots are filled with real screens. Straina and EdTech Assistant screenshot slots remain intentionally deferred until the user supplies real files. No PRD data is missing; no PRD update is required for these slots.
 
-**Change log:** v1.4 — 28 Nov 2026: Home AI-augmented role line, `"Open LinkedIn"` hero CTA and rewritten principle notes, PRD v1.6 / plan v1.5 parity. v1.3 — 28 Nov 2026: icon-and-label technology badges, shared stack icon registry, PRD v1.5 / plan v1.4 parity. v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
+**Change log:** v1.5 — 28 Nov 2026: Projects Evidence section with real captioned StokvelOS screens, rewritten explorer count and empty copy, corrected Straina role on `/projects`, PRD v1.7 / plan v1.6 parity. v1.4 — 28 Nov 2026: Home AI-augmented role line, `"Open LinkedIn"` hero CTA and rewritten principle notes, PRD v1.6 / plan v1.5 parity. v1.3 — 28 Nov 2026: icon-and-label technology badges, shared stack icon registry, PRD v1.5 / plan v1.4 parity. v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
 
 ## 10. Shipped record
 
