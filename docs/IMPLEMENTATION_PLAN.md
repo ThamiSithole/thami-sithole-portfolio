@@ -1,6 +1,6 @@
 # Implementation Plan — Thami Sithole Portfolio (responsive + build + craft)
 
-**Status:** Companion to `docs/PRD.md` v1.5 · **Version:** v1.4 · **Date:** 2026-11-28
+**Status:** Companion to `docs/PRD.md` v1.6 · **Version:** v1.5 · **Date:** 2026-11-28
 **Source of truth for requirements:** [`docs/PRD.md`](./PRD.md)  
 **Target folder:** `/home/kayron1/Work/thami-sithole-portfolio`
 
@@ -14,13 +14,13 @@
 | Field | Value |
 | --- | --- |
 | App name | Thami Sithole Portfolio |
-| Built from PRD version | v1.5 |
-| Screen designs | `docs/designs/stitch-prompts.md` v1.3 (S1–S5). No Stitch project URL yet. |
-| Plan version | v1.4 (T11 technology badge icons, PRD v1.5 parity) |
+| Built from PRD version | v1.6 |
+| Screen designs | `docs/designs/stitch-prompts.md` v1.4 (S1–S5). No Stitch project URL yet. |
+| Plan version | v1.5 (T12 Home positioning slice, PRD v1.6 parity) |
 | Repository | https://github.com/ThamiSithole/thami-sithole-portfolio |
 | Local path | `/home/kayron1/Work/thami-sithole-portfolio` (tracked Git checkout on `main`) |
 | Asset tooling | Higgsfield CLI 1.2.3 at `~/.local/bin/higgsfield` (authenticated, workspace selected, CLI generation blocked on trial); Higgsfield MCP connected and used for the full brand kit. |
-| Status | Shipped: T0 to T10 complete, full brand kit generated via MCP, all planned PRs merged. Content corrections remain a user-led backlog. |
+| Status | Shipped: T0 to T11 complete, full brand kit generated via MCP, all planned PRs merged. T12 is in progress on `feat/home-personalization`. Content corrections remain a user-led backlog. |
 | Last updated | 28 Nov 2026 |
 
 ---
@@ -30,8 +30,8 @@
 Before writing any code:
 
 1. Read this whole file from top to bottom.
-2. Read `docs/PRD.md` v1.5.
-3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.3 (S1–S5), especially the Style Guide and craft gates.
+2. Read `docs/PRD.md` v1.6.
+3. Look at the screen designs in `docs/designs/stitch-prompts.md` v1.4 (S1–S5), especially the Style Guide and craft gates.
 4. Check Section 10. If a PRD requirement has no task, or this file contradicts the PRD or prompts, stop and ask the human. Do not guess.
 5. Check the stack and local constraints in Sections 3–4 (Node 26, npm, browser tooling, tracked Git history, CLI auth).
 6. Start at **T0 only**. When that task's **Verify** step passes, stop and wait for the human to say "continue". Do not batch tasks unless explicitly allowed.
@@ -179,7 +179,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 
 ### T8 — About, Contact, 404 and metadata
 **Files:** `src/app/about/page.tsx`, `src/app/contact/page.tsx`, `src/app/not-found.tsx` (new), `src/app/layout.tsx` metadata, `public/assets/site.webmanifest`.  
-**Actions:** responsive stacking for the About portrait, focus rows/toolkit/links; keep current 9-chip toolkit (expansion deferred); add on-brand 404 with generated artwork and link home; unify CTA labels to `"View projects"`, `"Get in touch"`, `"Open GitHub"`; wire OG card, cover, favicon set, `theme-color` and full social block; confirm one `<h1>` and correct metadata per route.
+**Actions:** responsive stacking for the About portrait, focus rows/toolkit/links; keep current 9-chip toolkit (expansion deferred); add on-brand 404 with generated artwork and link home; unify CTA labels to `"View projects"`, `"Get in touch"`, `"Open GitHub"`, `"Open LinkedIn"`; wire OG card, cover, favicon set, `theme-color` and full social block; confirm one `<h1>` and correct metadata per route.
 **Acceptance:** every route clean at all six widths; 404 styled and reachable; no em/en-dashes in visible copy; one radius scale plus nav pill exception; real absolute image URLs.
 **Verify:** visit all routes in browser and inspect `<head>`.
 
@@ -206,6 +206,13 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 **Verify:** `npm run check`, responsive pass at 320/375/414/768/1024/1440px, filter/skeleton regression pass, and two-axis review.
 **Result (2026-11-28):** shipped as PR #23. `simple-icons` 15.0.0 is dev-only; 11 brand SVGs were generated into `public/assets/icons/stacks/` in the existing `#EEF1F6` palette. `src/lib/stack-icons.ts` is the shared registry and `src/components/StackIcon.tsx` renders either kind with `aria-hidden`. Project cards and the About toolkit consume the same registry. `npm run check` passed on Node 26.13.1: ESLint clean, `tsc --noEmit` clean and `next build` generated 7 static pages. First Load JS: `/projects` 125 kB, `/about` 113 kB, shared 103 kB.
 
+### T12 — Home positioning slice
+**Files:** `src/components/Hero.tsx`, `src/app/page.tsx`, `docs/PRD.md`, `docs/designs/stitch-prompts.md`, this plan.
+**Decision:** after explicit user confirmation, the Home hero leads with `"AI-augmented software engineer"` and one plain line about building AI-integrated software; the old Home framing is retired here, while About copy stays untouched until its own PR. The hero CTA row gains `"Open LinkedIn"` as its own external-link intent beside `"View projects"` and `"Get in touch"`. The three existing principle rows are rewritten in the same voice. Palette, Satoshi/JetBrains Mono, four routes, nav and the toolkit badge treatment are unchanged.
+**Acceptance:** no new dependency, no new page or section, no em/en-dashes in visible copy, external link reuses the shipped external-link icon with `rel="noreferrer"` and a screen-reader-only new-tab cue, one label per CTA intent, and no horizontal overflow at 320px.
+**Verify:** `npm run check`, six-width browser pass on `/`, keyboard focus on all three CTAs, and two-axis review.
+**Result (2026-11-28):** implemented on `feat/home-personalization`; verification in progress.
+
 ---
 
 ## 8. Risks and mitigations
@@ -228,7 +235,7 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 - Mobile nav and project filter work with mouse, touch and keyboard.
 - All 11 strong projects render from one content file; the featured three appear first.
 - Craft gates pass: one accent, generated assets and icons, one signature motion effect with reduced-motion fallback, no em/en-dashes, one CTA label per intent, one 12px radius scale with the fixed nav pill as sole exception, declared mobile collapse.
-- T10 shadcn `badge`/`button`, mapped tokens, brand Toolkit SVGs and the Lucide filter check are shipped; T11 adds Lucide only for conceptual project technology badges.
+- T10 shadcn `badge`/`button`, mapped tokens, brand Toolkit SVGs and the Lucide filter check are shipped; T11 adds Lucide only for conceptual project technology badges; T12 adds the AI-augmented role line and the `"Open LinkedIn"` CTA on Home only.
 - No secrets/`.env` in the repo; all three docs are approved and tracked on `main`.
 
 ---
@@ -242,9 +249,10 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 | §3 Audience — mobile/laptop scanning | T2, T6, T7, T9 | Breakpoint screenshots at both sizes |
 | §4 Goals — responsive, navigation, filtering, check green, 11 projects, a11y, craft | T2, T3, T4, T6, T7, T9 | Every goal has a task and a verification |
 | §5 Non-goals / deferred cleanup | T4/T8 (explicitly excluded) | Deferred items listed in PRD are not silently implemented |
-| §5 in-scope craft refresh | T2, T4, T5, T7, T8, T9 | Palette, fonts, icons, assets, motion, CTA copy |
+| §5 in-scope craft refresh | T2, T4, T5, T7, T8, T9, T12 | Palette, fonts, icons, assets, motion, CTA copy |
 | §5 design-system decision | T10 | Shipped post-launch, mirrored in PRD §5, prompts Style Guide and Modals |
 | §6 IA — four routes, header behaviour, home, projects, about, contact, footer, 404 | T3, T6, T7, T8 | Footer dual-GitHub links remain deferred |
+| §6 Home positioning — AI-augmented role line, LinkedIn CTA, personal principles | T12 | Home only; About framing stays unchanged until its own PR |
 | §7.1 Breakpoints, typography, radius, mobile collapse | T2, T3, T7, T9 | Six tested widths; Satoshi + JetBrains Mono; 12px radius, nav pill exception |
 | §7.2 Cards, filter categories, featured order, asymmetric featured grid | T4, T5, T6, T7 | Categories arrays; `featured` boolean; no equal-card row |
 | §7.3 Accessibility, alt text, reduced motion, mount-safe motion | T2, T3, T5, T6, T7, T8, T9 | Skip link preserved in T2; B2 fallback in T7 |
@@ -253,10 +261,10 @@ T1 can run in parallel with T2–T8. T4 depends on Higgsfield auth or the connec
 | §8 Engineering/build/CI/secrets, fonts, generated assets | T0, T1, T2, T4, T9 | Tokens refreshed; Higgsfield MCP is an asset tool only; branch protection is a GitHub setting |
 | §9 Rollout steps 1–9 | T2, T3, T5, T4, T6, T7, T9 | Step 4 asset generation is T4; step 9 is T10 |
 | §10 Acceptance criteria | T9 | Checklist owned by T9 |
-| §11 Open decisions — `/skills`, labels, PRD visibility, T10 | Section 9 + PRD §11 | CTA labels closed in v1.3; others left open intentionally |
+| §11 Open decisions — `/skills`, labels, PRD visibility, T10 | Section 9 + PRD §11 | CTA labels closed in v1.3 and amended in v1.6; others left open intentionally |
 | §13 shipped record | §12 | PR history and verification anchors |
 
-**Gap check:** every PRD requirement maps to at least one task with an acceptance criterion. Every task maps back to a PRD section. T10 exists in all three documents with identical scope.
+**Gap check:** every PRD requirement maps to at least one task with an acceptance criterion. Every task maps back to a PRD section. T10 and T11 are shipped with identical scope in all three documents; T12 is tracked here and in the Stitch S1 prompt.
 
 ---
 

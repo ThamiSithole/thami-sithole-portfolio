@@ -1,7 +1,7 @@
 # Stitch Prompts — Thami Sithole Portfolio
 
-**Version:** v1.3 · **Date:** 2026-11-28
-**Source:** [`../PRD.md`](../PRD.md) v1.5 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.4
+**Version:** v1.4 · **Date:** 2026-11-28
+**Source:** [`../PRD.md`](../PRD.md) v1.6 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.5
 **Method:** higgsfield-websites craft rules applied as a refinement lens. The build stack stays Next.js 15 + Vercel as locked in the PRD and plan.
 
 > This document and its companion docs are approved, tracked and shipped on `main`. Per-project content corrections stay in the user-led backlog.
@@ -18,7 +18,7 @@
 ### Craft gates (from higgsfield-websites design recipe)
 
 - **No em-dash or en-dash as a separator** in any visible string. Use colon, comma, period or hyphen. The middle dot `·` is allowed.
-- **One label per CTA intent page-wide:** `"View projects"` for every browse-projects action, `"Get in touch"` for contact, `"Open GitHub"` for the profile. No synonyms.
+- **One label per CTA intent page-wide:** `"View projects"` for every browse-projects action, `"Get in touch"` for contact, `"Open GitHub"` for the profile, `"Open LinkedIn"` for the LinkedIn profile. No synonyms.
 - **Eyebrow ration:** at most one eyebrow per three sections. Prefer none. Section headings carry the hierarchy.
 - **No three equal feature cards in a row.** Home featured work uses a 2-column asymmetric grid; `"How I work"` uses a vertical rhythm list.
 - **One corner-radius scale site-wide:** 12px soft on cards, badges and controls. No mixed radii; the fixed SiteHeader nav pill is the only 999px exception.
@@ -115,21 +115,21 @@ Generated brand asset slots are generated and slotted in from Higgsfield MCP. Th
 
 Design screen "S1" for my responsive web portfolio at **1440 × 900 desktop** and **375 × 812 mobile**. Reuse the style guide and shared components exactly. Keep the header and footer identical to my other screens. Include every element in the order listed. Use the exact labels in quotation marks. Fill with the sample content given. Design the Normal state first, then one extra frame for each other state in the spec. Do not invent features, buttons, screens or text.
 
-**Spec (PRD §6):** Intro, featured projects (first three), working principles, clear browse-projects link. Primary action: `"View projects"`.
+**Spec (PRD §6):** Intro, featured projects (first three), working principles, clear browse-projects link. Primary action: `"View projects"`. Secondary actions: `"Get in touch"` and `"Open LinkedIn"`.
 
 **Layout (Normal):**
 
 - `SiteHeader` with active `"Home"`.
 - One eyebrow only, `"Portfolio · Selected work"`.
-- Hero: headline `"I build software that removes friction."` on two desktop lines, and a subtext of at most 25 words about frontend, backend and release engineering. A generated hero visual occupies `public/assets/hero-live.png` across the full card with a left-aligned focal point. No fake dashboard or terminal. The primary column contains exactly four text elements: eyebrow, headline, subtext, CTA row. The profile card sits in the right column of the same card on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacks inside the hero below the CTA row on smaller screens.
-- CTA row: `"View projects"` as the primary garment, `"Get in touch"` as the secondary garment. Each is its own component with its own interaction identity. No shared button class.
+- Hero: headline `"I build software that removes friction."` on two desktop lines, and a subtext of at most 25 words leading with the role line `"I'm an AI-augmented software engineer building software that integrates AI into real workflows, from accessible interfaces to systems a team can ship and trust."` A generated hero visual occupies `public/assets/hero-live.png` across the full card with a left-aligned focal point. No fake dashboard or terminal. The primary column contains exactly four text elements: eyebrow, headline, subtext, CTA row. The profile card sits in the right column of the same card on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacks inside the hero below the CTA row on smaller screens.
+- CTA row: `"View projects"` as the primary garment, `"Get in touch"` and `"Open LinkedIn"` as secondary garments. `"Open LinkedIn"` opens the LinkedIn profile in a new tab with the shipped external-link icon, decorative and hidden from screen readers, and a screen-reader-only new-tab cue. Each is its own component with its own interaction identity. No shared button class.
 - Signature motion: `"B2 grade-shift"` hero pair. A cursor spotlight crossfades `hero-dormant.png` to `hero-live.png` on desktop; on mobile a gentle scroll-linked grade change replaces the cursor. Purpose: the work lights up when the visitor engages. Initial paint shows `hero-live.png` in full. Reduced motion shows the same static image with no crossfade. Headline build fires on mount over 900ms with a 180ms second-line delay, not on viewport entry.
-- Profile card, placed at the right edge inside the hero: `anime-thami.png` portrait, small decorative `monogram-mark.png` hidden from screen readers, `"Thami Sithole"`, `"Frontend · Backend · DevOps / Release"`, short StokvelOS note, two-column facts `"Base"` / `"South Africa"` and `"Focus"` / `"Web & mobile-first UX"`.
+- Profile card, placed at the right edge inside the hero: `anime-thami.png` portrait, small decorative `monogram-mark.png` hidden from screen readers, `"Thami Sithole"`, `"AI-augmented software engineer"`, short StokvelOS note, two-column facts `"Base"` / `"South Africa"` and `"Focus"` / `"Web & mobile-first UX"`.
 - Section `"Selected work"` with heading `"Projects with a point."` and link `"View projects"`. Show the three featured cards in order `"Straina"`, `"StokvelOS"`, `"Riverside Community Hub"` in a 2-column asymmetric grid with the first card spanning both columns on desktop. Same `ProjectCard` component as the projects page, never a copied variant.
-- Section `"How I work"` with heading `"Small, clear slices."` and three principle rows in a vertical rhythm, separated by hairline rules, not a three-card row: `"Build for the real constraint"`, `"Prove it with tests"`, `"Ship in small reviews"`. Each row is a bold label on the left and a one-line note on the right.
+- Section `"How I work"` with heading `"Small, clear slices."` and three principle rows in a vertical rhythm, separated by hairline rules, not a three-card row: `"Start with the real constraint"` with note `"Taxi fares and stokvel trust are not edge cases. I design for the person who has to use the result."`, `"Make the decision visible"` with note `"Tests, database rules and CI carry the reasoning, so a reviewer can see why a choice holds."`, `"Keep the work legible"` with note `"Small branches, reviewed pull requests and squash merges leave a history I can explain."` Each row is a bold label on the left and a one-line note on the right.
 - `SiteFooter`.
 
-**Mobile collapse:** the hero card keeps its full width, the primary copy stays above the profile card, and the profile facts remain in a two-column row. Featured grid becomes one column; principle rows stack label above note. No horizontal scroll at 320px.
+**Mobile collapse:** the hero card keeps its full width, the primary copy stays above the profile card, and the profile facts remain in a two-column row. The three hero CTAs wrap onto a second line without clipping. Featured grid becomes one column; principle rows stack label above note. No horizontal scroll at 320px.
 
 **States (PRD §7 / §10):**
 
@@ -288,7 +288,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | Gate | Pass condition |
 |---|---|
 | Dash ban | No em-dash or en-dash in any quoted visible string. Middle dot allowed. |
-| CTA labels | One label per intent: `"View projects"`, `"Get in touch"`, `"Open GitHub"`. |
+| CTA labels | One label per intent: `"View projects"`, `"Get in touch"`, `"Open GitHub"`, `"Open LinkedIn"`. |
 | Eyebrow ration | At most one eyebrow per three sections. |
 | Equal-card ban | No three equal feature cards. Home uses a 2-column asymmetric grid and a vertical rhythm list. |
 | Radius | 12px on cards, badges and controls; the fixed SiteHeader nav pill is the only 999px exception. |
@@ -319,13 +319,13 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 
 **TODO scan:** all asset slots are filled. No PRD data is missing; no PRD update is required for these slots.
 
-**Change log:** v1.3 — 28 Nov 2026: icon-and-label technology badges, shared stack icon registry, PRD v1.5 / plan v1.4 parity. v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
+**Change log:** v1.4 — 28 Nov 2026: Home AI-augmented role line, `"Open LinkedIn"` hero CTA and rewritten principle notes, PRD v1.6 / plan v1.5 parity. v1.3 — 28 Nov 2026: icon-and-label technology badges, shared stack icon registry, PRD v1.5 / plan v1.4 parity. v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
 
 ## 10. Shipped record
 
 The canonical PR table is in [`docs/PRD.md` §13](../PRD.md#13-shipped-record). It is the single source for PR scope and merge results; do not duplicate it here.
 
-Screens S1 to S5 are the shipped design source. Asset slots, T10 and T11 icon zones, the 12px radius contract and the single nav-pill exception match the implementation.
+Screens S1 to S5 are the shipped design source. Asset slots, T10 and T11 icon zones, the T12 Home CTA row and role line, the 12px radius contract and the single nav-pill exception match the implementation.
 
 ---
 Related: [`../PRD.md`](../PRD.md) · [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) · [[Home]]
