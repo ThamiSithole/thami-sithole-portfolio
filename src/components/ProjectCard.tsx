@@ -42,9 +42,9 @@ export default function ProjectCard({ project, featured = false }: Props) {
         <div className="mt-6 overflow-hidden rounded-[var(--radius-card)] border border-line">
           <Image
             src={screenshot}
-            alt={`${project.name} interface preview`}
+            alt={project.screenshotAlt ?? `${project.name} interface preview`}
             width={1200}
-            height={675}
+            height={887}
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="h-auto w-full object-cover"
           />

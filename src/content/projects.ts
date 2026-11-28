@@ -22,6 +22,7 @@ export type Project = {
   categories?: ProjectCategory[];
   proofLinks?: { label: string; href: string }[];
   screenshots?: string[];
+  screenshotAlt?: string;
 };
 
 export const projects: Project[] = [
@@ -32,12 +33,12 @@ export const projects: Project[] = [
       "An antimicrobial-resistance mapping platform that shows where resistant organisms emerge and which areas may become hotspots.",
     problem:
       "AMR information is spread across disconnected reports and dashboards. Health teams need one readable, time-aware view to act earlier.",
-    role: "DevOps and release, frontend and backend: hotspot alerts, user management, source management and the offline hook.",
+    role: "Frontend and backend: hotspot alerts and time exploration, users and sources APIs, admin screens and the offline hook.",
     stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Supabase", "Vercel"],
     highlights: [
       "Interactive map with time exploration and pathogen and antibiotic filters",
       "Role-based admin screens for users, roles and data sources",
-      "80 tests across 17 files with CI on every pull request",
+      "80 tests across 17 files",
     ],
     status: "Live · team capstone",
     liveHref: "https://straina-eight.vercel.app/",
@@ -67,6 +68,9 @@ export const projects: Project[] = [
     githubHref: "https://github.com/ThamiSithole/stokvelos",
     featured: true,
     categories: ["featured", "capstone"],
+    screenshots: ["/assets/screenshots/stokvelos-home.webp"],
+    screenshotAlt:
+      "StokvelOS organiser home showing the active cycle and a pending contribution alert.",
   },
   {
     name: "Riverside Community Hub",
