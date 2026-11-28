@@ -16,20 +16,69 @@ export default function ContactPage() {
         </h1>
         <p className="mt-6 max-w-xl text-base leading-relaxed text-muted">
           I am open to collaboration, code review and roles where careful engineering and clear
-          product thinking matter. The quickest way to reach me is through GitHub, where my public
-          work and contribution history are visible.
+          product thinking matter. Email is quickest; my work is on GitHub.
         </p>
 
         <div className="mt-10 grid gap-4">
+          <a
+            href="mailto:Thamironeo.sithole@gmail.com"
+            className="card flex items-center justify-between gap-4 p-6 hover:border-accent/50"
+          >
+            <span className="min-w-0">
+              <span className="block text-sm font-bold text-text">Get in touch</span>
+              <span className="mt-1 block break-all text-sm text-muted">
+                Thamironeo.sithole@gmail.com
+              </span>
+            </span>
+            <Image
+              src="/assets/icons/external-link.svg"
+              alt=""
+              aria-hidden="true"
+              width={18}
+              height={18}
+              unoptimized
+              className="size-5 shrink-0 text-accent"
+            />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/thami-sithole-71566b143/"
+            target="_blank"
+            rel="noreferrer"
+            className="card flex items-center justify-between gap-4 p-6 hover:border-accent/50"
+          >
+            <span className="min-w-0">
+              <span className="block text-sm font-bold text-text">
+                Open LinkedIn<span className="sr-only"> (opens in a new tab)</span>
+              </span>
+              <span className="mt-1 block break-all text-sm text-muted">
+                linkedin.com/in/thami-sithole-71566b143/
+              </span>
+            </span>
+            <Image
+              src="/assets/icons/external-link.svg"
+              alt=""
+              aria-hidden="true"
+              width={18}
+              height={18}
+              unoptimized
+              className="size-5 shrink-0 text-accent"
+            />
+          </a>
+
           <a
             href="https://github.com/ThamiRoneo"
             target="_blank"
             rel="noreferrer"
             className="card flex items-center justify-between gap-4 p-6 hover:border-accent/50"
           >
-            <span>
-              <span className="block text-sm font-bold text-text">Open GitHub</span>
-              <span className="mt-1 block text-sm text-muted">github.com/ThamiRoneo</span>
+            <span className="min-w-0">
+              <span className="block text-sm font-bold text-text">
+                Open GitHub<span className="sr-only"> (opens in a new tab)</span>
+              </span>
+              <span className="mt-1 block break-all text-sm text-muted">
+                github.com/ThamiRoneo
+              </span>
             </span>
             <Image
               src="/assets/icons/external-link.svg"
@@ -48,8 +97,10 @@ export default function ContactPage() {
             rel="noreferrer"
             className="card flex items-center justify-between gap-4 p-6 hover:border-accent/50"
           >
-            <span>
-              <span className="block text-sm font-bold text-text">Current focus</span>
+            <span className="min-w-0">
+              <span className="block text-sm font-bold text-text">
+                Current focus<span className="sr-only"> (opens in a new tab)</span>
+              </span>
               <span className="mt-1 block text-sm text-muted">
                 StokvelOS capstone: auth, groups and permissions
               </span>

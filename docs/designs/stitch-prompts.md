@@ -1,10 +1,10 @@
 # Stitch Prompts — Thami Sithole Portfolio
 
-**Version:** v1.5 · **Date:** 2026-11-28
-**Source:** [`../PRD.md`](../PRD.md) v1.7 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.6
+**Version:** v1.6 · **Date:** 2026-11-28
+**Source:** [`../PRD.md`](../PRD.md) v1.8 and [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) v1.7
 **Method:** higgsfield-websites craft rules applied as a refinement lens. The build stack stays Next.js 15 + Vercel as locked in the PRD and plan.
 
-> This document and its companion docs are approved, tracked and shipped on `main`. Per-project content corrections stay in the user-led backlog.
+> Prior versions of these docs were approved, tracked and shipped on `main` through PR #26. The current versions are in review on `feat/contact-links`. Per-project content corrections stay in the user-led backlog.
 
 ## Prompt conventions
 
@@ -220,15 +220,18 @@ Design screen "S3" for my responsive web portfolio at **1440 × 900 desktop** an
 
 Design screen "S4" for my responsive web portfolio at **1440 × 900 desktop** and **375 × 812 mobile**. Reuse the style guide and shared components exactly. Keep the header and footer identical to my other screens. Include every element in the order listed. Use the exact labels in quotation marks. Fill with the sample content given. Design the Normal state first, then one extra frame for each other state. Do not invent features, buttons, screens or text.
 
-**Spec (PRD §6):** GitHub and current work links. Primary action: open the GitHub profile card.
+**Spec (PRD §6):** email, LinkedIn, GitHub and current work links. Primary action: open an email draft.
 
 **Layout (Normal):**
 
 - `SiteHeader` with active `"Contact"`.
 - No eyebrow. Heading `"Let's build something useful."`.
-- Intro paragraph of at most 25 words about collaboration, code review and roles.
-- Link card `"GitHub"` with `"github.com/ThamiRoneo"` and the generated external-link icon.
+- Intro paragraph of at most 25 words about collaboration, code review and roles, naming email as the quickest channel.
+- Link card `"Get in touch"` with `"Thamironeo.sithole@gmail.com"` using `mailto:Thamironeo.sithole@gmail.com` and the generated external-link icon.
+- Link card `"Open LinkedIn"` with `"linkedin.com/in/thami-sithole-71566b143/"` using `https://www.linkedin.com/in/thami-sithole-71566b143/` and the generated external-link icon.
+- Link card `"Open GitHub"` with `"github.com/ThamiRoneo"` and the generated external-link icon.
 - Link card `"Current focus"` with `"StokvelOS capstone: auth, groups and permissions"` and the generated external-link icon.
+- Every external link card adds a screen-reader-only `"(opens in a new tab)"` cue. Long strings wrap without horizontal overflow at 375px.
 - Aside card `"What I bring to a team"` with three dot bullets: small reviewable changes; frontend and backend respecting the same product rules; release discipline with CI and repeatable deployments.
 - Closing note that project pages contain problem, contribution and verification links.
 - `SiteFooter`.
@@ -242,9 +245,9 @@ Design screen "S4" for my responsive web portfolio at **1440 × 900 desktop** an
 - Loading: N/A — static content.
 - Error: N/A — no runtime data request.
 - Offline: N/A — no offline mode in this pass.
-- Success: N/A — view-only page; link cards open external targets.
+- Success: N/A — view-only page; the email card opens a draft and the other link cards open external targets.
 
-**Sample content:** `"Thami Sithole"`, `"South Africa"`, `"2026-11-24"`.
+**Sample content:** `"Thami Sithole"`, `"South Africa"`, `"2026-11-24"`, `"Thamironeo.sithole@gmail.com"`, `"linkedin.com/in/thami-sithole-71566b143/"`.
 
 **TODOs:** none.
 
@@ -308,6 +311,7 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 | §5 deferred cleanup / dual GitHub identities | Excluded from S3 and S4 by explicit note |
 | §5 shipped T10 shadcn/lucide and T11 badge icons | Style Guide notes brand-token mapping; badge and button only, Lucide in filter controls plus conceptual technology badges |
 | §6 IA — four routes + 404 | S1–S5 |
+| §6 Contact links — email, LinkedIn, GitHub and current work | S4 link cards with exact strings and new-tab cues |
 | §6 header behaviour | Style Guide SiteHeader; repeated in every screen prompt |
 | §7.1 breakpoints, typography, radius | Style Guide; desktop + mobile frames in every prompt |
 | §7.2 cards, badges, filters, featured order | Style Guide components; S2, S1 |
@@ -321,13 +325,13 @@ No modals are specified in PRD §6 or §7. None are designed in this pass. Do no
 
 **TODO scan:** the StokvelOS screenshot slots are filled with real screens. Straina and EdTech Assistant screenshot slots remain intentionally deferred until the user supplies real files. No PRD data is missing; no PRD update is required for these slots.
 
-**Change log:** v1.5 — 28 Nov 2026: Projects Evidence section with real captioned StokvelOS screens, rewritten explorer count and empty copy, corrected Straina role on `/projects`, PRD v1.7 / plan v1.6 parity. v1.4 — 28 Nov 2026: Home AI-augmented role line, `"Open LinkedIn"` hero CTA and rewritten principle notes, PRD v1.6 / plan v1.5 parity. v1.3 — 28 Nov 2026: icon-and-label technology badges, shared stack icon registry, PRD v1.5 / plan v1.4 parity. v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
+**Change log:** v1.6 — 28 Nov 2026: Contact email and LinkedIn cards with exact strings, email as the primary channel, screen-reader new-tab cues, unchanged CTA labels, PRD v1.8 / plan v1.7 parity. v1.5 — 28 Nov 2026: Projects Evidence section with real captioned StokvelOS screens, rewritten explorer count and empty copy, corrected Straina role on `/projects`, PRD v1.7 / plan v1.6 parity. v1.4 — 28 Nov 2026: Home AI-augmented role line, `"Open LinkedIn"` hero CTA and rewritten principle notes, PRD v1.6 / plan v1.5 parity. v1.3 — 28 Nov 2026: icon-and-label technology badges, shared stack icon registry, PRD v1.5 / plan v1.4 parity. v1.2 — final close-out 26 Nov 2026: shipped status, PRD v1.4 / plan v1.3 parity, shadcn technology badges, sole nav-pill radius exception and PR record. v1.1 — higgsfield-websites craft lens applied: single-accent slate palette, Satoshi + JetBrains Mono, generated icon and asset kit, bespoke CTA garments, eyebrow ration, no em/en-dashes, mount-safe B2 hero motion, explicit mobile collapse, craft gate checklist, and mirrored PRD v1.3 / plan v1.2. Asset status amended 25 Nov 2026: full generated kit slotted in through Higgsfield MCP.
 
 ## 10. Shipped record
 
 The canonical PR table is in [`docs/PRD.md` §13](../PRD.md#13-shipped-record). It is the single source for PR scope and merge results; do not duplicate it here.
 
-Screens S1 to S5 are the shipped design source. Asset slots, T10 and T11 icon zones, the T12 Home CTA row and role line, the 12px radius contract and the single nav-pill exception match the implementation.
+Screens S1 to S5 are the shipped design source. Asset slots, T10 and T11 icon zones, the T12 Home CTA row and role line, the T13 Evidence figure, the 12px radius contract and the single nav-pill exception match the implementation. The T14 Contact link cards are pending PR.
 
 ---
 Related: [`../PRD.md`](../PRD.md) · [`../IMPLEMENTATION_PLAN.md`](../IMPLEMENTATION_PLAN.md) · [[Home]]
