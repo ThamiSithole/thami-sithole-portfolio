@@ -165,7 +165,7 @@ export default function ProjectsExplorer({ projects }: Props) {
       </div>
 
       <p className="mt-6 font-mono text-sm text-muted" aria-live="polite">
-        {visible.length} {visible.length === 1 ? "project" : "projects"}
+        {visible.length} {visible.length === 1 ? "project" : "projects"} in this view
       </p>
       <span className="sr-only" role="status">
         {pending ? "Loading projects" : ""}
@@ -179,8 +179,8 @@ export default function ProjectsExplorer({ projects }: Props) {
         </div>
       ) : (
         <div className="card mt-6 flex flex-col items-start gap-3 p-8">
-          <p className="text-lg font-bold text-text">No projects match this filter.</p>
-          <p className="text-sm text-muted">Choose another category to see more work.</p>
+          <p className="text-lg font-bold text-text">No work under this filter.</p>
+          <p className="text-sm text-muted">The full set is still one click away.</p>
           <button
             type="button"
             onClick={() => chooseFilter("All")}

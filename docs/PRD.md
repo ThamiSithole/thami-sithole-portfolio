@@ -1,7 +1,7 @@
-# PRD — Thami Sithole Portfolio (v1.6)
+# PRD — Thami Sithole Portfolio (v1.7)
 
-**Status:** v1.5 shipped, v1.6 in review · **Owner:** Thami Sithole · **Date:** 2026-11-28 · **Supersedes:** v1.5
-**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.5
+**Status:** v1.6 shipped as PR #25, v1.7 in review · **Owner:** Thami Sithole · **Date:** 2026-11-28 · **Supersedes:** v1.6
+**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.6
 
 > **Scope reset:** this pass is about a fully responsive, functional, reliably building portfolio. All strong projects are in scope as content. Per-project accuracy fixes are a later backlog item, not a blocker.  
 > **Craft refresh (v1.3):** the higgsfield-websites design recipe now applies to the Stitch prompts. This changes the palette, type pairing, icon set, motion and CTA copy, and adds generated visual assets. These are in scope and mirrored in the plan.  
@@ -45,10 +45,11 @@ Recorded as the pre-build problem statement; shipped scope is in §10 and §13.
 **Deferred to user-led cleanup later (does not block responsive/build work):**
 - Fix broken Indlela repo link (`indlela-app` → `indlela-mvp`).
 - Update stale StokvelOS status and merge [PR #43](https://github.com/ThamiSithole/stokvelos/pull/43).
-- Correct team-vs-personal attribution on Straina highlights.
-- Expand the `/about` toolkit beyond 9 chips. Final screenshot assets for individual projects remain deferred; the generated brand assets in v1.3 are not per-project screenshots.
+- Expand the `/about` toolkit beyond 9 chips. Straina and EdTech Assistant screenshots remain deferred until the user supplies real files; StokvelOS screens are implemented on `feat/projects-evidence`, pending PR. The generated brand assets in v1.3 are not per-project screenshots.
 - Link both GitHub accounts (`ThamiSithole` and `ThamiRoneo`) and the Straina PR.
 - Add a dedicated `/skills` route if needed later; skills stay in `/about` for this pass.
+
+**Closed in T13 (2026-11-28) for the `/projects` page only:** Straina attribution there now lists only verifiable feature work and PR #66. The CI, deploy and release ownership claim was removed after git-history review showed those files were authored by another team member. The same stale claim in `/about` and its S3 prompt stays in the About PR backlog.
 
 **In scope from v1.3 (higgsfield-websites craft lens, applied to Stitch prompts and implementation):**
 - Replace the near-black plus cyan/violet two-accent scheme with one slate base and one coral accent.
@@ -103,6 +104,8 @@ Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 - Desktop project grid is 1/2/3 columns at mobile/tablet/desktop. Home arranges the three featured cards in a 2-column asymmetric grid with the first spanning both columns. No three equal feature cards in a row.
 - Filter categories: **All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI**. Filtering is client-side, keyboard accessible and updates results without a page reload. Chip selection is a transform-only transition with an `:active` scale of 0.98. A chip change to a filter with results shows a ~180ms card-shaped skeleton that reserves the real card row height in the same grid, with a token-based shimmer; the grid is `aria-busy`, an `sr-only` status announces `"Loading projects"`, and the count and empty state stay tied to the committed filter. Reduced motion keeps the static skeleton shape without the shimmer.
 - Featured order: **Straina → StokvelOS → Riverside Community Hub**, expressed with `featured: true` on those three records and their array order — not a hard-coded slice.
+- Result count reads `"N projects in this view"` in a live region, with the singular form `"1 project in this view"` when one result remains. The empty state reads `"No work under this filter."` and `"The full set is still one click away."` with a `"Show all projects"` action.
+- `/projects` ends with an **Evidence** section: one captioned figure per publicly shareable screen. Each caption names the project and states what the screen proves. Only real screens with no private or user data are published; projects without a supplied screen are omitted, never shown as empty placeholders.
 
 ### 7.3 Accessibility
 
@@ -136,6 +139,7 @@ type Project = {
   categories?: ProjectCategory[];
   proofLinks?: { label: string; href: string }[];
   screenshots?: string[];
+  screenshotAlt?: string;
 };
 ```
 
@@ -143,8 +147,8 @@ type Project = {
 
 | Tier | Project | Category | Planned stack / proof | Links to verify in cleanup |
 |---|---|---|---|---|
-| 1 | **Straina** | featured, team | React 19, TS, Vite, Tailwind, Supabase; PR #66, live app | [Live](https://straina-eight.vercel.app/) · [Repo](https://github.com/analystmodikwe/Straina) · [PR #66](https://github.com/analystmodikwe/Straina/pull/66) |
-| 1 | **StokvelOS** | featured, capstone | Next.js 15, TS, Supabase, RLS; 59 unit + 72 DB tests | [Live](https://stokvelos-mu.vercel.app) · [Repo](https://github.com/ThamiSithole/stokvelos) |
+| 1 | **Straina** | featured, team | React 19, TS, Vite, Tailwind, Supabase; PR #66, live app; role limited to verifiable feature work | [Live](https://straina-eight.vercel.app/) · [Repo](https://github.com/analystmodikwe/Straina) · [PR #66](https://github.com/analystmodikwe/Straina/pull/66) |
+| 1 | **StokvelOS** | featured, capstone | Next.js 15, TS, Supabase, RLS; 59 unit + 72 DB tests; real screen evidence implemented on `feat/projects-evidence` | [Live](https://stokvelos-mu.vercel.app) · [Repo](https://github.com/ThamiSithole/stokvelos) |
 | 1 | **Riverside Community Hub** | featured, frontend, backend | React, TS, Node/Express, Supabase Auth/RLS | [Repo](https://github.com/ThamiRoneo/riverside-community-hub-platform) |
 | 1 | **Indlela MVP** | mobile | Expo, TS, Supabase migrations/RLS/Storage, Maestro | [Repo](https://github.com/ThamiRoneo/indlela-mvp) |
 | 1 | **TaskForge API** | backend | Node, Express, REST CRUD, centralized errors | [Repo](https://github.com/ThamiRoneo/taskforge-api) |
@@ -219,6 +223,14 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - Filter, skeleton and reduced-motion behaviour are untouched; no new accent colour or radius was introduced.
 - Bundle review: `/projects` moved from 2.24 kB and 110 kB First Load JS to 14.6 kB and 123 kB; `/about` and shared JS were unchanged.
 
+### T13 verification record (2026-11-28)
+
+- Straina role now names hotspot alerts and time exploration, users and sources APIs, admin screens and the offline hook. The CI, deploy and release ownership claim is removed from both the role and highlights; PR #66 remains the linked proof.
+- Two real StokvelOS design screens were cropped from the local design set into `public/assets/screenshots/`: the organiser home for the card preview and the contributions ledger for the captioned Evidence figure. Names and amounts in those screens are demonstration data from the design set, not real member data.
+- `ProjectCard` is shared, so the same card preview also appears on Home's featured StokvelOS card. No Home source file changes in T13.
+- Explorer copy now reads `"N projects in this view"` with `"1 project in this view"` for a single result, and the composed empty state reads `"No work under this filter."` with `"The full set is still one click away."`
+- `npm run check`, six-width browser pass on `/projects`, keyboard filter pass and two-axis review are required before merge.
+
 ### LCP lab verification (2026-11-28)
 
 - LCP element confirmed as the hero image, `/assets/hero-live.png` through `next/image`, which carries `priority` and is preloaded with `fetchpriority="high"`. The dormant overlay starts at `opacity: 0`, so it is not an LCP candidate.
@@ -239,7 +251,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 
 ## 12. Cross-document coverage
 
-The implementation plan’s section 10 contains the full PRD → task coverage map and the reverse task → PRD check. T10 is recorded as shipped in all three documents. This PRD defines requirements and scope; the plan defines tasks, files, verification and risks. The Stitch prompts define screen-level design detail. None may add scope without updating the others.
+The implementation plan’s section 10 contains the full PRD → task coverage map and the reverse task → PRD check. T10, T11 and T12 are recorded as shipped in all three documents; T13 is tracked here, in the plan and in the S2 prompt. This PRD defines requirements and scope; the plan defines tasks, files, verification and risks. The Stitch prompts define screen-level design detail. None may add scope without updating the others.
 
 ## 13. Shipped record
 
@@ -255,8 +267,9 @@ The implementation plan’s section 10 contains the full PRD → task coverage m
 | [#19](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/19) | Final docs close-out: v1.4/v1.3/v1.2 parity, shipped status, T10 and radius record | merged 26 Nov 2026 |
 | [#23](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/23) | Add icons to project technology badges | merged 28 Nov 2026 |
 | [#24](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/24) | Record LCP lab verification and the Speed Insights Plus gate | merged 28 Nov 2026 |
+| [#25](https://github.com/ThamiSithole/thami-sithole-portfolio/pull/25) | Personalise Home: AI-augmented role line, LinkedIn CTA and principles | merged 28 Nov 2026 |
 
-Each PR passed the required `check` status and was squash-merged into `main`. Content corrections listed in §5 remain the user-led backlog.
+Each PR passed the required `check` status and was squash-merged into `main`. The Straina attribution item in §5 is closed by T13; the remaining items stay in the user-led backlog.
 
 ---
 Related: [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) · [`docs/designs/stitch-prompts.md`](./designs/stitch-prompts.md) · [[Home]]
