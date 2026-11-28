@@ -1,7 +1,7 @@
-# PRD — Thami Sithole Portfolio (v1.5)
+# PRD — Thami Sithole Portfolio (v1.6)
 
-**Status:** Shipped · **Owner:** Thami Sithole · **Date:** 2026-11-28 · **Supersedes:** v1.4
-**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.4
+**Status:** v1.5 shipped, v1.6 in review · **Owner:** Thami Sithole · **Date:** 2026-11-28 · **Supersedes:** v1.5
+**Companion:** [`docs/IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) v1.5
 
 > **Scope reset:** this pass is about a fully responsive, functional, reliably building portfolio. All strong projects are in scope as content. Per-project accuracy fixes are a later backlog item, not a blocker.  
 > **Craft refresh (v1.3):** the higgsfield-websites design recipe now applies to the Stitch prompts. This changes the palette, type pairing, icon set, motion and CTA copy, and adds generated visual assets. These are in scope and mirrored in the plan.  
@@ -56,7 +56,7 @@ Recorded as the pre-build problem statement; shipped scope is in §10 and §13.
 - Replace CSS arrow/menu marks with one generated icon set in the brand palette.
 - Generate a hero grade pair, section plate, profile portrait, profile-card monogram, monogram/favicon kit, OG card, cover and 404 artwork via an allowed Higgsfield path (MCP on this account). These are brand assets, not per-project screenshots.
 - Add one signature `"B2 grade-shift"` hero interaction in non-animated mode, with a `prefers-reduced-motion` static fallback. No scroll-scrub journey.
-- Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`.
+- Rewrite visible copy to remove em/en-dashes and unify CTA labels: `"View projects"`, `"Get in touch"`, `"Open GitHub"`, `"Open LinkedIn"`.
 - Apply eyebrow ration, a 12px radius scale with the fixed nav pill as the sole exception, declared mobile collapse and bespoke CTA garments.
 
 **Shipped design-system slice (plan T10, 2026-11-25):** shadcn/ui is enabled with two copy-in primitives, `badge` and `button`, in `src/components/ui/*`. `components.json` uses the Tailwind v4 style with an empty config path, and the shadcn CSS variables in `globals.css` map back to the existing `@theme` tokens so the one accent, slate base, fonts and 12px radius stay authoritative outside the nav pill exception. Toolkit items use one local brand SVG icon per stack, decorative with `aria-hidden`, beside a visible text label. At T10, `lucide-react` was limited to a decorative `Check` in the functional project-filter buttons, also hidden from screen readers, and never mixed into the Toolkit or external-link icon zone. T11 later added the conceptual badge exception recorded below. React was already present through Next.js 15 + React 19 and was not added again.
@@ -70,7 +70,7 @@ The content model must be able to hold all deferred corrections when they arrive
 Keep the four existing routes: `/`, `/about`, `/projects`, `/contact`.
 
 - **Header:** fixed, horizontally centred glass pill with a 1px outline; name/logo, desktop nav links and mobile toggle sit inside it. The mobile dropdown opens in a glass panel below the pill; toggle keeps `aria-expanded`/`aria-controls`, closes on route change and Escape, and returns focus to the toggle.
-- **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens. The card shows the profile portrait and a small decorative monogram.
+- **Home:** intro, featured projects (first three), working principles, clear "View projects" link. Hero uses the generated grade pair and one signature motion effect, with the profile card docked to its right edge on desktop, wide enough for the role line on one line and vertically centered against the primary copy, and stacked inside the card below the primary copy on smaller screens. The card shows the profile portrait and a small decorative monogram. The hero leads with an "AI-augmented software engineer" role line and a plain sentence about building AI-integrated software, and its CTA row adds "Open LinkedIn" alongside "View projects" and "Get in touch".
 - **Projects:** full project grid with category filter, status badges and shadcn technology badges with local brand or decorative lucide icons on each card.
 - **About:** background, focus areas, toolkit, GitHub links, and the same profile portrait in the intro.
 - **Contact:** GitHub and current work links.
@@ -235,7 +235,7 @@ Accuracy of copy, status and attribution for these entries will be corrected in 
 - Final filter category labels (currently fixed as All, Featured, Team, Capstone, Frontend, Backend, Mobile, AI).
 - Whether this PRD is public or internal.
 - **Closed 2026-11-25, amended 2026-11-28:** T10 is shipped with `badge` and `button`; brand stack SVGs stay in the Toolkit, Lucide stays in the filter controls, and T11 adds Lucide only for conceptual project technology badges.
-- **Closed in v1.3:** CTA label unification. Use `"View projects"`, `"Get in touch"` and `"Open GitHub"` site-wide.
+- **Closed in v1.3, amended in v1.6:** CTA label unification. Use `"View projects"`, `"Get in touch"`, `"Open GitHub"` and `"Open LinkedIn"` site-wide.
 
 ## 12. Cross-document coverage
 

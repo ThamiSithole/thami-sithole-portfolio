@@ -5,16 +5,16 @@ import { projects } from "@/content/projects";
 
 const principles = [
   {
-    title: "Build for the real constraint",
-    body: "Whether it is taxi fares or stokvel trust, I start with what actually blocks people.",
+    title: "Start with the real constraint",
+    body: "Taxi fares and stokvel trust are not edge cases. I design for the person who has to use the result.",
   },
   {
-    title: "Prove it with tests",
-    body: "Permissions belong in the database and CI should tell the truth before a reviewer guesses.",
+    title: "Make the decision visible",
+    body: "Tests, database rules and CI carry the reasoning, so a reviewer can see why a choice holds.",
   },
   {
-    title: "Ship in small reviews",
-    body: "Narrow branches, reviewed pull requests and squash merges keep the work legible.",
+    title: "Keep the work legible",
+    body: "Small branches, reviewed pull requests and squash merges leave a history I can explain.",
   },
 ];
 

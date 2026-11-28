@@ -105,8 +105,8 @@ export default function Hero() {
             <span className="hero-line hero-line-delayed">removes friction.</span>
           </h1>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-text/90">
-            I build across frontend, backend and release engineering, with accessible interfaces,
-            testable decisions and deployments a team can trust.
+            I&apos;m an AI-augmented software engineer building software that integrates AI into real
+            workflows, from accessible interfaces to systems a team can ship and trust.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <Link href="/projects" className="hero-primary-cta tap-target">
@@ -115,6 +115,24 @@ export default function Hero() {
             <Link href="/contact" className="hero-secondary-cta tap-target">
               Get in touch
             </Link>
+            <a
+              href="https://www.linkedin.com/in/thami-sithole-71566b143/"
+              target="_blank"
+              rel="noreferrer"
+              className="hero-secondary-cta tap-target gap-2"
+            >
+              Open LinkedIn
+              <span className="sr-only"> (opens in a new tab)</span>
+              <Image
+                src="/assets/icons/external-link.svg"
+                alt=""
+                aria-hidden="true"
+                width={16}
+                height={16}
+                unoptimized
+                className="size-4"
+              />
+            </a>
           </div>
         </div>
 
@@ -146,9 +164,7 @@ export default function Hero() {
                   className="size-5 shrink-0"
                 />
               </div>
-              <p className="mt-1 font-mono text-sm text-accent">
-                Frontend · Backend · DevOps / Release
-              </p>
+              <p className="mt-1 font-mono text-sm text-accent">AI-augmented software engineer</p>
             </div>
           </div>
           <p className="mt-6 text-sm leading-relaxed text-muted">
